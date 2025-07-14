@@ -199,7 +199,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Portfolio: [Live Demo](#)
 - GitHub: [@abdul-rahman](https://github.com)
 - LinkedIn: [Abdul Rahman](https://linkedin.com)
-- Email: abdul.rahman@email.com
+- Email: abdulrahman50abgmail.com
 
 ## 🙏 Acknowledgments
 
