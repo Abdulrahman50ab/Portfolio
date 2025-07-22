@@ -14,7 +14,7 @@ const Projects = () => {
       category: "Frontend",
       icon: <Globe className="h-6 w-6" />,
       liveLink: "#",
-      githubLink: "#"
+      githubLink: "https://github.com/Abdulrahman50ab/Riphah-International-University-Frontend"
     },
     {
       title: "To-Do Lists",
