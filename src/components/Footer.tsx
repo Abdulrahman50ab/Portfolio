@@ -15,7 +15,7 @@ const Footer = () => {
     },
     {
       name: 'Email',
-      href: 'mailto:abdul.rahman@email.com',
+      href: 'mailto:abdulrahman50ab@email.com',
       icon: <Mail className="h-5 w-5" />
     }
   ];
