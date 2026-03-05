@@ -24,7 +24,7 @@ const Projects = () => {
       category: "Frontend",
       icon: <Code className="h-6 w-6" />,
       liveLink: "#",
-      githubLink: "#"
+      githubLink: "https://github.com/Abdulrahman50ab/To-do-list/tree/main"
     },
     {
       title: "Portfolio",
@@ -34,7 +34,7 @@ const Projects = () => {
       category: "Frontend",
       icon: <Globe className="h-6 w-6" />,
       liveLink: "#",
-      githubLink: "#"
+      githubLink: "https://github.com/Abdulrahman50ab/Portfolio"
     },
     // C++ Projects
     {
@@ -45,7 +45,7 @@ const Projects = () => {
       category: "C++",
       icon: <Cpu className="h-6 w-6" />,
       liveLink: "#",
-      githubLink: "#"
+      githubLink: "https://github.com/Abdulrahman50ab/Bank-Management-System-with-C-"
     },
     {
       title: "Car Rental System",
@@ -55,17 +55,7 @@ const Projects = () => {
       category: "C++",
       icon: <Cpu className="h-6 w-6" />,
       liveLink: "#",
-      githubLink: "#"
-    },
-    {
-      title: "Easy Khata System",
-      description: "A digital ledger system for small businesses made with C++ featuring transaction tracking and financial reporting.",
-      image: "https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=500",
-      technologies: ["C++", "File I/O", "Business Logic", "Data Management"],
-      category: "C++",
-      icon: <Cpu className="h-6 w-6" />,
-      liveLink: "#",
-      githubLink: "#"
+      githubLink: "https://github.com/Abdulrahman50ab/Car-rental-System"
     },
     // Java Project
     {
@@ -76,7 +66,7 @@ const Projects = () => {
       category: "Java",
       icon: <Coffee className="h-6 w-6" />,
       liveLink: "#",
-      githubLink: "#"
+      githubLink: "https://github.com/Abdulrahman50ab/Bank-Management-System-with-JAVA"
     },
     // Full Stack Project
     {
@@ -87,14 +77,14 @@ const Projects = () => {
       category: "Full Stack",
       icon: <Dumbbell className="h-6 w-6" />,
       liveLink: "#",
-      githubLink: "#"
+      githubLink: "https://github.com/Abdulrahman50ab/Gym-Management-System"
     }
   ];
 
   const categories = ['All', 'Frontend', 'C++', 'Java', 'Full Stack'];
 
-  const filteredProjects = activeFilter === 'All' 
-    ? projects 
+  const filteredProjects = activeFilter === 'All'
+    ? projects
     : projects.filter(project => project.category === activeFilter);
 
   const getCategoryColor = (category: string) => {
@@ -124,11 +114,10 @@ const Projects = () => {
             <button
               key={category}
               onClick={() => setActiveFilter(category)}
-              className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
-                activeFilter === category
-                  ? 'bg-blue-600 text-white shadow-lg transform scale-105'
-                  : 'bg-white text-gray-600 hover:bg-blue-50 hover:text-blue-600 shadow-md'
-              }`}
+              className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${activeFilter === category
+                ? 'bg-blue-600 text-white shadow-lg transform scale-105'
+                : 'bg-white text-gray-600 hover:bg-blue-50 hover:text-blue-600 shadow-md'
+                }`}
             >
               {category}
             </button>
@@ -138,13 +127,13 @@ const Projects = () => {
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group"
             >
               <div className="relative overflow-hidden">
-                <img 
-                  src={project.image} 
+                <img
+                  src={project.image}
                   alt={project.title}
                   className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -160,7 +149,7 @@ const Projects = () => {
                   </span>
                 </div>
               </div>
-              
+
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
                   {project.title}
@@ -168,18 +157,18 @@ const Projects = () => {
                 <p className="text-gray-600 mb-4 text-sm leading-relaxed line-clamp-3">
                   {project.description}
                 </p>
-                
+
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.technologies.map((tech, techIndex) => (
-                    <span 
-                      key={techIndex} 
+                    <span
+                      key={techIndex}
                       className="bg-gray-100 text-gray-700 px-2 py-1 rounded-md text-xs font-medium hover:bg-blue-100 hover:text-blue-700 transition-colors"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
-                
+
                 <div className="flex space-x-4">
                   <a
                     href={project.liveLink}

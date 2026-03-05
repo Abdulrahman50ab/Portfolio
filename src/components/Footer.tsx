@@ -15,10 +15,17 @@ const Footer = () => {
     },
     {
       name: 'Email',
-      href: 'mailto:abdulrahman50ab@email.com',
+      href: '#contact',
       icon: <Mail className="h-5 w-5" />
     }
   ];
+
+  const handleScroll = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -35,7 +42,7 @@ const Footer = () => {
               <span className="text-xl font-bold">Abdul Rahman</span>
             </div>
             <p className="text-gray-400 max-w-md">
-              Full-stack web developer passionate about creating beautiful, 
+              Full-stack web developer passionate about creating beautiful,
               functional, and user-friendly digital experiences.
             </p>
           </div>
@@ -47,12 +54,7 @@ const Footer = () => {
               {['About', 'Projects', 'Skills', 'Contact'].map((item) => (
                 <li key={item}>
                   <button
-                    onClick={() => {
-                      const element = document.getElementById(item.toLowerCase());
-                      if (element) {
-                        element.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    }}
+                    onClick={() => handleScroll(item.toLowerCase())}
                     className="text-gray-400 hover:text-white transition-colors"
                   >
                     {item}
@@ -70,8 +72,13 @@ const Footer = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  onClick={(e) => {
+                    if (link.href.startsWith('#')) {
+                      e.preventDefault();
+                      handleScroll(link.href.substring(1));
+                    }
+                  }}
+                  {...(link.href.startsWith('http') ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   className="bg-gray-800 hover:bg-blue-600 p-3 rounded-lg transition-colors"
                   aria-label={link.name}
                 >

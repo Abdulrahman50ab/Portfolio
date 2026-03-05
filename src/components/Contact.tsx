@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Mail, Phone, MapPin, Send, CheckCircle, XCircle, Loader2 } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
+  const form = useRef<HTMLFormElement>(null);
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,18 +20,35 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    // Reset form
-    setFormData({ name: '', email: '', message: '' });
+    if (!form.current) return;
+
+    setStatus('submitting');
+
+    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
+      .then((result) => {
+        console.log('Email sent successfully:', result.text);
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+        // Reset success message after 5 seconds
+        setTimeout(() => setStatus('idle'), 5000);
+      }, (error) => {
+        console.error('Email failed to send:', error.text);
+        setStatus('error');
+        // Reset error message after 5 seconds
+        setTimeout(() => setStatus('idle'), 5000);
+      });
   };
 
   const contactInfo = [
     {
       icon: <Mail className="h-6 w-6 text-blue-600" />,
       title: "Email",
-      details: "abdulrahman50abgmail.com",
-      link: "mailto:abdul.rahman@email.com"
+      details: "abdulrahman50ab@gmail.com",
+      link: "mailto:abdulrahman50ab@gmail.com"
     },
     {
       icon: <Phone className="h-6 w-6 text-blue-600" />,
@@ -61,8 +81,8 @@ const Contact = () => {
             <div>
               <h3 className="text-2xl font-semibold text-gray-900 mb-6">Get In Touch</h3>
               <p className="text-gray-600 mb-8">
-                I'm currently available for freelance work and full-time opportunities. 
-                If you have a project in mind or just want to chat about web development, 
+                I'm currently available for freelance work and full-time opportunities.
+                If you have a project in mind or just want to chat about web development,
                 feel free to reach out!
               </p>
             </div>
@@ -75,7 +95,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-medium text-gray-900">{item.title}</h4>
-                    <a 
+                    <a
                       href={item.link}
                       className="text-gray-600 hover:text-blue-600 transition-colors"
                     >
@@ -89,7 +109,7 @@ const Contact = () => {
 
           {/* Contact Form */}
           <div className="bg-white p-8 rounded-lg shadow-md">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form ref={form} onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                   Name
@@ -140,11 +160,49 @@ const Contact = () => {
 
               <button
                 type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2"
+                disabled={status === 'submitting'}
+                className={`w-full font-medium py-3 px-6 rounded-lg transition-all flex items-center justify-center space-x-2 ${status === 'submitting'
+                  ? 'bg-blue-400 cursor-not-allowed'
+                  : status === 'success'
+                    ? 'bg-green-600 hover:bg-green-700'
+                    : status === 'error'
+                      ? 'bg-red-600 hover:bg-red-700'
+                      : 'bg-blue-600 hover:bg-blue-700'
+                  } text-white`}
               >
-                <Send className="h-5 w-5" />
-                <span>Send Message</span>
+                {status === 'submitting' ? (
+                  <>
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                    <span>Sending...</span>
+                  </>
+                ) : status === 'success' ? (
+                  <>
+                    <CheckCircle className="h-5 w-5" />
+                    <span>Message Sent!</span>
+                  </>
+                ) : status === 'error' ? (
+                  <>
+                    <XCircle className="h-5 w-5" />
+                    <span>Failed to Send</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="h-5 w-5" />
+                    <span>Send Message</span>
+                  </>
+                )}
               </button>
+
+              {status === 'success' && (
+                <p className="text-green-600 text-center text-sm font-medium animate-fade-in">
+                  Thanks for reaching out! I'll get back to you soon.
+                </p>
+              )}
+              {status === 'error' && (
+                <p className="text-red-600 text-center text-sm font-medium animate-fade-in">
+                  Something went wrong. Please try again or email me directly.
+                </p>
+              )}
             </form>
           </div>
         </div>
