@@ -25,6 +25,15 @@ const Skills = () => {
       ]
     },
     {
+      title: "Mobile Development",
+      skills: [
+        { name: "Flutter", level: 85, color: "bg-blue-400" },
+        { name: "Dart", level: 82, color: "bg-cyan-600" },
+        { name: "Cross-Platform Dev", level: 88, color: "bg-blue-600" },
+        { name: "Android Studio", level: 75, color: "bg-green-500" }
+      ]
+    },
+    {
       title: "Tools & Other",
       skills: [
         { name: "Git", level: 88, color: "bg-red-500" },
@@ -60,7 +69,7 @@ const Skills = () => {
                       <span className="text-sm text-gray-500">{skill.level}%</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div 
+                      <div
                         className={`h-2 rounded-full ${skill.color} transition-all duration-1000 ease-out`}
                         style={{ width: `${skill.level}%` }}
                       ></div>

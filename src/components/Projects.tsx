@@ -78,10 +78,21 @@ const Projects = () => {
       icon: <Dumbbell className="h-6 w-6" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab/Gym-Management-System"
+    },
+    // Mobile Project
+    {
+      title: "UniRide",
+      description: "A professional university transport application built with Flutter. Features include real-time tracking, time estimates, and a sleek map interface for students and staff.",
+      image: "/projects/uniride.png",
+      technologies: ["Flutter", "Dart", "Firebase", "Google Maps API"],
+      category: "Mobile",
+      icon: <Globe className="h-6 w-6" />,
+      liveLink: "#",
+      githubLink: "https://github.com/Abdulrahman50ab/Uniride"
     }
   ];
 
-  const categories = ['All', 'Frontend', 'C++', 'Java', 'Full Stack'];
+  const categories = ['All', 'Frontend', 'C++', 'Java', 'Full Stack', 'Mobile'];
 
   const filteredProjects = activeFilter === 'All'
     ? projects
@@ -92,7 +103,8 @@ const Projects = () => {
       'Frontend': 'bg-blue-100 text-blue-800',
       'C++': 'bg-purple-100 text-purple-800',
       'Java': 'bg-orange-100 text-orange-800',
-      'Full Stack': 'bg-green-100 text-green-800'
+      'Full Stack': 'bg-green-100 text-green-800',
+      'Mobile': 'bg-cyan-100 text-cyan-800'
     };
     return colors[category as keyof typeof colors] || 'bg-gray-100 text-gray-800';
   };
