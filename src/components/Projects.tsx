@@ -89,6 +89,16 @@ const Projects = () => {
       icon: <Globe className="h-6 w-6" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab/Uniride"
+    },
+    {
+      title: "Weather App Mobile",
+      description: "A visually stunning mobile weather application built with Flutter. It provides real-time weather updates, humidity details, and a 5-day forecast with dynamic backgrounds.",
+      image: "/projects/weather_app.png",
+      technologies: ["Flutter", "Dart", "MetaWeather API", "Glassmorphism"],
+      category: "Mobile",
+      icon: <Globe className="h-6 w-6" />,
+      liveLink: "#",
+      githubLink: "https://github.com/Abdulrahman50ab/Weather-App-Mobile"
     }
   ];
 
