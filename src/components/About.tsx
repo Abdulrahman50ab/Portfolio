@@ -15,8 +15,8 @@ const About = () => {
     },
     {
       icon: <Smartphone className="h-6 w-6 text-blue-600" />,
-      title: "Mobile-First Design",
-      description: "Responsive design and progressive web apps"
+      title: "Mobile App Development",
+      description: "Flutter, Dart, Firebase, Cross-platform Apps"
     },
     {
       icon: <Globe className="h-6 w-6 text-blue-600" />,
@@ -36,16 +36,16 @@ const About = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <p className="text-lg text-gray-600 leading-relaxed">
-              I'm a passionate full-stack web developer with over 3 years of experience in creating 
-              digital experiences that are both beautiful and functional. I specialize in modern 
-              web technologies and have a strong foundation in both frontend and backend development.
+              I'm a passionate full-stack developer with over 3 years of overall experience,
+              specializing in building high-quality digital solutions. For the past
+              <strong> 2+ years</strong>, I have focused on <strong>Mobile App Development using Flutter</strong>,
+              creating cross-platform applications that deliver seamless user experiences.
             </p>
-            
+
             <p className="text-lg text-gray-600 leading-relaxed">
-              My journey began with a curiosity for how things work on the web, and it has evolved 
-              into a career where I get to build amazing products that solve real-world problems. 
-              I'm constantly learning new technologies and best practices to deliver exceptional 
-              results for my clients and projects.
+              My journey evolved from web development to mastering mobile technologies, allowing me
+              to build scalable products across multiple platforms. I'm dedicated to continuous
+              learning and implementing best practices to solve real-world problems through innovation.
             </p>
 
             <div className="flex flex-wrap gap-4 pt-4">
