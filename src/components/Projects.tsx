@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ExternalLink, Github, Code, Globe, Cpu, Coffee, Dumbbell, Smartphone, Search, HelpCircle } from 'lucide-react';
+import { ExternalLink, Github, Globe, Cpu, Coffee, Smartphone, Search, HelpCircle, Sparkles } from 'lucide-react';
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -7,105 +7,181 @@ const Projects = () => {
   const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
 
   const projects = [
-    // Mobile Projects
+    // Generative AI
     {
-      title: "UniRide",
-      description: "A professional university transport application built with Flutter. Features include real-time tracking, time estimates, and a sleek map interface for students and staff.",
+      title: "DocFlow AI — Document Understanding & Extraction Pipeline",
+      description: "A production-grade Generative AI application that automates document processing, extracting structured data from invoices, utility bills, and contracts with 96% accuracy. Built with Gemini 1.5 Flash, LangGraph multi-agent workflows, and semantic similarity search.",
+      image: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=500",
+      technologies: ["Gemini 1.5 Flash", "LangGraph", "RAG", "pgvector", "Drizzle ORM", "Neon DB", "React", "Express.js"],
+      category: "Generative AI",
+      icon: <Sparkles className="h-5 w-5 text-purple-400" />,
+      liveLink: "#",
+      githubLink: "https://github.com/Abdulrahman50ab",
+      gradient: "from-purple-900/60 to-slate-900/90"
+    },
+    // Mobile Applications (Flutter)
+    {
+      title: "AI-Powered Keyboard App",
+      description: "Intelligent mobile keyboard with real-time text prediction improving typing speed by 30%. Custom REST API integration with backend AI models for context-aware suggestions and custom rendering.",
+      image: "/projects/keyboard.png",
+      technologies: ["Flutter", "Dart", "REST API", "State Management"],
+      category: "Mobile",
+      icon: <Smartphone className="h-5 w-5 text-cyan-400" />,
+      liveLink: "#",
+      githubLink: "https://github.com/Abdulrahman50ab",
+      gradient: "from-cyan-900/60 to-slate-900/90"
+    },
+    {
+      title: "AI PDF App",
+      description: "Full-featured PDF reader with AI-powered document summarization and Q&A capabilities. Integrated on-device text extraction with remote AI model calls for smart document analysis.",
+      image: "/projects/pdf_app.png",
+      technologies: ["Flutter", "REST API", "AI Model Integration", "PDF Kit"],
+      category: "Mobile",
+      icon: <Smartphone className="h-5 w-5 text-cyan-400" />,
+      liveLink: "#",
+      githubLink: "https://github.com/Abdulrahman50ab",
+      gradient: "from-blue-900/60 to-slate-900/90"
+    },
+    {
+      title: "AI Background Remover",
+      description: "One-tap background removal application leveraging AI segmentation APIs for precise results. Features batch processing support with gallery picker and real-time preview.",
+      image: "/projects/bg_remover.png",
+      technologies: ["Flutter", "Dart", "AI Segmentation API", "Photo Editor"],
+      category: "Mobile",
+      icon: <Smartphone className="h-5 w-5 text-cyan-400" />,
+      liveLink: "#",
+      githubLink: "https://github.com/Abdulrahman50ab",
+      gradient: "from-teal-900/60 to-slate-900/90"
+    },
+    {
+      title: "AI SmartJunk Cleaner",
+      description: "Intelligent storage optimizer using AI-driven file classification and smart cleanup suggestions. Uses native platform channels for deep device storage access and file analysis.",
+      image: "/projects/cleaner.png",
+      technologies: ["Flutter", "Native Channels", "Storage API", "FL Charts"],
+      category: "Mobile",
+      icon: <Smartphone className="h-5 w-5 text-cyan-400" />,
+      liveLink: "#",
+      githubLink: "https://github.com/Abdulrahman50ab",
+      gradient: "from-indigo-900/60 to-slate-900/90"
+    },
+    {
+      title: "AI PPT Generator",
+      description: "Generates presentation slides automatically from user-provided text or topic prompts via AI. Features dynamic slide layouts with editable content and theme selections.",
+      image: "/projects/ppt.png",
+      technologies: ["Flutter", "REST API", "AI API", "PPTX Exporter"],
+      category: "Mobile",
+      icon: <Smartphone className="h-5 w-5 text-cyan-400" />,
+      liveLink: "#",
+      githubLink: "https://github.com/Abdulrahman50ab",
+      gradient: "from-orange-900/60 to-slate-900/90"
+    },
+    {
+      title: "WantQuiz AI App",
+      description: "AI-powered mobile quiz application generating dynamic questions from any topic or pasted content. Features MCQ, true/false, open-ended modes with persistent progress analytics.",
+      image: "/projects/quiz.png",
+      technologies: ["Flutter", "Dart", "REST API", "Local DB"],
+      category: "Mobile",
+      icon: <Smartphone className="h-5 w-5 text-cyan-400" />,
+      liveLink: "#",
+      githubLink: "https://github.com/Abdulrahman50ab",
+      gradient: "from-emerald-900/60 to-slate-900/90"
+    },
+    {
+      title: "AI Post Generator App",
+      description: "On-demand social media post generation for LinkedIn, Instagram, and Twitter via AI APIs. Features tone selector (casual, professional, witty) with one-tap copy and share functionality.",
+      image: "/projects/post.png",
+      technologies: ["Flutter", "Dart", "AI APIs", "Share API"],
+      category: "Mobile",
+      icon: <Smartphone className="h-5 w-5 text-cyan-400" />,
+      liveLink: "#",
+      githubLink: "https://github.com/Abdulrahman50ab",
+      gradient: "from-purple-900/60 to-slate-900/90"
+    },
+    {
+      title: "UniRide — University Transport App",
+      description: "End-to-end campus transport management application serving 500+ students. Features real-time bus tracking (Google Maps API), seat booking, and offline-first caching for high reliability.",
       image: "/projects/uniride.png",
-      technologies: ["Flutter", "Dart", "Firebase", "Google Maps API"],
+      technologies: ["Flutter", "Dart", "Node.js", "MongoDB", "Google Maps API"],
       category: "Mobile",
       icon: <Smartphone className="h-5 w-5 text-cyan-400" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab/Uniride",
-      gradient: "from-cyan-900/60 to-slate-900/90"
+      gradient: "from-sky-900/60 to-slate-900/90"
     },
     {
-      title: "Weather App Mobile",
-      description: "A visually stunning mobile weather application built with Flutter. It provides real-time weather updates, humidity details, and a 5-day forecast with dynamic backgrounds.",
-      image: "/projects/weather_app.png",
-      technologies: ["Flutter", "Dart", "MetaWeather API", "Glassmorphism"],
+      title: "Fitness Tracker Mobile",
+      description: "Comprehensive workout logging application featuring Firebase Authentication, animated timers, custom FL Chart analytics, and personalized exercise routines.",
+      image: "https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=500",
+      technologies: ["Flutter", "Firebase Auth", "Firestore", "FL Charts"],
       category: "Mobile",
       icon: <Smartphone className="h-5 w-5 text-cyan-400" />,
       liveLink: "#",
-      githubLink: "https://github.com/Abdulrahman50ab/Weather-App-Mobile",
-      gradient: "from-blue-900/60 to-slate-900/90"
+      githubLink: "https://github.com/Abdulrahman50ab",
+      gradient: "from-red-900/60 to-slate-900/90"
     },
-    // Full Stack Project
+    // Web Projects
     {
-      title: "Gym-Fitness Management System",
-      description: "MERN stack app to manage gym members, packages, trainers, and attendance with comprehensive dashboard and reporting.",
-      image: "https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=500",
-      technologies: ["MongoDB", "Express.js", "React", "Node.js"],
-      category: "Full Stack",
-      icon: <Dumbbell className="h-5 w-5 text-emerald-400" />,
-      liveLink: "#",
-      githubLink: "https://github.com/Abdulrahman50ab/Gym-Management-System",
-      gradient: "from-emerald-900/60 to-slate-900/90"
-    },
-    // Development (Frontend)
-    {
-      title: "Riphah International University Frontend",
-      description: "A frontend layout clone for a university website with modern design and responsive layout.",
-      image: "https://images.pexels.com/photos/267507/pexels-photo-267507.jpeg?auto=compress&cs=tinysrgb&w=500",
-      technologies: ["HTML", "CSS", "JavaScript", "Bootstrap"],
-      category: "Frontend",
+      title: "WantQuiz Web Platform",
+      description: "AI-driven quiz web platform built in React allowing users to generate quizzes from any topic or document. Uses Neon serverless PostgreSQL for quiz history and leaderboards.",
+      image: "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=500",
+      technologies: ["React", "Neon PostgreSQL", "REST API", "AI Generator"],
+      category: "Web",
       icon: <Globe className="h-5 w-5 text-indigo-400" />,
       liveLink: "#",
-      githubLink: "https://github.com/Abdulrahman50ab/Riphah-International-University-Frontend",
+      githubLink: "https://github.com/Abdulrahman50ab",
       gradient: "from-indigo-900/60 to-slate-900/90"
     },
     {
-      title: "To-Do Lists",
-      description: "A simple and stylish React-based to-do list application with local storage and drag-and-drop functionality.",
-      image: "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=500",
-      technologies: ["React", "CSS", "Local Storage", "JavaScript"],
-      category: "Frontend",
-      icon: <Code className="h-5 w-5 text-indigo-400" />,
-      liveLink: "#",
-      githubLink: "https://github.com/Abdulrahman50ab/To-do-list/tree/main",
-      gradient: "from-purple-900/60 to-slate-900/90"
-    },
-    {
-      title: "Portfolio",
-      description: "A personal portfolio website built with React and responsive design showcasing projects and skills.",
+      title: "AI Post Generator Web",
+      description: "React-based web platform for AI-generated social media posts with tone, platform customization, and draft management. Backed by Neon PostgreSQL database.",
       image: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=500",
-      technologies: ["React", "Tailwind CSS", "TypeScript", "Responsive Design"],
-      category: "Frontend",
+      technologies: ["React", "Neon PostgreSQL", "Drizzle ORM", "Vite"],
+      category: "Web",
       icon: <Globe className="h-5 w-5 text-indigo-400" />,
       liveLink: "#",
-      githubLink: "https://github.com/Abdulrahman50ab/Portfolio",
+      githubLink: "https://github.com/Abdulrahman50ab",
+      gradient: "from-blue-900/60 to-slate-900/90"
+    },
+    {
+      title: "AI Creator Platform Dashboard",
+      description: "Multi-purpose AI content creation dashboard built with React for text, captions, bios, and marketing copy. Uses Neon serverless PostgreSQL for content management.",
+      image: "https://images.pexels.com/photos/267507/pexels-photo-267507.jpeg?auto=compress&cs=tinysrgb&w=500",
+      technologies: ["React", "Neon PostgreSQL", "REST APIs", "Tailwind CSS"],
+      category: "Web",
+      icon: <Globe className="h-5 w-5 text-indigo-400" />,
+      liveLink: "#",
+      githubLink: "https://github.com/Abdulrahman50ab",
       gradient: "from-violet-900/60 to-slate-900/90"
     },
-    // C++ Projects
+    // Others
     {
       title: "Bank Management System with DSA",
-      description: "Console-based banking system using data structures and file handling for efficient customer and account management.",
+      description: "Console-based banking system written in C++ using advanced data structures and file handling for efficient customer records and transaction logs.",
       image: "https://images.pexels.com/photos/259200/pexels-photo-259200.jpeg?auto=compress&cs=tinysrgb&w=500",
-      technologies: ["C++", "Data Structures", "File Handling", "OOP"],
-      category: "C++",
+      technologies: ["C++", "Data Structures", "OOP", "File Handling"],
+      category: "Others",
       icon: <Cpu className="h-5 w-5 text-pink-400" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab/Bank-Management-System-with-C-",
-      gradient: "from-pink-900/60 to-slate-900/90"
+      gradient: "from-rose-900/60 to-slate-900/90"
     },
     {
       title: "Car Rental System",
-      description: "Vehicle booking and customer management project in C++ with comprehensive rental tracking and billing system.",
+      description: "Vehicle booking and customer management project in C++ with OOP, comprehensive rental tracking, and custom billing modules.",
       image: "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=500",
-      technologies: ["C++", "File Management", "OOP", "Console Application"],
-      category: "C++",
+      technologies: ["C++", "OOP", "File Management", "Console UI"],
+      category: "Others",
       icon: <Cpu className="h-5 w-5 text-pink-400" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab/Car-rental-System",
-      gradient: "from-rose-900/60 to-slate-900/90"
+      gradient: "from-zinc-900/60 to-slate-900/90"
     },
-    // Java Project
     {
-      title: "Bank Management System",
-      description: "GUI-based Java application for managing bank records and transactions with user-friendly interface and secure operations.",
+      title: "Bank Management System (GUI)",
+      description: "GUI-based Java application for managing bank records and transactions with user-friendly interface and secure database operations.",
       image: "https://images.pexels.com/photos/259027/pexels-photo-259027.jpeg?auto=compress&cs=tinysrgb&w=500",
       technologies: ["Java", "Swing", "JDBC", "MySQL"],
-      category: "Java",
+      category: "Others",
       icon: <Coffee className="h-5 w-5 text-amber-400" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab/Bank-Management-System-with-JAVA",
@@ -113,14 +189,13 @@ const Projects = () => {
     }
   ];
 
-  const categories = ['All', 'Mobile', 'Full Stack', 'Frontend', 'C++', 'Java'];
+  const categories = ['All', 'Generative AI', 'Mobile', 'Web', 'Others'];
 
   const getCategoryColor = (category: string) => {
     const colors = {
-      'Frontend': 'bg-indigo-500/10 text-indigo-300 border-indigo-500/20',
-      'C++': 'bg-pink-500/10 text-pink-300 border-pink-500/20',
-      'Java': 'bg-amber-500/10 text-amber-300 border-amber-500/20',
-      'Full Stack': 'bg-emerald-500/10 text-emerald-300 border-emerald-500/20',
+      'Generative AI': 'bg-purple-500/10 text-purple-300 border-purple-500/20',
+      'Web': 'bg-indigo-500/10 text-indigo-300 border-indigo-500/20',
+      'Others': 'bg-pink-500/10 text-pink-300 border-pink-500/20',
       'Mobile': 'bg-cyan-500/10 text-cyan-300 border-cyan-500/20'
     };
     return colors[category as keyof typeof colors] || 'bg-slate-800 text-slate-300 border-white/5';

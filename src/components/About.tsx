@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code, Database, Smartphone, Globe, Zap } from 'lucide-react';
+import { Code, Database, Smartphone, Globe, Zap, Briefcase, Award } from 'lucide-react';
 
 const About = () => {
   const highlights = [
@@ -127,6 +127,93 @@ const About = () => {
             ))}
           </div>
 
+        </div>
+
+        {/* Timeline: Experience & Education */}
+        <div className="mt-24 border-t border-white/5 pt-20">
+          <div className="grid md:grid-cols-2 gap-12 text-left">
+            
+            {/* Experience Column */}
+            <div className="space-y-8">
+              <h3 className="text-2xl font-bold text-white tracking-tight flex items-center space-x-3">
+                <Briefcase className="h-5 w-5 text-indigo-400" />
+                <span>Work Experience</span>
+              </h3>
+              
+              <div className="relative border-l border-indigo-500/20 pl-6 ml-2 space-y-8">
+                
+                {/* Job 1 */}
+                <div className="relative">
+                  <div className="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-indigo-500 border-4 border-slate-950 shadow-[0_0_8px_rgba(99,102,241,0.8)]"></div>
+                  <div>
+                    <span className="text-xs font-bold text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded border border-indigo-500/20">
+                      Jan 2026 – Present
+                    </span>
+                    <h4 className="text-lg font-bold text-white mt-2.5">Software Engineer</h4>
+                    <p className="text-sm font-semibold text-slate-350 mt-0.5">IntelliG</p>
+                    <ul className="text-xs text-slate-450 list-disc pl-4 mt-3 space-y-1.5 leading-relaxed">
+                      <li>Building AI-powered and full-stack applications, contributing across backend, frontend, and Generative AI workflows.</li>
+                      <li>Designing and developing Generative AI pipelines and full-stack features using modern AI/LLM tooling.</li>
+                      <li>Collaborating with cross-functional teams to ship production-ready features from design through deployment.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Job 2 */}
+                <div className="relative">
+                  <div className="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-700 border-4 border-slate-950"></div>
+                  <div>
+                    <span className="text-xs font-semibold text-slate-400 bg-slate-900 border border-white/5 px-2.5 py-1.5 rounded">
+                      Nov 2024 – Apr 2025 (6 Months)
+                    </span>
+                    <h4 className="text-lg font-bold text-white mt-2.5">Flutter & Web Developer</h4>
+                    <p className="text-sm font-semibold text-slate-350 mt-0.5">IzzaTech — Lahore, Pakistan</p>
+                    <ul className="text-xs text-slate-450 list-disc pl-4 mt-3 space-y-1.5 leading-relaxed">
+                      <li>Developed and maintained cross-platform Flutter mobile applications delivered as SaaS products to clients.</li>
+                      <li>Built React-based web applications with Neon PostgreSQL backend as part of SaaS service offerings.</li>
+                      <li>Collaborated with clients to gather requirements and translate them into production-ready solutions.</li>
+                      <li>Revived and refactored stalled client projects through code optimization, bug fixing, and UI/UX redesign.</li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            {/* Education Column */}
+            <div className="space-y-8">
+              <h3 className="text-2xl font-bold text-white tracking-tight flex items-center space-x-3">
+                <Award className="h-5 w-5 text-cyan-400" />
+                <span>Education</span>
+              </h3>
+
+              <div className="relative border-l border-cyan-500/20 pl-6 ml-2 space-y-8">
+                
+                {/* Education 1 */}
+                <div className="relative">
+                  <div className="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-cyan-400 border-4 border-slate-950 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></div>
+                  <div>
+                    <span className="text-xs font-bold text-cyan-400 bg-cyan-500/10 px-2.5 py-1 rounded border border-cyan-500/20">
+                      2023 – 2027
+                    </span>
+                    <h4 className="text-lg font-bold text-white mt-2.5">BS in Computer Science</h4>
+                    <p className="text-sm font-semibold text-slate-350 mt-0.5">Riphah International University, Lahore</p>
+                    <div className="mt-3 flex items-center space-x-2">
+                      <span className="text-xs font-bold text-slate-300">CGPA:</span>
+                      <span className="text-xs font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">
+                        3.93 / 4.00
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+                      Coursework: Mobile Application Development, Data Structures, Algorithms, OOP.
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
         </div>
 
       </div>

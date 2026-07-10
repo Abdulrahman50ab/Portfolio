@@ -1,5 +1,5 @@
 import React from 'react';
-import { Terminal, Smartphone, ShieldCheck, Cpu, Layers } from 'lucide-react';
+import { Terminal, Smartphone, ShieldCheck, Layers, Sparkles } from 'lucide-react';
 
 const Skills = () => {
   const skillCategories = [
@@ -7,57 +7,59 @@ const Skills = () => {
       title: "Mobile Development",
       icon: <Smartphone className="h-5 w-5 text-cyan-400" />,
       skills: [
-        { name: "Flutter", level: 90, label: "Expert" },
-        { name: "Dart", level: 85, label: "Expert" },
-        { name: "Cross-Platform SDKs", level: 88, label: "Expert" },
-        { name: "Android Studio / Tools", level: 80, label: "Advanced" }
+        { name: "Flutter", level: 92, label: "Expert" },
+        { name: "Dart", level: 90, label: "Expert" },
+        { name: "iOS & Android Cross-Platform", level: 88, label: "Expert" },
+        { name: "Custom Widgets & Animations", level: 85, label: "Expert" }
       ],
       glow: "hover:shadow-[0_0_25px_rgba(34,211,238,0.1)]"
     },
     {
-      title: "Frontend Web",
-      icon: <Layers className="h-5 w-5 text-indigo-400" />,
+      title: "Generative AI",
+      icon: <Sparkles className="h-5 w-5 text-purple-400" />,
       skills: [
-        { name: "React / Vite", level: 85, label: "Expert" },
-        { name: "JavaScript (ES6+)", level: 88, label: "Expert" },
-        { name: "TypeScript", level: 80, label: "Advanced" },
-        { name: "Tailwind CSS", level: 85, label: "Expert" },
-        { name: "HTML5 / CSS3", level: 95, label: "Expert" }
+        { name: "LangGraph", level: 85, label: "Expert" },
+        { name: "RAG Pipelines", level: 88, label: "Expert" },
+        { name: "Gemini 1.5 Flash", level: 90, label: "Expert" },
+        { name: "pgvector & Embeddings", level: 82, label: "Advanced" },
+        { name: "AI Agents", level: 80, label: "Advanced" }
       ],
-      glow: "hover:shadow-[0_0_25px_rgba(99,102,241,0.1)]"
+      glow: "hover:shadow-[0_0_25px_rgba(168,85,247,0.1)]"
     },
     {
-      title: "Backend & Systems",
+      title: "Backend & API",
       icon: <Terminal className="h-5 w-5 text-emerald-400" />,
       skills: [
-        { name: "Node.js / Express", level: 80, label: "Advanced" },
-        { name: "MongoDB", level: 78, label: "Advanced" },
-        { name: "PostgreSQL", level: 75, label: "Intermediate" },
-        { name: "RESTful Web APIs", level: 85, label: "Advanced" }
+        { name: "Firebase (Auth / DB / Storage)", level: 90, label: "Expert" },
+        { name: "Node.js / Express.js", level: 85, label: "Expert" },
+        { name: "Neon DB (PostgreSQL)", level: 80, label: "Advanced" },
+        { name: "Supabase", level: 82, label: "Advanced" },
+        { name: "REST APIs & Drizzle ORM", level: 85, label: "Expert" }
       ],
       glow: "hover:shadow-[0_0_25px_rgba(52,211,153,0.1)]"
     },
     {
-      title: "C++ & Java (Core)",
-      icon: <Cpu className="h-5 w-5 text-pink-400" />,
+      title: "Web Development",
+      icon: <Layers className="h-5 w-5 text-indigo-400" />,
       skills: [
-        { name: "C++ (OOP & DSA)", level: 80, label: "Advanced" },
-        { name: "Java (Core & Swing)", level: 75, label: "Intermediate" },
-        { name: "Data Structures", level: 82, label: "Advanced" },
-        { name: "Algorithms", level: 78, label: "Advanced" }
+        { name: "React", level: 88, label: "Expert" },
+        { name: "Next.js", level: 80, label: "Advanced" },
+        { name: "Vite & React-Vite", level: 85, label: "Expert" },
+        { name: "Tailwind CSS", level: 90, label: "Expert" },
+        { name: "JavaScript / TypeScript", level: 85, label: "Expert" }
       ],
-      glow: "hover:shadow-[0_0_25px_rgba(236,72,153,0.1)]"
+      glow: "hover:shadow-[0_0_25px_rgba(99,102,241,0.1)]"
     },
     {
-      title: "Tools & DevOps",
-      icon: <ShieldCheck className="h-5 w-5 text-purple-400" />,
+      title: "Tools & Designing",
+      icon: <ShieldCheck className="h-5 w-5 text-pink-400" />,
       skills: [
-        { name: "Git & Version Control", level: 88, label: "Expert" },
-        { name: "Firebase (Auth / DB)", level: 85, label: "Expert" },
-        { name: "Figma (UI design)", level: 75, label: "Intermediate" },
-        { name: "Docker", level: 65, label: "Intermediate" }
+        { name: "Git & GitHub", level: 90, label: "Expert" },
+        { name: "Android Studio & VS Code", level: 88, label: "Expert" },
+        { name: "Figma & Adobe XD", level: 80, label: "Advanced" },
+        { name: "Photoshop & Vercel", level: 78, label: "Advanced" }
       ],
-      glow: "hover:shadow-[0_0_25px_rgba(168,85,247,0.1)]"
+      glow: "hover:shadow-[0_0_25px_rgba(236,72,153,0.1)]"
     }
   ];
 
@@ -76,7 +78,7 @@ const Skills = () => {
           </h2>
           <div className="w-16 h-1 bg-gradient-to-r from-indigo-500 to-cyan-400 mx-auto rounded-full mb-4"></div>
           <p className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto">
-            A comprehensive mapping of my technical stack, framework competencies, and development toolchains.
+            A comprehensive mapping of my technical stack, generative AI capabilities, and web architectures.
           </p>
         </div>
 

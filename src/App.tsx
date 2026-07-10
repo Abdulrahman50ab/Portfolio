@@ -7,16 +7,21 @@ import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
+import PrintableCV from './components/PrintableCV';
+
 function App() {
   return (
     <div className="min-h-screen">
-      <Header />
-      <Hero />
-      <About />
-      <Projects />
-      <Skills />
-      <Contact />
-      <Footer />
+      <div className="print:hidden">
+        <Header />
+        <Hero />
+        <About />
+        <Projects />
+        <Skills />
+        <Contact />
+        <Footer />
+      </div>
+      <PrintableCV />
     </div>
   );
 }

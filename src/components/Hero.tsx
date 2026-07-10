@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
+import { ChevronDown, ArrowRight, Github, Linkedin, Mail, FileText } from 'lucide-react';
 import img from './cv2.jpg';
 
 const roles = ["Software Engineer", "Flutter Developer", "Full Stack Web Engineer"];
@@ -95,10 +95,11 @@ const Hero = () => {
               </button>
               
               <button
-                onClick={() => scrollToSection('about')}
+                onClick={() => window.print()}
                 className="bg-slate-900/80 hover:bg-slate-900 text-slate-200 border border-white/10 hover:border-white/20 font-semibold px-8 py-3.5 rounded-xl transition-all duration-300 flex items-center space-x-2 backdrop-blur-sm"
               >
-                <span>Learn More</span>
+                <FileText className="h-4 w-4 text-indigo-400" />
+                <span>Download CV</span>
               </button>
             </div>
 
