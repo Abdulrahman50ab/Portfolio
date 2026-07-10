@@ -42,8 +42,7 @@ const Footer = () => {
               <span className="text-xl font-bold">Abdul Rahman</span>
             </div>
             <p className="text-gray-400 max-w-md">
-              Full-stack web developer passionate about creating beautiful,
-              functional, and user-friendly digital experiences.
+              Software Engineer specializing in Flutter mobile development and full-stack web architectures to deliver high-performance applications.
             </p>
           </div>
 
