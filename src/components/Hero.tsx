@@ -55,13 +55,6 @@ const Hero = () => {
           
           {/* Left Column: Bio / CTA */}
           <div className="lg:col-span-7 text-left space-y-6 md:space-y-8 animate-fade-in-up">
-            
-            {/* Tag Badge */}
-            <div className="inline-flex items-center space-x-2 bg-emerald-50 border border-emerald-200/80 px-3.5 py-1.5 rounded-full text-xs font-semibold text-emerald-800">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span>Available for Freelance & Remote Work</span>
-            </div>
-
             {/* Title */}
             <div className="space-y-4">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">

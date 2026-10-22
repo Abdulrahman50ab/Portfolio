@@ -9,6 +9,12 @@
 
 ## Task History & Changelog
 
+### [2026-10-22] Hero Badge Cleanup
+- **Objective:** Remove the "Available for Freelance & Remote Work" badge from the Hero section as requested.
+- **Changes:**
+  - `Hero.tsx`: Removed the emerald availability badge pill above the headline to streamline the introduction.
+  - Verified compilation with `npm run build` (0 errors).
+
 ### [2026-10-22] Light Theme Redesign & Vector Polish
 - **Objective:** Redesign the entire portfolio to a clean, crisp, editorial light theme (white / Warm Porcelain / Chalk palette) and push all changes to the remote Git repository.
 - **Architectural Changes:**
@@ -32,6 +38,6 @@
 
 ## Current Roadmap & Next Steps
 - [x] Convert full portfolio to Editorial Light Mode.
+- [x] Remove availability badge from Hero.
 - [x] Verify production build (`npm run build`).
-- [x] Commit and push changes to GitHub (`origin main`).
-- [ ] Add dark/light theme toggle mode if user requests dynamic theme switching in the future.
+- [ ] Push updates to remote repository when ready.
