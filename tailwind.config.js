@@ -3,36 +3,28 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['"Plus Jakarta Sans"', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+      },
+      colors: {
+        canvas: '#FAFAFA',
+        obsidian: '#09090B',
+      },
       animation: {
-        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-        'fade-in': 'fadeIn 0.5s ease-out forwards',
-        'float-slow': 'float 6s ease-in-out infinite',
-        'float-medium': 'float 4s ease-in-out infinite',
-        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
-        'background-shine': 'shine 8s linear infinite',
+        'fade-in': 'fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'fade-in-up': 'fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards',
       },
       keyframes: {
-        fadeInUp: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
         fadeIn: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-15px)' },
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(12px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        pulseGlow: {
-          '0%, 100%': { opacity: '0.6', filter: 'drop-shadow(0 0 15px rgba(99, 102, 241, 0.4))' },
-          '50%': { opacity: '1', filter: 'drop-shadow(0 0 30px rgba(99, 102, 241, 0.8))' },
-        },
-        shine: {
-          '0%': { backgroundPosition: '200% 0' },
-          '100%': { backgroundPosition: '-200% 0' },
-        }
-      }
+      },
     },
   },
   plugins: [],

@@ -1,119 +1,151 @@
 import React from 'react';
-import { Terminal, Smartphone, ShieldCheck, Layers, Cpu } from 'lucide-react';
+import { Smartphone, Cpu, Globe, Database, CheckCircle2 } from 'lucide-react';
+
+interface SkillDomain {
+  domain: string;
+  index: string;
+  icon: React.ReactNode;
+  summary: string;
+  technologies: {
+    name: string;
+    level: string;
+    highlight?: boolean;
+  }[];
+}
 
 const Skills = () => {
-  const skillCategories = [
+  const domains: SkillDomain[] = [
     {
-      title: "Mobile Development",
-      icon: <Smartphone className="h-5 w-5 text-sky-600" />,
-      skills: [
-        { name: "Flutter", level: 92, label: "Expert" },
-        { name: "Dart", level: 90, label: "Expert" },
-        { name: "iOS & Android Cross-Platform", level: 88, label: "Expert" },
-        { name: "Custom Widgets & Animations", level: 85, label: "Expert" }
-      ],
+      domain: "Mobile Engineering (Flutter Core)",
+      index: "01",
+      icon: <Smartphone className="h-4 w-4" />,
+      summary: "Specialized in the Flutter runtime, Dart asynchronous isolate mechanics, and native cross-platform pipelines.",
+      technologies: [
+        { name: "Flutter SDK", level: "Primary Specialty", highlight: true },
+        { name: "Dart (Null-Safe / Isolates)", level: "Primary Specialty", highlight: true },
+        { name: "iOS & Android Cross-Platform", level: "Production Deployed", highlight: true },
+        { name: "State Architecture (Bloc / Riverpod)", level: "Production Deployed" },
+        { name: "Platform Channels & Pigeon", level: "Native Integration" },
+        { name: "Custom Painters & Shaders", level: "Advanced Graphics" },
+        { name: "Impeller & Frame Budget Tuning", level: "Performance Profiling" },
+        { name: "Offline-First Caching", level: "Data Architecture" },
+      ]
     },
     {
-      title: "Generative AI",
-      icon: <Cpu className="h-5 w-5 text-purple-600" />,
-      skills: [
-        { name: "LangGraph", level: 85, label: "Expert" },
-        { name: "RAG Pipelines", level: 88, label: "Expert" },
-        { name: "Gemini 1.5 Flash", level: 90, label: "Expert" },
-        { name: "pgvector & Embeddings", level: 82, label: "Advanced" },
-        { name: "AI Agents", level: 80, label: "Advanced" }
-      ],
+      domain: "Generative AI & Agentic Workflows",
+      index: "02",
+      icon: <Cpu className="h-4 w-4" />,
+      summary: "Architecting document extraction pipelines and deterministic stateful multi-agent systems.",
+      technologies: [
+        { name: "LangGraph", level: "Multi-Agent Graphs", highlight: true },
+        { name: "RAG Pipelines", level: "Production Deployed", highlight: true },
+        { name: "Gemini 1.5 Flash / Pro", level: "Production Deployed", highlight: true },
+        { name: "pgvector & Embeddings", level: "Vector Storage" },
+        { name: "Document Parsing Pipelines", level: "Information Extraction" },
+        { name: "Structured JSON Inference", level: "Schema Validation" },
+      ]
     },
     {
-      title: "Backend & API",
-      icon: <Terminal className="h-5 w-5 text-emerald-600" />,
-      skills: [
-        { name: "Firebase (Auth / DB / Storage)", level: 90, label: "Expert" },
-        { name: "Node.js / Express.js", level: 85, label: "Expert" },
-        { name: "Neon DB (PostgreSQL)", level: 80, label: "Advanced" },
-        { name: "Supabase", level: 82, label: "Advanced" },
-        { name: "REST APIs & Drizzle ORM", level: 85, label: "Expert" }
-      ],
+      domain: "Web & Modern Frontend",
+      index: "03",
+      icon: <Globe className="h-4 w-4" />,
+      summary: "High-performance web applications built with TypeScript, component modularity, and crisp ergonomics.",
+      technologies: [
+        { name: "React", level: "Production Deployed", highlight: true },
+        { name: "TypeScript", level: "Strict Type Systems", highlight: true },
+        { name: "Next.js & Vite", level: "Modern Toolchains" },
+        { name: "Tailwind CSS", level: "Design Systems" },
+        { name: "Responsive Layouts (8pt Grid)", level: "Spatial Engineering" },
+        { name: "DOM & Network Profiling", level: "Core Web Vitals" },
+      ]
     },
     {
-      title: "Web Development",
-      icon: <Layers className="h-5 w-5 text-indigo-600" />,
-      skills: [
-        { name: "React", level: 88, label: "Expert" },
-        { name: "Next.js", level: 80, label: "Advanced" },
-        { name: "Vite & React-Vite", level: 85, label: "Expert" },
-        { name: "Tailwind CSS", level: 90, label: "Expert" },
-        { name: "JavaScript / TypeScript", level: 85, label: "Expert" }
-      ],
-    },
-    {
-      title: "Tools & Designing",
-      icon: <ShieldCheck className="h-5 w-5 text-rose-600" />,
-      skills: [
-        { name: "Git & GitHub", level: 90, label: "Expert" },
-        { name: "Android Studio & VS Code", level: 88, label: "Expert" },
-        { name: "Figma & Adobe XD", level: 80, label: "Advanced" },
-        { name: "Photoshop & Vercel", level: 78, label: "Advanced" }
-      ],
+      domain: "Backend, Cloud & Infrastructure",
+      index: "04",
+      icon: <Database className="h-4 w-4" />,
+      summary: "Cloud persistence, serverless relational databases, authentication layers, and developer tooling.",
+      technologies: [
+        { name: "Firebase (Auth / DB / Storage)", level: "Production Deployed", highlight: true },
+        { name: "Neon DB (Serverless Postgres)", level: "Production Deployed" },
+        { name: "Node.js & Express.js", level: "API Services" },
+        { name: "Drizzle ORM & Supabase", level: "Type-Safe Relational" },
+        { name: "Git & Version Control", level: "Collaborative GitFlow" },
+        { name: "Figma & Design Tokens", level: "Vector Craftsmanship" },
+      ]
     }
   ];
 
   return (
-    <section id="skills" className="py-24 bg-slate-50/70 relative overflow-hidden border-b border-slate-200/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="skills" className="py-20 md:py-28 border-b border-zinc-200/80 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
-            My <span className="text-indigo-600">Skills</span>
+        {/* Section Header */}
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-12 border-b border-zinc-200/60 font-mono text-xs text-zinc-500">
+          <div className="flex items-center space-x-2">
+            <span className="text-zinc-900 font-semibold">[ 04 ]</span>
+            <span>//</span>
+            <span className="uppercase tracking-wider">Capabilities &amp; Stack</span>
+          </div>
+          <span className="text-zinc-400">Production Proficiencies</span>
+        </div>
+
+        {/* Section Headline */}
+        <div className="max-w-3xl text-left mb-16">
+          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-zinc-950">
+            Disciplines, technical proficiencies &amp; tooling.
           </h2>
-          <div className="w-16 h-1 bg-indigo-600 mx-auto rounded-full mb-4"></div>
-          <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
-            A comprehensive mapping of my technical stack, generative AI capabilities, and web architectures.
+          <p className="text-sm sm:text-base text-zinc-600 mt-2">
+            A comprehensive mapping of technologies verified through client deliveries, proprietary SaaS builds, and ongoing production operations.
           </p>
         </div>
 
-        {/* Skill Panels Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillCategories.map((category, idx) => (
-            <div 
-              key={idx} 
-              className="bg-white border border-slate-200/90 rounded-2xl p-7 shadow-xs hover:shadow-md hover:border-slate-300 transition-all duration-300"
+        {/* Domains Grid */}
+        <div className="grid md:grid-cols-2 gap-8 text-left">
+          {domains.map((dom) => (
+            <div
+              key={dom.index}
+              className="p-7 rounded-xl border border-zinc-200/90 bg-[#FAFAFA] hover:border-zinc-400 transition-colors flex flex-col justify-between shadow-2xs"
             >
-              {/* Category Header */}
-              <div className="flex items-center space-x-3 mb-8 border-b border-slate-100 pb-4 text-left">
-                <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
-                  {category.icon}
-                </div>
-                <h3 className="text-lg font-bold text-slate-900 tracking-tight">
-                  {category.title}
-                </h3>
-              </div>
-
-              {/* Skills List */}
-              <div className="space-y-6 text-left">
-                {category.skills.map((skill, skillIdx) => (
-                  <div key={skillIdx} className="space-y-2">
-                    <div className="flex justify-between items-center text-xs sm:text-sm">
-                      <span className="font-semibold text-slate-800">{skill.name}</span>
-                      <div className="flex items-center space-x-2">
-                        <span className="text-[10px] font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100 uppercase tracking-wide">
-                          {skill.label}
-                        </span>
-                        <span className="text-slate-500 text-xs font-semibold">{skill.level}%</span>
-                      </div>
+              <div>
+                {/* Domain Header */}
+                <div className="flex items-center justify-between pb-4 border-b border-zinc-200/70 mb-4 font-mono text-xs">
+                  <div className="flex items-center space-x-2 text-zinc-900 font-semibold">
+                    <div className="p-1.5 rounded-md bg-white border border-zinc-200">
+                      {dom.icon}
                     </div>
-                    {/* Clean Progress bar */}
-                    <div className="w-full bg-slate-100 border border-slate-200/70 rounded-full h-2 overflow-hidden p-[1px]">
-                      <div
-                        className="h-full rounded-full bg-indigo-600 transition-all duration-1000 ease-out"
-                        style={{ width: `${skill.level}%` }}
-                      ></div>
-                    </div>
+                    <span>{dom.domain}</span>
                   </div>
-                ))}
+                  <span className="text-zinc-400">#{dom.index}</span>
+                </div>
+
+                <p className="text-xs sm:text-sm text-zinc-600 mb-6">
+                  {dom.summary}
+                </p>
+
+                {/* Technologies List */}
+                <div className="divide-y divide-zinc-200/70 border-y border-zinc-200/70">
+                  {dom.technologies.map((tech, idx) => (
+                    <div
+                      key={idx}
+                      className="py-2.5 flex items-center justify-between text-xs"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-zinc-400" />
+                        <span className={`font-medium ${tech.highlight ? 'text-zinc-950' : 'text-zinc-700'}`}>
+                          {tech.name}
+                        </span>
+                      </div>
+                      <span className="font-mono text-[11px] text-zinc-500 bg-white px-2 py-0.5 rounded border border-zinc-200/80">
+                        {tech.level}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
+              <div className="pt-4 font-mono text-[10px] text-zinc-400 text-right">
+                VERIFIED IN PRODUCTION
+              </div>
             </div>
           ))}
         </div>

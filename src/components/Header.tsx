@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Code } from 'lucide-react';
-import img from './cv2.jpg';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,13 +8,13 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 20);
       if (window.scrollY < 200) {
         setActiveSection('home');
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -31,9 +30,9 @@ const Header = () => {
             setActiveSection(sectionId);
           }
         },
-        { 
+        {
           rootMargin: '-20% 0px -60% 0px',
-          threshold: 0.1 
+          threshold: 0.1,
         }
       );
       observer.observe(el);
@@ -58,107 +57,122 @@ const Header = () => {
   };
 
   const navItems = [
-    { name: 'Home', id: 'home' },
-    { name: 'About', id: 'about' },
-    { name: 'Projects', id: 'projects' },
-    { name: 'Skills', id: 'skills' },
-    { name: 'Contact', id: 'contact' },
+    { name: 'About', id: 'about', index: '01' },
+    { name: 'Selected Work', id: 'projects', index: '02' },
+    { name: 'Capabilities', id: 'skills', index: '03' },
+    { name: 'Contact', id: 'contact', index: '04' },
   ];
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 border-b ${
-      scrolled 
-        ? 'bg-white/90 backdrop-blur-md border-slate-200/80 shadow-xs py-3' 
-        : 'bg-white/60 backdrop-blur-xs border-transparent py-4'
-    }`}>
+    <header
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+        scrolled
+          ? 'bg-[#FAFAFA]/90 backdrop-blur-md border-b border-zinc-200/80 shadow-[0_1px_2px_rgba(0,0,0,0.03)]'
+          : 'bg-[#FAFAFA]/60 backdrop-blur-sm border-b border-transparent'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <button 
-            onClick={() => scrollToSection('home')} 
-            className="flex items-center space-x-3 group cursor-pointer focus:outline-none"
+          
+          {/* Logo / Identity */}
+          <button
+            onClick={() => scrollToSection('home')}
+            className="flex items-center space-x-2.5 text-left group cursor-pointer focus:outline-none"
+            aria-label="Abdul Rahman - Return to top"
           >
-            <div className="bg-indigo-600 p-2 rounded-xl text-white shadow-xs group-hover:bg-indigo-700 transition-colors">
-              <Code className="h-5 w-5" />
-            </div>
-            <div className="text-left">
-              <span className="text-xl font-bold tracking-tight text-slate-900 block group-hover:text-indigo-600 transition-colors">
-                Abdul Rahman
-              </span>
-              <span className="text-[10px] text-slate-500 font-semibold tracking-wider uppercase block -mt-0.5">
-                Software Engineer
-              </span>
-            </div>
+            <span className="font-semibold text-sm sm:text-base text-zinc-900 tracking-tight group-hover:text-zinc-600 transition-colors">
+              Abdul Rahman
+            </span>
+            <span className="text-zinc-300 font-mono text-xs hidden sm:inline">/</span>
+            <span className="font-mono text-[11px] text-zinc-500 uppercase tracking-wider hidden sm:inline">
+              Software Engineer
+            </span>
           </button>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-7">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`relative py-2 text-sm font-medium transition-colors focus:outline-none ${
-                  activeSection === item.id 
-                    ? 'text-indigo-600 font-semibold' 
-                    : 'text-slate-600 hover:text-slate-900'
+                className={`group flex items-center space-x-1.5 py-1 text-xs tracking-tight transition-colors focus:outline-none ${
+                  activeSection === item.id
+                    ? 'text-zinc-900 font-medium'
+                    : 'text-zinc-500 hover:text-zinc-900'
                 }`}
               >
-                {item.name}
+                <span className="font-mono text-[10px] text-zinc-400 group-hover:text-zinc-600 transition-colors">
+                  {item.index}
+                </span>
+                <span>{item.name}</span>
                 {activeSection === item.id && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-indigo-600 rounded-full" />
+                  <span className="w-1 h-1 rounded-full bg-zinc-900 ml-1" />
                 )}
               </button>
             ))}
           </nav>
 
-          {/* Picture Frame / CTA Button */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* Right Actions: Availability & CTA */}
+          <div className="hidden md:flex items-center space-x-5">
+            <div className="flex items-center space-x-2 pl-2">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span className="font-mono text-[11px] text-zinc-500 tracking-tight">Available for hire</span>
+            </div>
+
             <button
               onClick={() => scrollToSection('contact')}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-4 py-2.5 rounded-lg shadow-xs hover:shadow transition-all"
+              className="inline-flex items-center space-x-1.5 bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-medium px-3.5 py-1.5 rounded-lg border border-zinc-900 transition-all active:scale-[0.98]"
             >
-              Let's Talk
+              <span>Get in touch</span>
+              <ArrowUpRight className="h-3.5 w-3.5 text-zinc-400" />
             </button>
-            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-slate-200 shadow-xs p-[1px] bg-white">
-              <img 
-                src={img} 
-                alt="Abdul Rahman" 
-                className="w-full h-full object-cover rounded-full"
-              />
-            </div>
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 focus:outline-none transition-colors"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle navigation menu"
-          >
-            {isMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </button>
+          <div className="flex md:hidden items-center space-x-3">
+            <button
+              onClick={() => scrollToSection('contact')}
+              className="bg-zinc-900 text-white text-xs font-medium px-2.5 py-1.5 rounded-md"
+            >
+              Contact
+            </button>
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-1.5 rounded-md text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 transition-colors focus:outline-none"
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
+
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Dropdown */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-20 left-4 right-4 bg-white/95 backdrop-blur-md border border-slate-200 rounded-2xl shadow-xl p-4 animate-fade-in z-50">
-            <div className="flex flex-col space-y-1.5">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`block w-full text-left px-4 py-3 text-base font-medium rounded-xl transition-all ${
-                    activeSection === item.id 
-                      ? 'text-indigo-600 bg-indigo-50/80 border-l-4 border-indigo-600 font-semibold' 
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
-                  }`}
-                >
-                  {item.name}
-                </button>
-              ))}
+          <div className="md:hidden border-t border-zinc-200/80 bg-[#FAFAFA] py-4 space-y-1 animate-fade-in">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`w-full flex items-center justify-between px-3 py-2.5 text-left text-sm rounded-md transition-colors ${
+                  activeSection === item.id
+                    ? 'bg-zinc-100 text-zinc-900 font-medium'
+                    : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50'
+                }`}
+              >
+                <span>{item.name}</span>
+                <span className="font-mono text-xs text-zinc-400">{item.index}</span>
+              </button>
+            ))}
+            <div className="pt-3 px-3 border-t border-zinc-200/60 flex items-center justify-between">
+              <span className="font-mono text-xs text-zinc-500">Status</span>
+              <span className="font-mono text-xs text-emerald-600 flex items-center space-x-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                <span>Available</span>
+              </span>
             </div>
           </div>
         )}

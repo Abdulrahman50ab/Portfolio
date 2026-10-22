@@ -1,39 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronDown, ArrowRight, Github, Linkedin, Mail, FileText } from 'lucide-react';
+import React from 'react';
+import { ArrowUpRight, Github, Linkedin, Mail, FileText, MapPin } from 'lucide-react';
 import img from './cv2.jpg';
 
-const roles = ["Software Engineer", "Flutter Developer", "Full Stack Web Engineer"];
-
 const Hero = () => {
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [currentText, setCurrentText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [typingSpeed, setTypingSpeed] = useState(100);
-
-  useEffect(() => {
-    const handleType = () => {
-      const fullText = roles[roleIndex];
-      if (!isDeleting) {
-        setCurrentText(fullText.substring(0, currentText.length + 1));
-        setTypingSpeed(80);
-        if (currentText === fullText) {
-          setTimeout(() => setIsDeleting(true), 2000);
-          return;
-        }
-      } else {
-        setCurrentText(fullText.substring(0, currentText.length - 1));
-        setTypingSpeed(40);
-        if (currentText === '') {
-          setIsDeleting(false);
-          setRoleIndex((prev) => (prev + 1) % roles.length);
-        }
-      }
-    };
-
-    const timer = setTimeout(handleType, typingSpeed);
-    return () => clearTimeout(timer);
-  }, [currentText, isDeleting, roleIndex, typingSpeed]);
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -42,139 +11,160 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-white pt-20 pb-16 md:pt-28 md:pb-20">
-      {/* Background Soft Glow Orbs */}
-      <div className="glow-orb-indigo top-[10%] left-[-5%]"></div>
-      <div className="glow-orb-cyan bottom-[15%] right-[-5%]"></div>
+    <section id="home" className="relative pt-12 pb-20 md:pt-20 md:pb-28 border-b border-zinc-200/80 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Top Monospaced Header Bar */}
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-8 mb-12 border-b border-zinc-200/60 font-mono text-xs text-zinc-500">
+          <div className="flex items-center space-x-2">
+            <span className="text-zinc-900 font-semibold">[ 01 ]</span>
+            <span>//</span>
+            <span className="uppercase tracking-wider">Software Engineer &amp; Mobile Specialist</span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <span className="flex items-center space-x-1.5">
+              <MapPin className="h-3.5 w-3.5 text-zinc-400" />
+              <span>Lahore, Pakistan</span>
+            </span>
+            <span className="text-zinc-300">|</span>
+            <span className="text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200/60 text-[11px] font-medium">
+              Open to Opportunities
+            </span>
+          </div>
+        </div>
 
-      {/* Grid Pattern Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_20%,#000_70%,transparent_100%)] opacity-70"></div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-12 md:py-16">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        {/* Main Hero Grid */}
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
-          {/* Left Column: Bio / CTA */}
-          <div className="lg:col-span-7 text-left space-y-6 md:space-y-8 animate-fade-in-up">
-            {/* Title */}
-            <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
-                Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-indigo-700 to-indigo-900">Abdul Rahman</span>
+          {/* Left Column: Bold Editorial Typography & Narrative */}
+          <div className="lg:col-span-7 space-y-8 text-left">
+            
+            <div className="space-y-5">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-950 leading-[1.08]">
+                Architecting resilient mobile ecosystems &amp; thoughtful software.
               </h1>
               
-              {/* Typing Effect */}
-              <div className="h-10 sm:h-12 flex items-center">
-                <p className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-800">
-                  <span className="text-slate-500 font-normal">A passionate </span>
-                  <span className="text-indigo-600 font-bold border-r-2 border-indigo-600 pr-1 animate-pulse">
-                    {currentText}
-                  </span>
-                </p>
-              </div>
-
-              {/* Bio */}
-              <p className="text-base sm:text-lg text-slate-600 max-w-xl leading-relaxed">
-                A dedicated <strong className="text-slate-900 font-semibold">Software Engineer</strong> specializing in building native-performance <strong className="text-indigo-600 font-semibold">Mobile Apps (Flutter)</strong> and scalable <strong className="text-slate-900 font-semibold">Web Applications</strong>. I architect clean, robust, and user-centric digital experiences.
+              <p className="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-2xl font-normal pt-1">
+                I am <span className="text-zinc-900 font-medium">Abdul Rahman</span>, a Software Engineer specializing in high-performance <span className="text-zinc-900 font-medium">Flutter cross-platform architectures</span>, full-stack web applications in <span className="text-zinc-900 font-medium">React &amp; Node.js</span>, and modern <span className="text-zinc-900 font-medium">Generative AI pipelines</span>. Focused on mechanical sympathy, deterministic state flows, and human-first simplicity.
               </p>
             </div>
 
-            {/* CTAs */}
-            <div className="flex flex-wrap gap-4 items-center">
+            {/* Action Row */}
+            <div className="flex flex-wrap items-center gap-3 pt-2">
               <button
                 onClick={() => scrollToSection('contact')}
-                className="group bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-3.5 rounded-xl transition-all duration-300 shadow-xs hover:shadow-md flex items-center space-x-2 active:scale-[0.98]"
+                className="group inline-flex items-center space-x-2 bg-zinc-900 hover:bg-zinc-800 text-white text-sm font-medium px-6 py-3 rounded-xl transition-all shadow-xs active:scale-[0.98]"
               >
-                <span>Hire Me</span>
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                <span>Initiate conversation</span>
+                <ArrowUpRight className="h-4 w-4 text-zinc-400 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </button>
-              
+
               <button
                 onClick={() => window.print()}
-                className="bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 hover:border-slate-300 font-semibold px-8 py-3.5 rounded-xl transition-all duration-300 flex items-center space-x-2 shadow-xs active:scale-[0.98]"
+                className="inline-flex items-center space-x-2 bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-200 hover:border-zinc-300 text-sm font-medium px-5 py-3 rounded-xl transition-all shadow-xs active:scale-[0.98]"
               >
-                <FileText className="h-4 w-4 text-indigo-600" />
-                <span>Download CV</span>
+                <FileText className="h-4 w-4 text-zinc-500" />
+                <span>Curriculum Vitae</span>
               </button>
             </div>
 
-            {/* Social Shortcuts */}
-            <div className="flex items-center space-x-4 pt-4 border-t border-slate-200/80">
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Connect:</span>
-              <a 
-                href="https://github.com/Abdulrahman50ab" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="p-2.5 rounded-lg bg-slate-50 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-200 text-slate-600 hover:text-indigo-600 transition-colors"
-                aria-label="GitHub Profile"
+            {/* Architectural Data Strip */}
+            <div className="pt-6 border-t border-zinc-200/70">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-left">
+                <div className="space-y-1">
+                  <span className="font-mono text-[11px] text-zinc-400 uppercase tracking-wider block">Core Domain</span>
+                  <p className="text-sm font-semibold text-zinc-900">Flutter Mobile</p>
+                  <span className="text-xs text-zinc-500 block">iOS &amp; Android</span>
+                </div>
+
+                <div className="space-y-1">
+                  <span className="font-mono text-[11px] text-zinc-400 uppercase tracking-wider block">Experience</span>
+                  <p className="text-sm font-semibold text-zinc-900 tabular-nums">3+ Years Active</p>
+                  <span className="text-xs text-zinc-500 block">15+ Shipped Works</span>
+                </div>
+
+                <div className="space-y-1">
+                  <span className="font-mono text-[11px] text-zinc-400 uppercase tracking-wider block">Academics</span>
+                  <p className="text-sm font-semibold text-zinc-900 tabular-nums">3.93 / 4.00 CGPA</p>
+                  <span className="text-xs text-zinc-500 block">BS Computer Science</span>
+                </div>
+
+                <div className="space-y-1">
+                  <span className="font-mono text-[11px] text-zinc-400 uppercase tracking-wider block">Current Role</span>
+                  <p className="text-sm font-semibold text-zinc-900">Software Engineer</p>
+                  <span className="text-xs text-zinc-500 block">@ IntelliG</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Direct Connect Anchors */}
+            <div className="flex items-center space-x-6 pt-2 font-mono text-xs text-zinc-600">
+              <span className="text-zinc-400 uppercase tracking-wider text-[11px]">Channels:</span>
+              <a
+                href="https://github.com/Abdulrahman50ab"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-zinc-950 transition-colors flex items-center space-x-1"
               >
-                <Github className="h-4 w-4" />
+                <Github className="h-3.5 w-3.5" />
+                <span>GitHub</span>
               </a>
-              <a 
-                href="https://www.linkedin.com/in/abdulrahman50?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="p-2.5 rounded-lg bg-slate-50 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-200 text-slate-600 hover:text-indigo-600 transition-colors"
-                aria-label="LinkedIn Profile"
+              <a
+                href="https://www.linkedin.com/in/abdulrahman50?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-zinc-950 transition-colors flex items-center space-x-1"
               >
-                <Linkedin className="h-4 w-4" />
+                <Linkedin className="h-3.5 w-3.5" />
+                <span>LinkedIn</span>
               </a>
-              <a 
-                href="mailto:abdulrahman50ab@gmail.com" 
-                className="p-2.5 rounded-lg bg-slate-50 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-200 text-slate-600 hover:text-indigo-600 transition-colors"
-                aria-label="Send Email"
+              <a
+                href="mailto:abdulrahman50ab@gmail.com"
+                className="hover:text-zinc-950 transition-colors flex items-center space-x-1"
               >
-                <Mail className="h-4 w-4" />
+                <Mail className="h-3.5 w-3.5" />
+                <span>Email</span>
               </a>
             </div>
 
           </div>
 
-          {/* Right Column: Circular Profile Image Showcase */}
-          <div className="lg:col-span-5 w-full flex justify-center items-center relative animate-float-slow">
-            <div className="relative group">
-              
-              {/* Circular Container with Clean Light Border */}
-              <div className="w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full p-2 bg-white border border-slate-200 shadow-xl relative z-10">
-                <div className="w-full h-full rounded-full overflow-hidden bg-slate-100 p-0.5">
+          {/* Right Column: Editorial Portrait Presentation */}
+          <div className="lg:col-span-5 w-full flex justify-center lg:justify-end">
+            <div className="w-full max-w-sm">
+              <div className="relative bg-white border border-zinc-200/90 rounded-2xl p-2.5 shadow-sm">
+                
+                {/* Photo Frame */}
+                <div className="aspect-[4/5] w-full overflow-hidden rounded-xl bg-zinc-100 relative">
                   <img
                     src={img}
-                    alt="Abdul Rahman"
-                    className="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-500"
+                    alt="Abdul Rahman — Software Engineer"
+                    className="w-full h-full object-cover object-center filter grayscale contrast-[1.05] hover:grayscale-0 transition-all duration-700"
                   />
+                  
+                  {/* Subtle Corner Status Overlay */}
+                  <div className="absolute bottom-3 left-3 right-3 bg-zinc-900/80 backdrop-blur-md text-white p-3 rounded-lg border border-white/10 flex items-center justify-between">
+                    <div>
+                      <p className="text-xs font-medium text-white">Abdul Rahman</p>
+                      <p className="font-mono text-[10px] text-zinc-300">Software Engineer &bull; IntelliG</p>
+                    </div>
+                    <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                  </div>
                 </div>
-              </div>
 
-              {/* Floating Badge 1: Flutter */}
-              <div className="absolute -top-3 -left-5 z-20 bg-white/95 border border-slate-200 px-4 py-2 rounded-xl flex items-center space-x-2 shadow-md backdrop-blur-xs">
-                <div className="w-2.5 h-2.5 rounded-full bg-cyan-600"></div>
-                <span className="text-xs font-bold text-slate-800">Flutter Mobile Apps</span>
-              </div>
+                {/* Subtitle Caption */}
+                <div className="pt-3 px-1 flex items-center justify-between font-mono text-[11px] text-zinc-500">
+                  <span>Lahore, PK (UTC+5)</span>
+                  <span>Est. 2023</span>
+                </div>
 
-              {/* Floating Badge 2: Experience stats */}
-              <div className="absolute top-[40%] -right-8 z-20 bg-white/95 border border-slate-200 px-4 py-2.5 rounded-xl flex flex-col shadow-md text-left backdrop-blur-xs">
-                <span className="text-[10px] text-slate-500 font-bold tracking-wider uppercase">Experience</span>
-                <span className="text-sm font-extrabold text-indigo-600 -mt-0.5">3+ Years Active</span>
               </div>
-
-              {/* Floating Badge 3: Projects completed */}
-              <div className="absolute -bottom-3 left-[10%] z-20 bg-white/95 border border-slate-200 px-4 py-2 rounded-xl flex items-center space-x-2 shadow-md backdrop-blur-xs">
-                <span className="text-xs font-bold text-slate-800">8+ Completed Projects</span>
-              </div>
-
             </div>
           </div>
 
         </div>
-      </div>
 
-      {/* Scroll Down Indicator */}
-      <button 
-        onClick={() => scrollToSection('about')} 
-        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-slate-400 hover:text-slate-700 transition-colors animate-bounce flex flex-col items-center cursor-pointer focus:outline-none"
-        aria-label="Scroll to About section"
-      >
-        <span className="text-[10px] font-semibold tracking-widest uppercase mb-1.5 text-slate-400">Scroll Down</span>
-        <ChevronDown className="h-5 w-5 text-indigo-600" />
-      </button>
+      </div>
     </section>
   );
 };
