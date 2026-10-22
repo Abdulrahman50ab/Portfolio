@@ -75,7 +75,7 @@ const Skills = () => {
         
         {/* Section Header */}
         <div className="text-left mb-12">
-          <span className="text-xs font-semibold text-zinc-500 uppercase tracking-wider block mb-2">
+          <span className="text-xs font-semibold text-indigo-600 uppercase tracking-wider block mb-2">
             Capabilities
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950">
@@ -91,12 +91,12 @@ const Skills = () => {
           {skillGroups.map((group, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-2xl border border-zinc-200/90 bg-zinc-50/50 hover:bg-zinc-50/90 hover:border-zinc-300 transition-colors shadow-2xs flex flex-col justify-between"
+              className="p-6 rounded-2xl border border-zinc-200/90 bg-zinc-50/50 hover:bg-zinc-50/90 hover:border-indigo-200/80 transition-colors shadow-2xs flex flex-col justify-between"
             >
               <div>
                 {/* Header */}
                 <div className="flex items-center space-x-2.5 mb-2.5">
-                  <div className="p-2 rounded-lg bg-white border border-zinc-200/80 text-zinc-900 shadow-2xs">
+                  <div className="p-2 rounded-lg bg-indigo-50 border border-indigo-200/70 text-indigo-600 shadow-2xs">
                     {group.icon}
                   </div>
                   <h3 className="font-heading text-base font-semibold text-zinc-950">
@@ -114,7 +114,7 @@ const Skills = () => {
                 {group.skills.map((skill, sIdx) => (
                   <span
                     key={sIdx}
-                    className="text-xs font-medium text-zinc-700 bg-white border border-zinc-200/90 px-2.5 py-1 rounded-md shadow-2xs hover:border-zinc-300 transition-colors"
+                    className="text-xs font-medium text-zinc-700 bg-white border border-zinc-200/90 px-2.5 py-1 rounded-md shadow-2xs hover:border-indigo-200 hover:text-indigo-700 transition-colors"
                   >
                     {skill}
                   </span>

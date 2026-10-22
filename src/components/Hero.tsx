@@ -21,19 +21,18 @@ const Hero = () => {
           <div className="lg:col-span-7 space-y-6 text-left">
             
             {/* Top Status Tag */}
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200/80 text-xs text-zinc-700">
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-              <span className="font-medium">Software Engineer</span>
-              <span className="text-zinc-300">·</span>
-              <span className="text-zinc-500 flex items-center gap-1">
-                <MapPin className="h-3 w-3 inline text-zinc-400" />
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-50/70 border border-indigo-200/70 text-xs text-zinc-700">
+              <span className="font-semibold text-indigo-700">Software Engineer</span>
+              <span className="text-indigo-200">·</span>
+              <span className="text-zinc-600 flex items-center gap-1">
+                <MapPin className="h-3 w-3 inline text-indigo-500" />
                 Lahore, Pakistan
               </span>
             </div>
 
             {/* Main Headline */}
             <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-zinc-950 leading-[1.12]">
-              Building fast mobile apps &amp; intelligent software.
+              Building fast mobile apps &amp; <span className="text-indigo-600">intelligent software.</span>
             </h1>
             
             {/* Concise Subhead */}
@@ -45,10 +44,10 @@ const Hero = () => {
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <button
                 onClick={() => scrollToSection('projects')}
-                className="group inline-flex items-center space-x-2 bg-zinc-950 hover:bg-zinc-800 text-white text-sm font-medium px-5 py-2.5 rounded-xl transition-all shadow-xs active:scale-[0.98]"
+                className="group inline-flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-5 py-2.5 rounded-xl transition-all shadow-xs active:scale-[0.98]"
               >
                 <span>View Projects</span>
-                <ArrowUpRight className="h-4 w-4 text-zinc-400 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowUpRight className="h-4 w-4 text-indigo-200 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </button>
 
               <button

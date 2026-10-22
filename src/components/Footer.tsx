@@ -66,7 +66,7 @@ const Footer = () => {
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
-                className="text-xs sm:text-sm text-zinc-600 hover:text-zinc-950 transition-colors font-medium"
+                className="text-xs sm:text-sm text-zinc-600 hover:text-indigo-600 transition-colors font-medium"
               >
                 {link.label}
               </button>
@@ -81,7 +81,7 @@ const Footer = () => {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-zinc-50 hover:bg-zinc-100 text-zinc-600 hover:text-zinc-950 border border-zinc-200/60 transition-colors"
+                className="p-2 rounded-lg bg-zinc-50 hover:bg-indigo-50 text-zinc-600 hover:text-indigo-600 border border-zinc-200/60 hover:border-indigo-200 transition-colors"
                 aria-label={social.name}
               >
                 {social.icon}
@@ -97,7 +97,7 @@ const Footer = () => {
           
           <button
             onClick={scrollToTop}
-            className="inline-flex items-center space-x-1.5 text-zinc-600 hover:text-zinc-950 font-medium transition-colors"
+            className="inline-flex items-center space-x-1.5 text-zinc-600 hover:text-indigo-600 font-medium transition-colors"
           >
             <span>Back to top</span>
             <ArrowUp className="h-3.5 w-3.5" />

@@ -98,12 +98,12 @@ const Header = () => {
                 className={`text-sm tracking-tight transition-colors focus:outline-none py-1 relative ${
                   activeSection === item.id
                     ? 'text-zinc-950 font-semibold'
-                    : 'text-zinc-500 hover:text-zinc-950 font-normal'
+                    : 'text-zinc-500 hover:text-indigo-600 font-normal'
                 }`}
               >
                 <span>{item.name}</span>
                 {activeSection === item.id && (
-                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-zinc-900 rounded-full" />
+                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-indigo-600 rounded-full" />
                 )}
               </button>
             ))}
@@ -111,17 +111,13 @@ const Header = () => {
 
           {/* Right Actions: Availability & CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <div className="flex items-center space-x-2 text-xs text-zinc-600 font-medium">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span>Available for hire</span>
-            </div>
+            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-200/70">
+              Available for hire
+            </span>
 
             <button
               onClick={() => scrollToSection('contact')}
-              className="inline-flex items-center space-x-1.5 bg-zinc-950 hover:bg-zinc-800 text-white text-xs font-medium px-3.5 py-2 rounded-lg transition-all active:scale-[0.98]"
+              className="inline-flex items-center space-x-1.5 bg-zinc-950 hover:bg-indigo-600 text-white text-xs font-medium px-3.5 py-2 rounded-lg transition-all active:scale-[0.98]"
             >
               <span>Get in touch</span>
               <ArrowUpRight className="h-3.5 w-3.5 text-zinc-400" />
@@ -165,10 +161,7 @@ const Header = () => {
             ))}
             <div className="pt-3 px-3 border-t border-zinc-200/60 flex items-center justify-between text-xs text-zinc-600">
               <span>Status</span>
-              <span className="text-emerald-700 font-medium flex items-center space-x-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                <span>Available for hire</span>
-              </span>
+              <span className="text-zinc-600 font-medium">Available for hire</span>
             </div>
           </div>
         )}

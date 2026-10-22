@@ -63,7 +63,7 @@ const Contact = () => {
         
         {/* Section Header */}
         <div className="text-left mb-12">
-          <span className="text-xs font-semibold text-zinc-500 uppercase tracking-wider block mb-2">
+          <span className="text-xs font-semibold text-indigo-600 uppercase tracking-wider block mb-2">
             Contact
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950">
@@ -81,12 +81,12 @@ const Contact = () => {
           <div className="lg:col-span-5 space-y-4">
             
             {/* Email Card with Copy */}
-            <div className="p-5 rounded-2xl border border-zinc-200/90 bg-white shadow-2xs">
+            <div className="p-5 rounded-2xl border border-zinc-200/90 bg-white shadow-2xs hover:border-indigo-200/80 transition-colors">
               <div className="flex items-center justify-between mb-1">
                 <span className="text-xs text-zinc-500 font-medium">Direct Email</span>
                 <button
                   onClick={handleCopyEmail}
-                  className="inline-flex items-center space-x-1 text-xs text-zinc-600 hover:text-zinc-950 px-2 py-0.5 rounded bg-zinc-100 hover:bg-zinc-200 transition-colors"
+                  className="inline-flex items-center space-x-1 text-xs text-zinc-600 hover:text-indigo-600 px-2 py-0.5 rounded bg-zinc-100 hover:bg-indigo-50 transition-colors"
                   title="Copy email"
                 >
                   {copiedEmail ? (
@@ -104,21 +104,21 @@ const Contact = () => {
               </div>
               <a
                 href="mailto:abdulrahman50ab@gmail.com"
-                className="font-heading text-base font-semibold text-zinc-950 hover:text-zinc-700 transition-colors block"
+                className="font-heading text-base font-semibold text-zinc-950 hover:text-indigo-600 transition-colors block"
               >
                 abdulrahman50ab@gmail.com
               </a>
             </div>
 
             {/* Phone & WhatsApp Card */}
-            <div className="p-5 rounded-2xl border border-zinc-200/90 bg-white shadow-2xs">
+            <div className="p-5 rounded-2xl border border-zinc-200/90 bg-white shadow-2xs hover:border-indigo-200/80 transition-colors">
               <div className="flex items-center justify-between mb-1">
                 <span className="text-xs text-zinc-500 font-medium">WhatsApp / Phone</span>
                 <a
                   href="https://wa.me/923010401544"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-zinc-600 hover:text-zinc-950 flex items-center space-x-0.5"
+                  className="text-xs text-indigo-600 hover:text-indigo-700 font-medium flex items-center space-x-0.5"
                 >
                   <span>Chat</span>
                   <ArrowUpRight className="h-3 w-3" />
@@ -137,7 +137,7 @@ const Contact = () => {
               <div>
                 <span className="text-xs text-zinc-500 font-medium block">Location</span>
                 <p className="font-heading text-sm font-semibold text-zinc-950 mt-0.5 flex items-center space-x-1.5">
-                  <MapPin className="h-3.5 w-3.5 text-zinc-400" />
+                  <MapPin className="h-3.5 w-3.5 text-indigo-500" />
                   <span>Lahore, Pakistan</span>
                 </p>
                 <span className="text-xs text-zinc-500">Open to remote &amp; hybrid</span>
@@ -148,7 +148,7 @@ const Contact = () => {
                   href="https://github.com/Abdulrahman50ab"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-700 hover:text-zinc-950 transition-colors"
+                  className="p-2 rounded-lg bg-zinc-100 hover:bg-indigo-50 text-zinc-700 hover:text-indigo-600 border border-transparent hover:border-indigo-200 transition-colors"
                   aria-label="GitHub"
                 >
                   <Github className="h-4 w-4" />
@@ -157,7 +157,7 @@ const Contact = () => {
                   href="https://www.linkedin.com/in/abdulrahman50?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-700 hover:text-zinc-950 transition-colors"
+                  className="p-2 rounded-lg bg-zinc-100 hover:bg-indigo-50 text-zinc-700 hover:text-indigo-600 border border-transparent hover:border-indigo-200 transition-colors"
                   aria-label="LinkedIn"
                 >
                   <Linkedin className="h-4 w-4" />
@@ -197,7 +197,7 @@ const Contact = () => {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="John Doe"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-[#FAFAFA] text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-400"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-[#FAFAFA] text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400"
                       />
                     </div>
 
@@ -212,7 +212,7 @@ const Contact = () => {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="john@example.com"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-[#FAFAFA] text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-400"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-[#FAFAFA] text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400"
                       />
                     </div>
                   </div>
@@ -227,7 +227,7 @@ const Contact = () => {
                       value={formData.subject}
                       onChange={handleChange}
                       placeholder="Mobile App Project / Job Opportunity"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-[#FAFAFA] text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-400"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-[#FAFAFA] text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400"
                     />
                   </div>
 
@@ -242,7 +242,7 @@ const Contact = () => {
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="Tell me about your project, timeline, or inquiry..."
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-[#FAFAFA] text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-400 resize-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-[#FAFAFA] text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 resize-none"
                     />
                   </div>
 
@@ -255,10 +255,10 @@ const Contact = () => {
                   <button
                     type="submit"
                     disabled={status === 'submitting'}
-                    className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-zinc-950 hover:bg-zinc-800 disabled:opacity-50 text-white text-sm font-medium px-6 py-2.5 rounded-xl transition-all shadow-xs active:scale-[0.98]"
+                    className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white text-sm font-medium px-6 py-2.5 rounded-xl transition-all shadow-xs active:scale-[0.98]"
                   >
                     <span>{status === 'submitting' ? 'Sending...' : 'Send Message'}</span>
-                    <Send className="h-3.5 w-3.5 text-zinc-400" />
+                    <Send className="h-3.5 w-3.5 text-indigo-200" />
                   </button>
                 </form>
               )}

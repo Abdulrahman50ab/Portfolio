@@ -10,7 +10,7 @@ import PrintableCV from './components/PrintableCV';
 
 function App() {
   return (
-    <div className="min-h-screen bg-[#FAFAFA] text-zinc-950 selection:bg-zinc-900 selection:text-white font-sans">
+    <div className="min-h-screen bg-[#FAFAFA] text-zinc-950 selection:bg-indigo-600 selection:text-white font-sans">
       <div className="print:hidden">
         <Header />
         <main className="relative z-10">

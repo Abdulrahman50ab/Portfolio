@@ -144,7 +144,7 @@ const Projects = () => {
         
         {/* Section Header */}
         <div className="text-left mb-10">
-          <span className="text-xs font-semibold text-zinc-500 uppercase tracking-wider block mb-2">
+          <span className="text-xs font-semibold text-indigo-600 uppercase tracking-wider block mb-2">
             Selected Work
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950">
@@ -166,8 +166,8 @@ const Projects = () => {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
                   selectedCategory === cat
-                    ? 'bg-zinc-950 text-white shadow-xs'
-                    : 'bg-white text-zinc-600 hover:text-zinc-950 border border-zinc-200 hover:border-zinc-300'
+                    ? 'bg-indigo-600 text-white shadow-xs'
+                    : 'bg-white text-zinc-600 hover:text-indigo-600 border border-zinc-200 hover:border-indigo-200'
                 }`}
               >
                 {cat}
@@ -183,7 +183,7 @@ const Projects = () => {
               placeholder="Search projects or tech..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-1.5 rounded-lg bg-white border border-zinc-200 text-xs text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-400"
+              className="w-full pl-9 pr-3 py-1.5 rounded-lg bg-white border border-zinc-200 text-xs text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400"
             />
           </div>
 
@@ -194,27 +194,27 @@ const Projects = () => {
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="p-6 rounded-2xl border border-zinc-200/90 bg-white hover:border-zinc-300 transition-all flex flex-col justify-between shadow-2xs group"
+              className="p-6 rounded-2xl border border-zinc-200/90 bg-white hover:border-indigo-200/90 transition-all flex flex-col justify-between shadow-2xs group"
             >
               <div>
                 {/* Card Header: Category & Metric */}
                 <div className="flex items-center justify-between gap-2 mb-3">
-                  <div className="flex items-center space-x-2 text-xs font-medium text-zinc-600">
-                    <span className="p-1 rounded bg-zinc-100 text-zinc-700">
+                  <div className="flex items-center space-x-2 text-xs font-medium text-zinc-700">
+                    <span className="p-1 rounded bg-indigo-50 text-indigo-600 border border-indigo-100">
                       {project.icon}
                     </span>
                     <span>{project.category}</span>
                   </div>
 
                   {project.metric && (
-                    <span className="text-[11px] font-medium text-emerald-800 bg-emerald-50 border border-emerald-200/80 px-2 py-0.5 rounded-md">
+                    <span className="text-[11px] font-medium text-indigo-700 bg-indigo-50 border border-indigo-200/80 px-2 py-0.5 rounded-md">
                       {project.metric}
                     </span>
                   )}
                 </div>
 
                 {/* Project Title */}
-                <h3 className="font-heading text-lg font-semibold text-zinc-950 mb-2 group-hover:text-zinc-700 transition-colors">
+                <h3 className="font-heading text-lg font-semibold text-zinc-950 mb-2 group-hover:text-indigo-600 transition-colors">
                   {project.title}
                 </h3>
 
@@ -230,7 +230,7 @@ const Projects = () => {
                   {project.technologies.map((tech, idx) => (
                     <span
                       key={idx}
-                      className="text-[11px] font-medium text-zinc-600 bg-zinc-50 border border-zinc-200/80 px-2 py-0.5 rounded"
+                      className="text-[11px] font-medium text-zinc-600 bg-zinc-50 border border-zinc-200/80 px-2 py-0.5 rounded hover:border-indigo-200 hover:text-indigo-700 transition-colors"
                     >
                       {tech}
                     </span>
@@ -243,11 +243,11 @@ const Projects = () => {
                     href={project.githubLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-1.5 text-xs font-medium text-zinc-800 hover:text-zinc-950 transition-colors"
+                    className="inline-flex items-center space-x-1.5 text-xs font-medium text-zinc-800 hover:text-indigo-600 transition-colors"
                   >
                     <Github className="h-3.5 w-3.5" />
                     <span>View Repository</span>
-                    <ArrowUpRight className="h-3.5 w-3.5 text-zinc-400" />
+                    <ArrowUpRight className="h-3.5 w-3.5 text-zinc-400 group-hover:text-indigo-500" />
                   </a>
 
                   {project.liveLink && (
@@ -255,7 +255,7 @@ const Projects = () => {
                       href={project.liveLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs font-medium text-zinc-600 hover:text-zinc-950 transition-colors"
+                      className="text-xs font-medium text-indigo-600 hover:text-indigo-700 transition-colors"
                     >
                       Live Demo &rarr;
                     </a>

@@ -9,6 +9,25 @@
 
 ## Task History & Changelog
 
+### [2026-10-22] Refined Warm Indigo Accent Color Integration
+- **Objective:** Eliminate pure stark monochrome appearance by introducing a subtle, intentional, domain-authentic accent color (`Indigo / Slate Indigo` — `#4F46E5`).
+- **Changes:**
+  - `Header.tsx`: Removed blinking green pulse; active navigation tab underline now uses `bg-indigo-600`; availability tag converted to a subtle `indigo-50` pill.
+  - `Hero.tsx`: Removed status green dot; styled top status pill with `indigo-50/70` and `text-indigo-700`; highlighted headline phrase with `text-indigo-600`; upgraded primary CTA to `bg-indigo-600 hover:bg-indigo-700`.
+  - `About.tsx`: Styled section tag with `text-indigo-600`; Academic Distinction and current role badges upgraded with subtle `indigo-50` and `border-indigo-200`.
+  - `Projects.tsx`: Category filter active pill set to `bg-indigo-600`; project metric tags and category icons given soft `indigo-50` tint; title hover transitions to `text-indigo-600`.
+  - `Skills.tsx`: Section tag, domain card icon backgrounds, and skill badge hover states tuned with subtle indigo tints.
+  - `Contact.tsx`: Submit button styled in `bg-indigo-600 hover:bg-indigo-700`; input focus rings and active channels styled with indigo accents.
+  - `Footer.tsx` & `src/index.css`: Text selection highlighted with `bg-indigo-600`; links and social icon hovers accented with indigo.
+  - Verification: 0 lint errors, 0 warnings; production build successful in 4.55s.
+
+### [2026-10-22] Removed Blinking Green Dots
+- **Objective:** Remove all blinking/pulsating green dots (`animate-ping`, `animate-pulse`, `bg-emerald-500`) across Header and Hero components for a cleaner, calmer visual presentation.
+- **Changes:**
+  - `Header.tsx`: Removed animated green ping and static green dot from the "Available for hire" status in both desktop and mobile navigation.
+  - `Hero.tsx`: Removed green status circle from the top status pill tag.
+  - Verified static analysis (`npm run lint`: 0 errors) and production build (`npm run build`: cleanly passed).
+
 ### [2026-10-22] Minimalist Hierarchy & Typography Pairing Overhaul
 - **Objective:** Eliminate visual clutter, excessive reading fatigue, and the robotic monospaced font stack across all sections. Implement a calm, high-legibility font pairing (`Plus Jakarta Sans` for headings, `Inter` for interface/body text), streamline content for effortless scanning, and enforce a clean, minimal reading hierarchy.
 - **Architectural & Design Changes:**

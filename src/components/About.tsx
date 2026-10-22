@@ -27,7 +27,7 @@ const About = () => {
         
         {/* Section Header */}
         <div className="text-left mb-12">
-          <span className="text-xs font-semibold text-zinc-500 uppercase tracking-wider block mb-2">
+          <span className="text-xs font-semibold text-indigo-600 uppercase tracking-wider block mb-2">
             About Me
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950">
@@ -53,9 +53,9 @@ const About = () => {
             </div>
 
             {/* Academic Credentials Card */}
-            <div className="p-5 rounded-2xl border border-zinc-200/90 bg-zinc-50/70">
+            <div className="p-5 rounded-2xl border border-zinc-200/90 bg-zinc-50/70 hover:border-indigo-200/80 transition-colors">
               <div className="flex items-center space-x-2 text-zinc-900 font-semibold text-sm mb-2">
-                <GraduationCap className="h-4 w-4 text-zinc-900" />
+                <GraduationCap className="h-4 w-4 text-indigo-600" />
                 <span>Education &amp; Distinction</span>
               </div>
               <h3 className="font-heading text-base font-semibold text-zinc-950">
@@ -67,8 +67,8 @@ const About = () => {
               <div className="mt-3 flex flex-wrap items-center gap-3 text-xs">
                 <span className="text-zinc-500">2023 – 2027</span>
                 <span className="text-zinc-300">·</span>
-                <span className="inline-flex items-center space-x-1 font-medium text-emerald-800 bg-emerald-50 border border-emerald-200/80 px-2 py-0.5 rounded-md">
-                  <Award className="h-3 w-3 inline text-emerald-600" />
+                <span className="inline-flex items-center space-x-1 font-medium text-indigo-800 bg-indigo-50 border border-indigo-200/80 px-2 py-0.5 rounded-md">
+                  <Award className="h-3 w-3 inline text-indigo-600" />
                   <span>CGPA 3.93 / 4.00</span>
                 </span>
               </div>
@@ -79,7 +79,7 @@ const About = () => {
           {/* Right Column: Work Experience Timeline */}
           <div className="lg:col-span-6">
             <div className="flex items-center space-x-2 text-zinc-900 font-semibold text-sm mb-6">
-              <Briefcase className="h-4 w-4 text-zinc-900" />
+              <Briefcase className="h-4 w-4 text-indigo-600" />
               <span>Professional Trajectory</span>
             </div>
 
@@ -87,7 +87,7 @@ const About = () => {
               {workHistory.map((job, idx) => (
                 <div
                   key={idx}
-                  className="p-5 rounded-2xl border border-zinc-200/80 bg-white hover:border-zinc-300 transition-colors shadow-2xs"
+                  className="p-5 rounded-2xl border border-zinc-200/80 bg-white hover:border-indigo-200 transition-colors shadow-2xs"
                 >
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                     <div>
@@ -98,7 +98,11 @@ const About = () => {
                         {job.company} <span className="text-zinc-400">· {job.location}</span>
                       </p>
                     </div>
-                    <span className="text-xs text-zinc-500 font-medium px-2 py-0.5 rounded bg-zinc-100 border border-zinc-200">
+                    <span className={`text-xs font-medium px-2 py-0.5 rounded border ${
+                      idx === 0
+                        ? 'text-indigo-700 bg-indigo-50 border-indigo-200/80'
+                        : 'text-zinc-600 bg-zinc-100 border-zinc-200'
+                    }`}>
                       {job.period}
                     </span>
                   </div>
@@ -111,7 +115,7 @@ const About = () => {
                     {job.tags.map((tag, tIdx) => (
                       <span
                         key={tIdx}
-                        className="text-[11px] font-medium text-zinc-600 bg-zinc-50 border border-zinc-200 px-2 py-0.5 rounded"
+                        className="text-[11px] font-medium text-zinc-600 bg-zinc-50 border border-zinc-200 px-2 py-0.5 rounded hover:border-indigo-200 hover:text-indigo-700 transition-colors"
                       >
                         {tag}
                       </span>
