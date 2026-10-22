@@ -9,6 +9,39 @@
 
 ## Task History & Changelog
 
+### [2026-10-22] Minimalist Hierarchy & Typography Pairing Overhaul
+- **Objective:** Eliminate visual clutter, excessive reading fatigue, and the robotic monospaced font stack across all sections. Implement a calm, high-legibility font pairing (`Plus Jakarta Sans` for headings, `Inter` for interface/body text), streamline content for effortless scanning, and enforce a clean, minimal reading hierarchy.
+- **Architectural & Design Changes:**
+  - **Typography & Font Pairing Overhaul:**
+    - Removed `JetBrains Mono` from badges, labels, numbers, and navigation.
+    - Configured Google Fonts pairing: `Plus Jakarta Sans` (weights 500–800) for confident headlines and `Inter` (weights 400–700) for effortless UI reading.
+    - Maintained numerical stability using CSS `tabular-nums` without monospace friction.
+  - **Header & Navigation:**
+    - Stripped numeric prefixes (`01`, `02`) from navigation links.
+    - Refined identity to bold "Abdul Rahman" with subtle "Software Engineer" tag and clean green availability dot.
+  - **Hero Section:**
+    - Purged top monospaced status strip (`[ 01 ] // ...`).
+    - Condensed narrative from dense technical buzzwords into a 2-sentence, human summary.
+    - Refactored metrics into an airy, scannable 4-item strip.
+    - Removed redundant bottom social links row.
+  - **About Section:**
+    - Removed 3 redundant "Architectural Tenets" cards that bloated reading volume.
+    - Presented concise biography alongside an elegant Academic Distinction card.
+    - Streamlined career trajectory into clean, focused company cards.
+  - **Projects Section:**
+    - Shortened all descriptions to 1–2 punchy, readable sentences.
+    - Limited tags from 8 down to 3–4 essential technologies per project.
+    - Preserved responsive category filters (`All`, `Mobile`, `Generative AI`, `Web`, `Systems`) and search.
+  - **Skills Section:**
+    - Eliminated 32 redundant micro-level status badges ("Production Deployed", etc.).
+    - Grouped skills into 4 clean domain cards with lightweight pill tags.
+  - **Contact & Footer:**
+    - Simplified contact channels with instant 1-click email copy, WhatsApp link, and clean form.
+    - Removed massive colophon and second-by-second clock from footer for a calm, minimal finish.
+  - **Verification:**
+    - `npm run lint`: 0 errors, 0 warnings.
+    - `npm run build`: Production build cleanly completed in 4.59s.
+
 ### [2026-10-22] Complete Awards-Grade Editorial Redesign & Anti-AI Overhaul
 - **Objective:** Completely redesign and overhaul the website from ground up to look like an awards-level ($1M / Awwwards / Linear aesthetic) portfolio. Eliminate all generic AI tropes, cheap gradients, glow orbs, typewriter tickers, floating badges, and percentage progress bars. Re-architect the Hero, Footer, Navigation, Projects, About, and Skills sections.
 - **Architectural & Design Changes:**

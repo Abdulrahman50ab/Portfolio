@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Send, CheckCircle, XCircle, Loader2, Copy, Check, ArrowUpRight } from 'lucide-react';
+import { Send, Check, Copy, ArrowUpRight, MapPin, Github, Linkedin } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 const Contact = () => {
@@ -9,7 +9,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: 'Mobile & Web Project',
+    subject: 'General Inquiry',
     message: ''
   });
 
@@ -37,10 +37,9 @@ const Contact = () => {
     const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
     if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
-      // Mock graceful fallback if environment keys are missing locally
       setTimeout(() => {
         setStatus('success');
-        setFormData({ name: '', email: '', subject: 'Mobile & Web Project', message: '' });
+        setFormData({ name: '', email: '', subject: 'General Inquiry', message: '' });
         setTimeout(() => setStatus('idle'), 6000);
       }, 1000);
       return;
@@ -49,234 +48,221 @@ const Contact = () => {
     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
       .then(() => {
         setStatus('success');
-        setFormData({ name: '', email: '', subject: 'Mobile & Web Project', message: '' });
+        setFormData({ name: '', email: '', subject: 'General Inquiry', message: '' });
         setTimeout(() => setStatus('idle'), 6000);
       }, (error) => {
-        console.error('Email transmission failure:', error);
+        console.error('Email transmission error:', error);
         setStatus('error');
         setTimeout(() => setStatus('idle'), 6000);
       });
   };
 
   return (
-    <section id="contact" className="py-20 md:py-28 border-b border-zinc-200/80 bg-[#FAFAFA]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-16 md:py-24 border-b border-zinc-200/80 bg-[#FAFAFA]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-12 border-b border-zinc-200/60 font-mono text-xs text-zinc-500">
-          <div className="flex items-center space-x-2">
-            <span className="text-zinc-900 font-semibold">[ 05 ]</span>
-            <span>//</span>
-            <span className="uppercase tracking-wider">Initiate Dialogue</span>
-          </div>
-          <span className="text-zinc-400">Response Window // &lt; 24h</span>
+        <div className="text-left mb-12">
+          <span className="text-xs font-semibold text-zinc-500 uppercase tracking-wider block mb-2">
+            Contact
+          </span>
+          <h2 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950">
+            Let's Start a Conversation
+          </h2>
+          <p className="text-base text-zinc-600 mt-2 max-w-2xl">
+            Have a project in mind, an opportunity, or a question? Feel free to reach out.
+          </p>
         </div>
 
-        {/* Contact Grid */}
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start text-left">
+        {/* 2-Column Clean Grid */}
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start text-left">
           
-          {/* Left Column: Direct Inquiries */}
-          <div className="lg:col-span-5 space-y-8">
-            <div>
-              <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-zinc-950 leading-tight">
-                Let's discuss an ambitious product or engineering challenge.
-              </h2>
-              <p className="text-sm sm:text-base text-zinc-600 mt-4 leading-relaxed">
-                Currently open to selective freelance engagements, full-time remote engineering positions, and collaborative technical architectures.
-              </p>
-            </div>
-
-            {/* Direct Contact Channels */}
-            <div className="space-y-3 pt-2">
-              
-              {/* Email Card with Copy Trigger */}
-              <div className="p-4 rounded-xl border border-zinc-200 bg-white flex items-center justify-between shadow-2xs">
-                <div className="space-y-0.5">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-400">Direct Inquiries</span>
-                  <p className="text-xs sm:text-sm font-semibold text-zinc-900">abdulrahman50ab@gmail.com</p>
-                </div>
-                <div className="flex items-center space-x-1.5">
-                  <button
-                    onClick={handleCopyEmail}
-                    className="p-2 rounded-lg text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
-                    aria-label="Copy email address"
-                    title="Copy Email"
-                  >
-                    {copiedEmail ? <Check className="h-4 w-4 text-emerald-600" /> : <Copy className="h-4 w-4" />}
-                  </button>
-                  <a
-                    href="mailto:abdulrahman50ab@gmail.com"
-                    className="p-2 rounded-lg text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
-                    aria-label="Write email"
-                  >
-                    <ArrowUpRight className="h-4 w-4" />
-                  </a>
-                </div>
-              </div>
-
-              {/* Phone / WhatsApp */}
-              <a
-                href="https://wa.me/923010401544"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-4 rounded-xl border border-zinc-200 bg-white hover:border-zinc-400 transition-colors flex items-center justify-between shadow-2xs block group"
-              >
-                <div className="space-y-0.5">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-400">WhatsApp / Direct Call</span>
-                  <p className="text-xs sm:text-sm font-semibold text-zinc-900">+92 301 0401544</p>
-                </div>
-                <div className="text-zinc-400 group-hover:text-zinc-900 transition-colors">
-                  <ArrowUpRight className="h-4 w-4" />
-                </div>
-              </a>
-
-              {/* Location */}
-              <div className="p-4 rounded-xl border border-zinc-200 bg-white flex items-center justify-between shadow-2xs">
-                <div className="space-y-0.5">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-400">Primary Location</span>
-                  <p className="text-xs sm:text-sm font-semibold text-zinc-900">Lahore, Pakistan (UTC+5)</p>
-                </div>
-                <span className="font-mono text-[11px] text-zinc-400">Remote Worldwide</span>
-              </div>
-
-            </div>
-
-            {/* Note on Availability */}
-            <div className="p-4 rounded-xl border border-emerald-200/80 bg-emerald-50/50 text-emerald-900 text-xs">
-              <span className="font-semibold block">Q2 2026 Availability:</span>
-              <p className="mt-0.5 text-emerald-800">Available for new software development contracts and technical leadership.</p>
-            </div>
-
-          </div>
-
-          {/* Right Column: High-Craft Minimalist Form */}
-          <div className="lg:col-span-7 w-full">
-            <div className="p-7 sm:p-8 rounded-xl border border-zinc-200 bg-white shadow-2xs">
-              <form ref={form} onSubmit={handleSubmit} className="space-y-5">
-                
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {/* Name */}
-                  <div className="space-y-1.5">
-                    <label htmlFor="name" className="block font-mono text-[11px] uppercase tracking-wider text-zinc-600">
-                      Full Name <span className="text-zinc-400">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      placeholder="e.g. John Doe"
-                      className="w-full px-3.5 py-2.5 bg-white border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 focus:outline-none rounded-lg text-sm text-zinc-900 placeholder:text-zinc-400 transition-colors"
-                    />
-                  </div>
-
-                  {/* Email */}
-                  <div className="space-y-1.5">
-                    <label htmlFor="email" className="block font-mono text-[11px] uppercase tracking-wider text-zinc-600">
-                      Email Address <span className="text-zinc-400">*</span>
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      placeholder="name@organization.com"
-                      className="w-full px-3.5 py-2.5 bg-white border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 focus:outline-none rounded-lg text-sm text-zinc-900 placeholder:text-zinc-400 transition-colors"
-                    />
-                  </div>
-                </div>
-
-                {/* Scope / Category */}
-                <div className="space-y-1.5">
-                  <label htmlFor="subject" className="block font-mono text-[11px] uppercase tracking-wider text-zinc-600">
-                    Project Scope / Topic
-                  </label>
-                  <select
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    className="w-full px-3.5 py-2.5 bg-white border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 focus:outline-none rounded-lg text-sm text-zinc-900 transition-colors"
-                  >
-                    <option value="Flutter Mobile Application">Flutter Mobile Application</option>
-                    <option value="Generative AI & LLM Pipeline">Generative AI &amp; LLM Pipeline</option>
-                    <option value="Full-Stack Web System">Full-Stack Web System</option>
-                    <option value="Full-Time Engineering Role">Full-Time Engineering Role</option>
-                    <option value="General Technical Inquiry">General Technical Inquiry</option>
-                  </select>
-                </div>
-
-                {/* Message */}
-                <div className="space-y-1.5">
-                  <label htmlFor="message" className="block font-mono text-[11px] uppercase tracking-wider text-zinc-600">
-                    Brief / Message <span className="text-zinc-400">*</span>
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    placeholder="Outline your application goals, timelines, or role expectations..."
-                    className="w-full px-3.5 py-2.5 bg-white border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 focus:outline-none rounded-lg text-sm text-zinc-900 placeholder:text-zinc-400 transition-colors resize-none"
-                  />
-                </div>
-
-                {/* Submit Action */}
+          {/* Left Column: Direct Communication Channels */}
+          <div className="lg:col-span-5 space-y-4">
+            
+            {/* Email Card with Copy */}
+            <div className="p-5 rounded-2xl border border-zinc-200/90 bg-white shadow-2xs">
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-xs text-zinc-500 font-medium">Direct Email</span>
                 <button
-                  type="submit"
-                  disabled={status === 'submitting'}
-                  className={`w-full py-3 px-5 rounded-lg font-medium text-sm flex items-center justify-center space-x-2 transition-all ${
-                    status === 'submitting'
-                      ? 'bg-zinc-100 text-zinc-400 cursor-not-allowed border border-zinc-200'
-                      : status === 'success'
-                        ? 'bg-emerald-600 text-white'
-                        : status === 'error'
-                          ? 'bg-rose-600 text-white'
-                          : 'bg-zinc-900 hover:bg-zinc-800 text-white active:scale-[0.99]'
-                  }`}
+                  onClick={handleCopyEmail}
+                  className="inline-flex items-center space-x-1 text-xs text-zinc-600 hover:text-zinc-950 px-2 py-0.5 rounded bg-zinc-100 hover:bg-zinc-200 transition-colors"
+                  title="Copy email"
                 >
-                  {status === 'submitting' ? (
+                  {copiedEmail ? (
                     <>
-                      <Loader2 className="h-4 w-4 animate-spin text-zinc-400" />
-                      <span>Transmitting message...</span>
-                    </>
-                  ) : status === 'success' ? (
-                    <>
-                      <CheckCircle className="h-4 w-4" />
-                      <span>Message Dispatched Successfully</span>
-                    </>
-                  ) : status === 'error' ? (
-                    <>
-                      <XCircle className="h-4 w-4" />
-                      <span>Transmission Failed — Please retry or email directly</span>
+                      <Check className="h-3 w-3 text-emerald-600" />
+                      <span className="text-emerald-700 font-medium">Copied</span>
                     </>
                   ) : (
                     <>
-                      <span>Transmit Message</span>
-                      <Send className="h-3.5 w-3.5 text-zinc-400" />
+                      <Copy className="h-3 w-3" />
+                      <span>Copy</span>
                     </>
                   )}
                 </button>
+              </div>
+              <a
+                href="mailto:abdulrahman50ab@gmail.com"
+                className="font-heading text-base font-semibold text-zinc-950 hover:text-zinc-700 transition-colors block"
+              >
+                abdulrahman50ab@gmail.com
+              </a>
+            </div>
 
-                {/* Feedback Notification */}
-                {status === 'success' && (
-                  <p className="text-emerald-700 font-mono text-xs text-center pt-1">
-                    Thank you. Your message has been received. I will review and reply within 24 hours.
-                  </p>
-                )}
-                {status === 'error' && (
-                  <p className="text-rose-700 font-mono text-xs text-center pt-1">
-                    Direct transmission error. Please send your message directly to abdulrahman50ab@gmail.com
-                  </p>
-                )}
+            {/* Phone & WhatsApp Card */}
+            <div className="p-5 rounded-2xl border border-zinc-200/90 bg-white shadow-2xs">
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-xs text-zinc-500 font-medium">WhatsApp / Phone</span>
+                <a
+                  href="https://wa.me/923010401544"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-zinc-600 hover:text-zinc-950 flex items-center space-x-0.5"
+                >
+                  <span>Chat</span>
+                  <ArrowUpRight className="h-3 w-3" />
+                </a>
+              </div>
+              <p className="font-heading text-base font-semibold text-zinc-950">
+                +92 301 0401544
+              </p>
+              <p className="text-xs text-zinc-500 mt-0.5">
+                Available on WhatsApp and direct call
+              </p>
+            </div>
 
-              </form>
+            {/* Location & Social */}
+            <div className="p-5 rounded-2xl border border-zinc-200/90 bg-white shadow-2xs flex items-center justify-between">
+              <div>
+                <span className="text-xs text-zinc-500 font-medium block">Location</span>
+                <p className="font-heading text-sm font-semibold text-zinc-950 mt-0.5 flex items-center space-x-1.5">
+                  <MapPin className="h-3.5 w-3.5 text-zinc-400" />
+                  <span>Lahore, Pakistan</span>
+                </p>
+                <span className="text-xs text-zinc-500">Open to remote &amp; hybrid</span>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <a
+                  href="https://github.com/Abdulrahman50ab"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-700 hover:text-zinc-950 transition-colors"
+                  aria-label="GitHub"
+                >
+                  <Github className="h-4 w-4" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/abdulrahman50?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-700 hover:text-zinc-950 transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Right Column: Clean Contact Form */}
+          <div className="lg:col-span-7">
+            <div className="p-6 sm:p-8 rounded-2xl border border-zinc-200/90 bg-white shadow-2xs">
+              
+              {status === 'success' ? (
+                <div className="py-10 text-center space-y-3">
+                  <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto">
+                    <Check className="h-5 w-5" />
+                  </div>
+                  <h3 className="font-heading text-lg font-semibold text-zinc-950">
+                    Message sent successfully!
+                  </h3>
+                  <p className="text-sm text-zinc-600 max-w-sm mx-auto">
+                    Thank you for reaching out. I will review your message and respond promptly within 24 hours.
+                  </p>
+                </div>
+              ) : (
+                <form ref={form} onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-medium text-zinc-700 mb-1.5">
+                        Your Name
+                      </label>
+                      <input
+                        type="text"
+                        name="name"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="John Doe"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-[#FAFAFA] text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-400"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-medium text-zinc-700 mb-1.5">
+                        Email Address
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="john@example.com"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-[#FAFAFA] text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-400"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-medium text-zinc-700 mb-1.5">
+                      Subject
+                    </label>
+                    <input
+                      type="text"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      placeholder="Mobile App Project / Job Opportunity"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-[#FAFAFA] text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-400"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-medium text-zinc-700 mb-1.5">
+                      Message
+                    </label>
+                    <textarea
+                      name="message"
+                      rows={4}
+                      required
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Tell me about your project, timeline, or inquiry..."
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-[#FAFAFA] text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-400 resize-none"
+                    />
+                  </div>
+
+                  {status === 'error' && (
+                    <p className="text-xs text-red-600">
+                      Failed to send message. Please email me directly at abdulrahman50ab@gmail.com
+                    </p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={status === 'submitting'}
+                    className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-zinc-950 hover:bg-zinc-800 disabled:opacity-50 text-white text-sm font-medium px-6 py-2.5 rounded-xl transition-all shadow-xs active:scale-[0.98]"
+                  >
+                    <span>{status === 'submitting' ? 'Sending...' : 'Send Message'}</span>
+                    <Send className="h-3.5 w-3.5 text-zinc-400" />
+                  </button>
+                </form>
+              )}
+
             </div>
           </div>
 
