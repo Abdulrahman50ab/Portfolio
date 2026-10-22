@@ -68,24 +68,24 @@ const Header = () => {
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 border-b ${
       scrolled 
-        ? 'bg-slate-950/75 backdrop-blur-md border-white/5 shadow-2xl py-3' 
-        : 'bg-transparent border-transparent py-5'
+        ? 'bg-white/90 backdrop-blur-md border-slate-200/80 shadow-xs py-3' 
+        : 'bg-white/60 backdrop-blur-xs border-transparent py-4'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <button 
             onClick={() => scrollToSection('home')} 
-            className="flex items-center space-x-2.5 group cursor-pointer focus:outline-none"
+            className="flex items-center space-x-3 group cursor-pointer focus:outline-none"
           >
-            <div className="bg-gradient-to-tr from-indigo-600 to-cyan-500 p-2 rounded-xl shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-300">
-              <Code className="h-5 w-5 text-white" />
+            <div className="bg-indigo-600 p-2 rounded-xl text-white shadow-xs group-hover:bg-indigo-700 transition-colors">
+              <Code className="h-5 w-5" />
             </div>
             <div className="text-left">
-              <span className="text-xl font-bold tracking-tight text-white block group-hover:text-indigo-400 transition-colors">
+              <span className="text-xl font-bold tracking-tight text-slate-900 block group-hover:text-indigo-600 transition-colors">
                 Abdul Rahman
               </span>
-              <span className="text-[10px] text-slate-400 font-medium tracking-wider uppercase block -mt-1">
+              <span className="text-[10px] text-slate-500 font-semibold tracking-wider uppercase block -mt-0.5">
                 Software Engineer
               </span>
             </div>
@@ -97,15 +97,15 @@ const Header = () => {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`relative py-2 text-sm font-medium transition-all duration-300 focus:outline-none ${
+                className={`relative py-2 text-sm font-medium transition-colors focus:outline-none ${
                   activeSection === item.id 
-                    ? 'text-indigo-400' 
-                    : 'text-slate-300 hover:text-white'
+                    ? 'text-indigo-600 font-semibold' 
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 {item.name}
                 {activeSection === item.id && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-indigo-500 to-cyan-400 rounded-full shadow-[0_0_8px_rgba(99,102,241,0.6)]" />
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-indigo-600 rounded-full" />
                 )}
               </button>
             ))}
@@ -115,11 +115,11 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-4">
             <button
               onClick={() => scrollToSection('contact')}
-              className="bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white text-xs font-semibold px-4 py-2 rounded-lg border border-indigo-400/20 hover:shadow-lg hover:shadow-indigo-500/10 transition-all"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-4 py-2.5 rounded-lg shadow-xs hover:shadow transition-all"
             >
               Let's Talk
             </button>
-            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-indigo-500/30 p-[2px] bg-gradient-to-tr from-indigo-500 to-cyan-400 shadow-md">
+            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-slate-200 shadow-xs p-[1px] bg-white">
               <img 
                 src={img} 
                 alt="Abdul Rahman" 
@@ -130,8 +130,9 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 rounded-lg bg-slate-900/60 border border-white/5 text-slate-300 hover:text-white focus:outline-none"
+            className="md:hidden p-2 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 focus:outline-none transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle navigation menu"
           >
             {isMenuOpen ? (
               <X className="h-6 w-6" />
@@ -143,16 +144,16 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-20 left-4 right-4 bg-slate-950/95 backdrop-blur-lg border border-white/5 rounded-2xl shadow-2xl p-4 animate-fade-in z-50">
-            <div className="flex flex-col space-y-2">
+          <div className="md:hidden absolute top-20 left-4 right-4 bg-white/95 backdrop-blur-md border border-slate-200 rounded-2xl shadow-xl p-4 animate-fade-in z-50">
+            <div className="flex flex-col space-y-1.5">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
                   className={`block w-full text-left px-4 py-3 text-base font-medium rounded-xl transition-all ${
                     activeSection === item.id 
-                      ? 'text-indigo-400 bg-indigo-500/10 border-l-4 border-indigo-500' 
-                      : 'text-slate-300 hover:text-white hover:bg-white/5'
+                      ? 'text-indigo-600 bg-indigo-50/80 border-l-4 border-indigo-600 font-semibold' 
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                   }`}
                 >
                   {item.name}

@@ -43,21 +43,21 @@ const Contact = () => {
 
   const contactInfo = [
     {
-      icon: <Mail className="h-5 w-5 text-indigo-400" />,
+      icon: <Mail className="h-5 w-5 text-indigo-600" />,
       title: "Email",
       details: "abdulrahman50ab@gmail.com",
       link: "mailto:abdulrahman50ab@gmail.com",
       actionText: "Send email"
     },
     {
-      icon: <Phone className="h-5 w-5 text-cyan-400" />,
+      icon: <Phone className="h-5 w-5 text-sky-600" />,
       title: "Phone & WhatsApp",
       details: "+92 301 0401544",
       link: "https://wa.me/923010401544",
       actionText: "Chat on WhatsApp"
     },
     {
-      icon: <MapPin className="h-5 w-5 text-emerald-400" />,
+      icon: <MapPin className="h-5 w-5 text-emerald-600" />,
       title: "Location",
       details: "Green Home Lahore, Pakistan",
       link: "https://maps.google.com/?q=Lahore,Pakistan",
@@ -66,20 +66,16 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-24 bg-slate-950 relative overflow-hidden border-b border-white/5">
-      {/* Background Orbs */}
-      <div className="glow-orb-indigo bottom-[5%] left-[10%]"></div>
-      <div className="glow-orb-pink top-[10%] right-[10%]"></div>
-
+    <section id="contact" className="py-24 bg-white relative overflow-hidden border-b border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="text-center mb-20">
-          <h2 className="text-4xl font-extrabold text-white mb-4 tracking-tight">
-            Get In <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">Touch</span>
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
+            Get In <span className="text-indigo-600">Touch</span>
           </h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-indigo-500 to-cyan-400 mx-auto rounded-full mb-4"></div>
-          <p className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto">
+          <div className="w-16 h-1 bg-indigo-600 mx-auto rounded-full mb-4"></div>
+          <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
             Have a project in mind or want to explore collaboration opportunities? Let's connect!
           </p>
         </div>
@@ -89,11 +85,11 @@ const Contact = () => {
           {/* Left: Contact Info cards */}
           <div className="md:col-span-5 space-y-6 text-left">
             <div>
-              <h3 className="text-2xl font-bold text-white tracking-tight flex items-center space-x-2">
-                <MessageSquare className="h-5 text-indigo-400 w-5" />
+              <h3 className="text-2xl font-bold text-slate-900 tracking-tight flex items-center space-x-2">
+                <MessageSquare className="h-5 w-5 text-indigo-600" />
                 <span>Let's talk about your project</span>
               </h3>
-              <p className="text-slate-450 text-sm sm:text-base mt-3 leading-relaxed">
+              <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
                 I'm currently open to freelance contracts, remote software roles, and creative partnerships. Drop a message and let's start planning.
               </p>
             </div>
@@ -105,23 +101,23 @@ const Contact = () => {
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group block bg-glass-card border border-glass rounded-2xl p-5 border-glass-hover hover:-translate-y-0.5 transition-all duration-300 hover:shadow-lg shadow-indigo-950/10"
+                  className="group block bg-white border border-slate-200/90 rounded-2xl p-5 hover:border-slate-300 hover:shadow-md transition-all duration-300 shadow-xs"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
-                      <div className="bg-slate-900 border border-white/5 p-3 rounded-xl">
+                      <div className="bg-slate-50 border border-slate-100 p-3 rounded-xl group-hover:bg-indigo-50 transition-colors">
                         {item.icon}
                       </div>
                       <div>
-                        <h4 className="text-sm font-bold text-white uppercase tracking-wider text-[10px] text-slate-500">
+                        <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
                           {item.title}
                         </h4>
-                        <p className="text-sm font-semibold text-slate-200 mt-0.5">
+                        <p className="text-sm font-semibold text-slate-900 mt-0.5">
                           {item.details}
                         </p>
                       </div>
                     </div>
-                    <div className="text-indigo-400 group-hover:text-indigo-300 transition-colors flex items-center text-xs font-semibold opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300">
+                    <div className="text-indigo-600 group-hover:text-indigo-700 transition-colors flex items-center text-xs font-semibold opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all duration-300">
                       <span className="mr-1.5">{item.actionText}</span>
                       <ArrowUpRight className="h-3.5 w-3.5" />
                     </div>
@@ -131,16 +127,14 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Right: Glassmorphic Contact Form */}
+          {/* Right: Clean Light Contact Form */}
           <div className="md:col-span-7 w-full">
-            <div className="bg-glass-card border border-glass p-8 rounded-2xl shadow-2xl relative">
-              <div className="absolute -inset-1 bg-gradient-to-tr from-cyan-500/5 to-indigo-500/5 rounded-2xl blur-lg opacity-50 pointer-events-none"></div>
-              
-              <form ref={form} onSubmit={handleSubmit} className="space-y-6 relative z-10 text-left">
+            <div className="bg-white border border-slate-200/90 p-8 rounded-2xl shadow-xs">
+              <form ref={form} onSubmit={handleSubmit} className="space-y-6 text-left">
                 
                 {/* Name */}
                 <div className="space-y-2">
-                  <label htmlFor="name" className="block text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  <label htmlFor="name" className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
                     Name
                   </label>
                   <input
@@ -150,14 +144,14 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-slate-950/60 border border-white/5 hover:border-white/10 focus:border-indigo-500/50 rounded-xl text-slate-200 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500/30 transition-all placeholder:text-slate-650"
-                    placeholder="E.g. Abdul Rahman"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 hover:border-slate-300 focus:border-indigo-600 focus:bg-white focus:ring-2 focus:ring-indigo-100 rounded-xl text-slate-900 text-sm focus:outline-none transition-all placeholder:text-slate-400 shadow-xs"
+                    placeholder="E.g. John Doe"
                   />
                 </div>
 
                 {/* Email */}
                 <div className="space-y-2">
-                  <label htmlFor="email" className="block text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  <label htmlFor="email" className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
                     Email Address
                   </label>
                   <input
@@ -167,14 +161,14 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-slate-950/60 border border-white/5 hover:border-white/10 focus:border-indigo-500/50 rounded-xl text-slate-200 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500/30 transition-all placeholder:text-slate-650"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 hover:border-slate-300 focus:border-indigo-600 focus:bg-white focus:ring-2 focus:ring-indigo-100 rounded-xl text-slate-900 text-sm focus:outline-none transition-all placeholder:text-slate-400 shadow-xs"
                     placeholder="your.email@domain.com"
                   />
                 </div>
 
                 {/* Message */}
                 <div className="space-y-2">
-                  <label htmlFor="message" className="block text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  <label htmlFor="message" className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
                     Message
                   </label>
                   <textarea
@@ -184,7 +178,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     rows={5}
-                    className="w-full px-4 py-3 bg-slate-950/60 border border-white/5 hover:border-white/10 focus:border-indigo-500/50 rounded-xl text-slate-200 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500/30 transition-all resize-none placeholder:text-slate-650"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 hover:border-slate-300 focus:border-indigo-600 focus:bg-white focus:ring-2 focus:ring-indigo-100 rounded-xl text-slate-900 text-sm focus:outline-none transition-all resize-none placeholder:text-slate-400 shadow-xs"
                     placeholder="Tell me about your product requirements, budget, or timelines..."
                   />
                 </div>
@@ -193,14 +187,14 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={status === 'submitting'}
-                  className={`w-full font-bold py-3.5 px-6 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 text-sm select-none ${
+                  className={`w-full font-bold py-3.5 px-6 rounded-xl transition-all duration-200 flex items-center justify-center space-x-2 text-sm select-none ${
                     status === 'submitting'
-                      ? 'bg-slate-900 border border-white/5 text-slate-400 cursor-not-allowed shadow-none'
+                      ? 'bg-slate-100 border border-slate-200 text-slate-400 cursor-not-allowed shadow-none'
                       : status === 'success'
-                        ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-500/20'
+                        ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs'
                         : status === 'error'
-                          ? 'bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-500/20'
-                          : 'bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white shadow-lg shadow-indigo-500/20 hover:scale-[1.01]'
+                          ? 'bg-rose-600 hover:bg-rose-700 text-white shadow-xs'
+                          : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-xs hover:shadow active:scale-[0.99]'
                   }`}
                 >
                   {status === 'submitting' ? (
@@ -228,12 +222,12 @@ const Contact = () => {
 
                 {/* Status messages */}
                 {status === 'success' && (
-                  <p className="text-emerald-400 text-center text-xs font-semibold animate-fade-in pt-1">
-                    Thank you for writing! I've received your request and will get back to you shortly.
+                  <p className="text-emerald-700 text-center text-xs font-semibold animate-fade-in pt-1">
+                    Thank you for reaching out! I've received your request and will get back to you shortly.
                   </p>
                 )}
                 {status === 'error' && (
-                  <p className="text-rose-400 text-center text-xs font-semibold animate-fade-in pt-1">
+                  <p className="text-rose-700 text-center text-xs font-semibold animate-fade-in pt-1">
                     An error occurred sending the message. Please write to me directly at abdulrahman50ab@gmail.com
                   </p>
                 )}

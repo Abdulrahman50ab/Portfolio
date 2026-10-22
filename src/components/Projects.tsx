@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ExternalLink, Github, Globe, Cpu, Coffee, Smartphone, Search, HelpCircle, Sparkles } from 'lucide-react';
+import { ExternalLink, Github, Globe, Cpu, Coffee, Smartphone, Search, HelpCircle, Bot } from 'lucide-react';
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -14,10 +14,10 @@ const Projects = () => {
       image: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=500",
       technologies: ["Gemini 1.5 Flash", "LangGraph", "RAG", "pgvector", "Drizzle ORM", "Neon DB", "React", "Express.js"],
       category: "Generative AI",
-      icon: <Sparkles className="h-5 w-5 text-purple-400" />,
+      icon: <Bot className="h-5 w-5 text-purple-600" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab",
-      gradient: "from-purple-900/60 to-slate-900/90"
+      gradient: "from-purple-50 to-indigo-50"
     },
     // Mobile Applications (Flutter)
     {
@@ -26,10 +26,10 @@ const Projects = () => {
       image: "/projects/keyboard.png",
       technologies: ["Flutter", "Dart", "REST API", "State Management"],
       category: "Mobile",
-      icon: <Smartphone className="h-5 w-5 text-cyan-400" />,
+      icon: <Smartphone className="h-5 w-5 text-sky-600" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab",
-      gradient: "from-cyan-900/60 to-slate-900/90"
+      gradient: "from-sky-50 to-indigo-50"
     },
     {
       title: "AI PDF App",
@@ -37,10 +37,10 @@ const Projects = () => {
       image: "/projects/pdf_app.png",
       technologies: ["Flutter", "REST API", "AI Model Integration", "PDF Kit"],
       category: "Mobile",
-      icon: <Smartphone className="h-5 w-5 text-cyan-400" />,
+      icon: <Smartphone className="h-5 w-5 text-sky-600" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab",
-      gradient: "from-blue-900/60 to-slate-900/90"
+      gradient: "from-blue-50 to-indigo-50"
     },
     {
       title: "AI Background Remover",
@@ -48,10 +48,10 @@ const Projects = () => {
       image: "/projects/bg_remover.png",
       technologies: ["Flutter", "Dart", "AI Segmentation API", "Photo Editor"],
       category: "Mobile",
-      icon: <Smartphone className="h-5 w-5 text-cyan-400" />,
+      icon: <Smartphone className="h-5 w-5 text-sky-600" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab",
-      gradient: "from-teal-900/60 to-slate-900/90"
+      gradient: "from-teal-50 to-emerald-50"
     },
     {
       title: "AI SmartJunk Cleaner",
@@ -59,10 +59,10 @@ const Projects = () => {
       image: "/projects/cleaner.png",
       technologies: ["Flutter", "Native Channels", "Storage API", "FL Charts"],
       category: "Mobile",
-      icon: <Smartphone className="h-5 w-5 text-cyan-400" />,
+      icon: <Smartphone className="h-5 w-5 text-sky-600" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab",
-      gradient: "from-indigo-900/60 to-slate-900/90"
+      gradient: "from-indigo-50 to-slate-50"
     },
     {
       title: "AI PPT Generator",
@@ -70,10 +70,10 @@ const Projects = () => {
       image: "/projects/ppt.png",
       technologies: ["Flutter", "REST API", "AI API", "PPTX Exporter"],
       category: "Mobile",
-      icon: <Smartphone className="h-5 w-5 text-cyan-400" />,
+      icon: <Smartphone className="h-5 w-5 text-sky-600" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab",
-      gradient: "from-orange-900/60 to-slate-900/90"
+      gradient: "from-amber-50 to-orange-50"
     },
     {
       title: "WantQuiz AI App",
@@ -81,10 +81,10 @@ const Projects = () => {
       image: "/projects/quiz.png",
       technologies: ["Flutter", "Dart", "REST API", "Local DB"],
       category: "Mobile",
-      icon: <Smartphone className="h-5 w-5 text-cyan-400" />,
+      icon: <Smartphone className="h-5 w-5 text-sky-600" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab",
-      gradient: "from-emerald-900/60 to-slate-900/90"
+      gradient: "from-emerald-50 to-teal-50"
     },
     {
       title: "AI Post Generator App",
@@ -92,10 +92,10 @@ const Projects = () => {
       image: "/projects/post.png",
       technologies: ["Flutter", "Dart", "AI APIs", "Share API"],
       category: "Mobile",
-      icon: <Smartphone className="h-5 w-5 text-cyan-400" />,
+      icon: <Smartphone className="h-5 w-5 text-sky-600" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab",
-      gradient: "from-purple-900/60 to-slate-900/90"
+      gradient: "from-purple-50 to-violet-50"
     },
     {
       title: "UniRide — University Transport App",
@@ -103,10 +103,10 @@ const Projects = () => {
       image: "/projects/uniride.png",
       technologies: ["Flutter", "Dart", "Node.js", "MongoDB", "Google Maps API"],
       category: "Mobile",
-      icon: <Smartphone className="h-5 w-5 text-cyan-400" />,
+      icon: <Smartphone className="h-5 w-5 text-sky-600" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab/Uniride",
-      gradient: "from-sky-900/60 to-slate-900/90"
+      gradient: "from-sky-50 to-blue-50"
     },
     {
       title: "Fitness Tracker Mobile",
@@ -114,10 +114,10 @@ const Projects = () => {
       image: "https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=500",
       technologies: ["Flutter", "Firebase Auth", "Firestore", "FL Charts"],
       category: "Mobile",
-      icon: <Smartphone className="h-5 w-5 text-cyan-400" />,
+      icon: <Smartphone className="h-5 w-5 text-sky-600" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab",
-      gradient: "from-red-900/60 to-slate-900/90"
+      gradient: "from-rose-50 to-pink-50"
     },
     // Web Projects
     {
@@ -126,10 +126,10 @@ const Projects = () => {
       image: "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=500",
       technologies: ["React", "Neon PostgreSQL", "REST API", "AI Generator"],
       category: "Web",
-      icon: <Globe className="h-5 w-5 text-indigo-400" />,
+      icon: <Globe className="h-5 w-5 text-indigo-600" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab",
-      gradient: "from-indigo-900/60 to-slate-900/90"
+      gradient: "from-indigo-50 to-blue-50"
     },
     {
       title: "AI Post Generator Web",
@@ -137,10 +137,10 @@ const Projects = () => {
       image: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=500",
       technologies: ["React", "Neon PostgreSQL", "Drizzle ORM", "Vite"],
       category: "Web",
-      icon: <Globe className="h-5 w-5 text-indigo-400" />,
+      icon: <Globe className="h-5 w-5 text-indigo-600" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab",
-      gradient: "from-blue-900/60 to-slate-900/90"
+      gradient: "from-blue-50 to-slate-50"
     },
     {
       title: "AI Creator Platform Dashboard",
@@ -148,10 +148,10 @@ const Projects = () => {
       image: "https://images.pexels.com/photos/267507/pexels-photo-267507.jpeg?auto=compress&cs=tinysrgb&w=500",
       technologies: ["React", "Neon PostgreSQL", "REST APIs", "Tailwind CSS"],
       category: "Web",
-      icon: <Globe className="h-5 w-5 text-indigo-400" />,
+      icon: <Globe className="h-5 w-5 text-indigo-600" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab",
-      gradient: "from-violet-900/60 to-slate-900/90"
+      gradient: "from-violet-50 to-indigo-50"
     },
     // Others
     {
@@ -160,10 +160,10 @@ const Projects = () => {
       image: "https://images.pexels.com/photos/259200/pexels-photo-259200.jpeg?auto=compress&cs=tinysrgb&w=500",
       technologies: ["C++", "Data Structures", "OOP", "File Handling"],
       category: "Others",
-      icon: <Cpu className="h-5 w-5 text-pink-400" />,
+      icon: <Cpu className="h-5 w-5 text-rose-600" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab/Bank-Management-System-with-C-",
-      gradient: "from-rose-900/60 to-slate-900/90"
+      gradient: "from-rose-50 to-slate-50"
     },
     {
       title: "Car Rental System",
@@ -171,10 +171,10 @@ const Projects = () => {
       image: "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=500",
       technologies: ["C++", "OOP", "File Management", "Console UI"],
       category: "Others",
-      icon: <Cpu className="h-5 w-5 text-pink-400" />,
+      icon: <Cpu className="h-5 w-5 text-rose-600" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab/Car-rental-System",
-      gradient: "from-zinc-900/60 to-slate-900/90"
+      gradient: "from-slate-100 to-slate-50"
     },
     {
       title: "Bank Management System (GUI)",
@@ -182,10 +182,10 @@ const Projects = () => {
       image: "https://images.pexels.com/photos/259027/pexels-photo-259027.jpeg?auto=compress&cs=tinysrgb&w=500",
       technologies: ["Java", "Swing", "JDBC", "MySQL"],
       category: "Others",
-      icon: <Coffee className="h-5 w-5 text-amber-400" />,
+      icon: <Coffee className="h-5 w-5 text-amber-600" />,
       liveLink: "#",
       githubLink: "https://github.com/Abdulrahman50ab/Bank-Management-System-with-JAVA",
-      gradient: "from-amber-900/60 to-slate-900/90"
+      gradient: "from-amber-50 to-slate-50"
     }
   ];
 
@@ -193,12 +193,12 @@ const Projects = () => {
 
   const getCategoryColor = (category: string) => {
     const colors = {
-      'Generative AI': 'bg-purple-500/10 text-purple-300 border-purple-500/20',
-      'Web': 'bg-indigo-500/10 text-indigo-300 border-indigo-500/20',
-      'Others': 'bg-pink-500/10 text-pink-300 border-pink-500/20',
-      'Mobile': 'bg-cyan-500/10 text-cyan-300 border-cyan-500/20'
+      'Generative AI': 'bg-purple-50 text-purple-700 border-purple-200',
+      'Web': 'bg-indigo-50 text-indigo-700 border-indigo-200',
+      'Others': 'bg-amber-50 text-amber-800 border-amber-200',
+      'Mobile': 'bg-sky-50 text-sky-700 border-sky-200'
     };
-    return colors[category as keyof typeof colors] || 'bg-slate-800 text-slate-300 border-white/5';
+    return colors[category as keyof typeof colors] || 'bg-slate-100 text-slate-700 border-slate-200';
   };
 
   const handleImageError = (index: number) => {
@@ -215,20 +215,16 @@ const Projects = () => {
   });
 
   return (
-    <section id="projects" className="py-24 bg-slate-950 relative overflow-hidden border-b border-white/5">
-      {/* Background Orbs */}
-      <div className="glow-orb-indigo top-[20%] right-[-10%]"></div>
-      <div className="glow-orb-cyan bottom-[20%] left-[-10%]"></div>
-
+    <section id="projects" className="py-24 bg-white relative overflow-hidden border-b border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-extrabold text-white mb-4 tracking-tight">
-            Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">Projects</span>
+          <h2 className="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
+            Featured <span className="text-indigo-600">Projects</span>
           </h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-indigo-500 to-cyan-400 mx-auto rounded-full mb-4"></div>
-          <p className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto">
+          <div className="w-16 h-1 bg-indigo-600 mx-auto rounded-full mb-4"></div>
+          <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
             A comprehensive list of application systems built across mobile, web frontends, and backend environments.
           </p>
         </div>
@@ -241,10 +237,10 @@ const Projects = () => {
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
             <input
               type="text"
-              placeholder="Search projects by name, descriptions or technologies (e.g. Flutter, React)..."
+              placeholder="Search projects by name, description, or technology (e.g. Flutter, React)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3.5 bg-slate-900/60 border border-white/5 hover:border-white/10 focus:border-indigo-500/50 rounded-2xl text-slate-200 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500/30 transition-all placeholder:text-slate-500 backdrop-blur-sm"
+              className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border border-slate-200 hover:border-slate-300 focus:border-indigo-600 focus:bg-white focus:ring-2 focus:ring-indigo-100 rounded-2xl text-slate-900 text-sm focus:outline-none transition-all placeholder:text-slate-400 shadow-xs"
             />
           </div>
 
@@ -254,10 +250,10 @@ const Projects = () => {
               <button
                 key={category}
                 onClick={() => setActiveFilter(category)}
-                className={`px-5 py-2 text-xs sm:text-sm font-semibold rounded-full border transition-all duration-300 ${
+                className={`px-5 py-2 text-xs sm:text-sm font-semibold rounded-full border transition-all duration-200 ${
                   activeFilter === category
-                    ? 'bg-gradient-to-r from-indigo-600 to-cyan-500 border-indigo-400/20 text-white shadow-lg shadow-indigo-500/20 scale-[1.03]'
-                    : 'bg-slate-900/60 text-slate-400 border-white/5 hover:bg-slate-900 hover:text-slate-200'
+                    ? 'bg-indigo-600 border-indigo-600 text-white shadow-xs'
+                    : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50 hover:text-slate-900'
                 }`}
               >
                 {category}
@@ -274,20 +270,18 @@ const Projects = () => {
             return (
               <div
                 key={index}
-                className="group bg-glass-card border border-glass hover:border-white/10 rounded-2xl overflow-hidden hover:-translate-y-2 hover:shadow-2xl hover:shadow-indigo-950/40 transition-all duration-300 flex flex-col h-full"
+                className="group bg-white border border-slate-200/90 hover:border-slate-300 rounded-2xl overflow-hidden hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 flex flex-col h-full shadow-xs"
               >
                 {/* Project Image Panel */}
-                <div className="relative h-48 overflow-hidden bg-slate-900 flex items-center justify-center border-b border-white/5">
+                <div className="relative h-48 overflow-hidden bg-slate-100 flex items-center justify-center border-b border-slate-200/80">
                   {hasError ? (
-                    // High Fidelity CSS Fallback Pattern
-                    <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient || "from-slate-900 to-slate-950"} flex flex-col items-center justify-center p-6 text-center select-none`}>
-                      <div className="bg-slate-950/50 p-3 rounded-xl border border-white/5 mb-2.5">
+                    <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient || "from-slate-100 to-slate-200"} flex flex-col items-center justify-center p-6 text-center select-none`}>
+                      <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-xs mb-2.5">
                         {project.icon}
                       </div>
-                      <span className="text-xs font-bold text-slate-350 tracking-wider uppercase">{project.category} Concept</span>
+                      <span className="text-xs font-bold text-slate-700 tracking-wider uppercase">{project.category} Project</span>
                     </div>
                   ) : (
-                    // Actual Image
                     <img
                       src={project.image}
                       alt={project.title}
@@ -297,7 +291,7 @@ const Projects = () => {
                   )}
                   {/* Category Pill */}
                   <div className="absolute top-4 left-4">
-                    <span className={`px-3 py-1 rounded-lg text-[10px] font-bold border backdrop-blur-md ${getCategoryColor(project.category)}`}>
+                    <span className={`px-3 py-1 rounded-lg text-[10px] font-bold border shadow-xs ${getCategoryColor(project.category)}`}>
                       {project.category}
                     </span>
                   </div>
@@ -305,11 +299,11 @@ const Projects = () => {
 
                 {/* Card Body */}
                 <div className="p-6 flex flex-col flex-grow text-left">
-                  <h3 className="text-lg font-bold text-white mb-2.5 group-hover:text-indigo-400 transition-colors">
+                  <h3 className="text-lg font-bold text-slate-900 mb-2.5 group-hover:text-indigo-600 transition-colors">
                     {project.title}
                   </h3>
                   
-                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-5 line-clamp-3 flex-grow">
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-5 line-clamp-3 flex-grow">
                     {project.description}
                   </p>
 
@@ -318,7 +312,7 @@ const Projects = () => {
                     {project.technologies.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="bg-slate-900 border border-white/5 text-slate-400 px-2.5 py-1 rounded-md text-[10px] font-semibold"
+                        className="bg-slate-100 border border-slate-200/60 text-slate-700 px-2.5 py-1 rounded-md text-[10px] font-semibold"
                       >
                         {tech}
                       </span>
@@ -326,20 +320,20 @@ const Projects = () => {
                   </div>
 
                   {/* Actions Links */}
-                  <div className="flex items-center space-x-4 pt-4 border-t border-white/5 mt-auto">
+                  <div className="flex items-center space-x-4 pt-4 border-t border-slate-100 mt-auto">
                     <a
                       href={project.githubLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center text-xs font-bold text-slate-300 hover:text-white transition-colors"
+                      className="flex items-center text-xs font-bold text-slate-700 hover:text-indigo-600 transition-colors"
                     >
-                      <Github className="h-4 w-4 mr-1.5 text-slate-400 group-hover:text-white" />
+                      <Github className="h-4 w-4 mr-1.5 text-slate-500 group-hover:text-indigo-600" />
                       Code Repository
                     </a>
                     {project.liveLink !== "#" && (
                       <a
                         href={project.liveLink}
-                        className="flex items-center text-xs font-bold text-indigo-400 hover:text-indigo-300 transition-colors"
+                        className="flex items-center text-xs font-bold text-indigo-600 hover:text-indigo-700 transition-colors"
                       >
                         <ExternalLink className="h-4 w-4 mr-1.5" />
                         Live Demo
@@ -354,11 +348,11 @@ const Projects = () => {
 
         {/* Empty Search State */}
         {filteredProjects.length === 0 && (
-          <div className="text-center py-20 bg-slate-900/30 border border-glass rounded-2xl max-w-2xl mx-auto animate-fade-in">
-            <div className="bg-slate-950 p-4 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 border border-white/5">
-              <HelpCircle className="h-7 w-7 text-slate-500" />
+          <div className="text-center py-16 bg-slate-50 border border-slate-200 rounded-2xl max-w-2xl mx-auto">
+            <div className="bg-white p-4 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 border border-slate-200 shadow-xs">
+              <HelpCircle className="h-7 w-7 text-slate-400" />
             </div>
-            <h3 className="text-lg font-bold text-slate-300 mb-1">No matching projects found</h3>
+            <h3 className="text-lg font-bold text-slate-800 mb-1">No matching projects found</h3>
             <p className="text-slate-500 text-xs sm:text-sm px-4">
               We couldn't find any projects matching "{searchQuery}" under the "{activeFilter}" category. Try refining your keywords.
             </p>

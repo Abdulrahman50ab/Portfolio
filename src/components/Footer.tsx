@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Linkedin, Mail, Code } from 'lucide-react';
+import { Github, Linkedin, Mail, Code, ArrowUp } from 'lucide-react';
 
 const Footer = () => {
   const socialLinks = [
@@ -32,29 +32,32 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-3 gap-8">
+    <footer className="bg-slate-50 border-t border-slate-200 text-slate-600">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid md:grid-cols-3 gap-10">
+          
           {/* Brand Section */}
-          <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <Code className="h-8 w-8 text-blue-400" />
-              <span className="text-xl font-bold">Abdul Rahman</span>
+          <div className="space-y-4 text-left">
+            <div className="flex items-center space-x-2.5">
+              <div className="bg-indigo-600 text-white p-1.5 rounded-lg shadow-xs">
+                <Code className="h-5 w-5" />
+              </div>
+              <span className="text-xl font-bold tracking-tight text-slate-900">Abdul Rahman</span>
             </div>
-            <p className="text-gray-400 max-w-md">
+            <p className="text-slate-600 max-w-md text-sm leading-relaxed">
               Software Engineer specializing in Flutter mobile development and full-stack web architectures to deliver high-performance applications.
             </p>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              {['About', 'Projects', 'Skills', 'Contact'].map((item) => (
+          <div className="text-left">
+            <h3 className="text-sm font-bold text-slate-900 tracking-wider uppercase mb-4">Quick Links</h3>
+            <ul className="space-y-2.5">
+              {['Home', 'About', 'Projects', 'Skills', 'Contact'].map((item) => (
                 <li key={item}>
                   <button
                     onClick={() => handleScroll(item.toLowerCase())}
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-slate-600 hover:text-indigo-600 transition-colors text-sm font-medium"
                   >
                     {item}
                   </button>
@@ -64,9 +67,9 @@ const Footer = () => {
           </div>
 
           {/* Social Links */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Connect With Me</h3>
-            <div className="flex space-x-4">
+          <div className="text-left">
+            <h3 className="text-sm font-bold text-slate-900 tracking-wider uppercase mb-4">Connect With Me</h3>
+            <div className="flex space-x-3">
               {socialLinks.map((link) => (
                 <a
                   key={link.name}
@@ -78,7 +81,7 @@ const Footer = () => {
                     }
                   }}
                   {...(link.href.startsWith('http') ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="bg-gray-800 hover:bg-blue-600 p-3 rounded-lg transition-colors"
+                  className="bg-white hover:bg-indigo-50 border border-slate-200 hover:border-indigo-200 p-2.5 rounded-xl text-slate-600 hover:text-indigo-600 transition-all shadow-xs"
                   aria-label={link.name}
                 >
                   {link.icon}
@@ -88,24 +91,19 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">
-              © 2024 Abdul Rahman. All rights reserved.
-            </p>
-          </div>
+        <div className="border-t border-slate-200 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
+          <p>© {new Date().getFullYear()} Abdul Rahman. All rights reserved.</p>
+          <p className="mt-2 md:mt-0 font-medium">Crafted with precision & modern light design.</p>
         </div>
       </div>
 
       {/* Scroll to Top Button */}
       <button
         onClick={scrollToTop}
-        className="fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-colors z-40"
+        className="fixed bottom-8 right-8 bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-full shadow-md hover:shadow-lg transition-all z-40 focus:outline-none active:scale-[0.98]"
         aria-label="Scroll to top"
       >
-        <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-        </svg>
+        <ArrowUp className="h-5 w-5" />
       </button>
     </footer>
   );

@@ -6,19 +6,20 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-
 import PrintableCV from './components/PrintableCV';
 
 function App() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white text-slate-900 selection:bg-indigo-100 selection:text-indigo-900">
       <div className="print:hidden">
         <Header />
-        <Hero />
-        <About />
-        <Projects />
-        <Skills />
-        <Contact />
+        <main>
+          <Hero />
+          <About />
+          <Projects />
+          <Skills />
+          <Contact />
+        </main>
         <Footer />
       </div>
       <PrintableCV />
