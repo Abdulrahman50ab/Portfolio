@@ -70,19 +70,19 @@ const skillGroups: SkillGroup[] = [
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-16 md:py-24 border-b border-zinc-200/80 bg-white">
+    <section id="skills" className="border-b border-zinc-200/80 bg-white py-20 md:py-28">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-left mb-12">
-          <span className="text-xs font-semibold text-indigo-600 uppercase tracking-wider block mb-2">
-            Capabilities
+          <span className="mb-3 block text-[11px] font-semibold uppercase tracking-[0.2em] text-indigo-600">
+            03 / What I work with
           </span>
-          <h2 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950">
-            Technical Skills &amp; Stack
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-zinc-950 sm:text-4xl">
+            A toolkit for ideas that scale.
           </h2>
-          <p className="text-base text-zinc-600 mt-2 max-w-2xl">
-            A comprehensive overview of tools and technologies I use to build scalable products.
+          <p className="mt-3 max-w-2xl text-base leading-7 text-zinc-600">
+            A considered mix of mobile, AI, web, and backend technologies — chosen to solve the problem, not add noise.
           </p>
         </div>
 
@@ -91,7 +91,7 @@ const Skills = () => {
           {skillGroups.map((group, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-2xl border border-zinc-200/90 bg-zinc-50/50 hover:bg-zinc-50/90 hover:border-indigo-200/80 transition-colors shadow-2xs flex flex-col justify-between"
+              className="flex flex-col justify-between rounded-2xl border border-zinc-200/90 bg-[#FAFAFA] p-6 shadow-[0_8px_30px_-28px_rgba(24,24,27,0.4)] transition-colors hover:border-indigo-200/80 hover:bg-white sm:p-7"
             >
               <div>
                 {/* Header */}

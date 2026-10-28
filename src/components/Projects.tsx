@@ -32,11 +32,22 @@ const projects: Project[] = [
     title: 'UniRide — Campus Transit & Live Telemetry',
     description: 'End-to-end university mobility platform serving 500+ students daily with real-time bus tracking via Google Maps and offline persistent caching.',
     metric: '500+ Daily Riders',
+    image: '/projects/uniride.png',
     technologies: ['Flutter', 'Dart', 'Node.js', 'Google Maps API'],
     category: 'Mobile',
     icon: <Smartphone className="h-4 w-4" />,
     githubLink: 'https://github.com/Abdulrahman50ab/Uniride',
     featured: true,
+  },
+  {
+    id: 'weather-app',
+    title: 'Weather App — Forecast at a Glance',
+    description: 'A polished mobile weather experience that pairs current conditions with clear, scannable seven-day forecasts for sunny and rainy days.',
+    technologies: ['Flutter', 'Dart', 'Weather API', 'Mobile UI'],
+    category: 'Mobile',
+    icon: <Smartphone className="h-4 w-4" />,
+    image: '/projects/weather_app.png',
+    githubLink: 'https://github.com/Abdulrahman50ab',
   },
   {
     id: 'ai-keyboard',
@@ -139,19 +150,19 @@ const Projects = () => {
   }, [selectedCategory, searchQuery]);
 
   return (
-    <section id="projects" className="py-16 md:py-24 border-b border-zinc-200/80 bg-[#FAFAFA]">
+    <section id="projects" className="border-b border-zinc-200/80 bg-[#FAFAFA] py-20 md:py-28">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-left mb-10">
-          <span className="text-xs font-semibold text-indigo-600 uppercase tracking-wider block mb-2">
-            Selected Work
+          <span className="mb-3 block text-[11px] font-semibold uppercase tracking-[0.2em] text-indigo-600">
+            02 / Selected work
           </span>
-          <h2 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950">
-            Featured Projects
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-zinc-950 sm:text-4xl">
+            A few things I’ve built.
           </h2>
-          <p className="text-base text-zinc-600 mt-2 max-w-2xl">
-            A curated collection of mobile applications, Generative AI pipelines, and web platforms.
+          <p className="mt-3 max-w-2xl text-base leading-7 text-zinc-600">
+            A selection of mobile products, intelligent workflows, web platforms, and systems work.
           </p>
         </div>
 
@@ -159,10 +170,12 @@ const Projects = () => {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-zinc-200/70">
           
           {/* Category Filter Pills */}
-          <div className="flex flex-wrap items-center gap-1.5">
+          <div aria-label="Filter projects by category" className="flex flex-wrap items-center gap-1.5">
             {categories.map((cat) => (
               <button
                 key={cat}
+                type="button"
+                aria-pressed={selectedCategory === cat}
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
                   selectedCategory === cat
@@ -179,7 +192,8 @@ const Projects = () => {
           <div className="relative w-full sm:w-64">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-zinc-400" />
             <input
-              type="text"
+              type="search"
+              aria-label="Search projects or technologies"
               placeholder="Search projects or tech..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -190,12 +204,28 @@ const Projects = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 gap-6 text-left">
+        <div className="grid items-stretch gap-6 text-left md:grid-cols-2">
           {filteredProjects.map((project) => (
-            <div
+            <article
               key={project.id}
-              className="p-6 rounded-2xl border border-zinc-200/90 bg-white hover:border-indigo-200/90 transition-all flex flex-col justify-between shadow-2xs group"
+              className="overflow-hidden rounded-2xl border border-zinc-200/90 bg-white transition-all hover:border-indigo-200/90 hover:shadow-[0_18px_45px_-34px_rgba(24,24,27,0.4)] flex flex-col justify-between shadow-2xs group"
             >
+              {project.image && (
+                <div className="relative overflow-hidden border-b border-zinc-100 bg-zinc-100">
+                  <img
+                    src={project.image}
+                    alt={`${project.title} mobile app preview`}
+                    loading="lazy"
+                    className="aspect-[16/8.5] w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.025]"
+                  />
+                  {project.featured && (
+                    <span className="absolute left-4 top-4 rounded-full border border-white/70 bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-zinc-700 backdrop-blur-sm">
+                      Featured work
+                    </span>
+                  )}
+                </div>
+              )}
+              <div className="flex flex-1 flex-col justify-between p-6 sm:p-7">
               <div>
                 {/* Card Header: Category & Metric */}
                 <div className="flex items-center justify-between gap-2 mb-3">
@@ -263,12 +293,13 @@ const Projects = () => {
                 </div>
               </div>
 
-            </div>
+              </div>
+            </article>
           ))}
         </div>
 
         {filteredProjects.length === 0 && (
-          <div className="text-center py-12 text-zinc-500 text-sm">
+          <div role="status" className="py-12 text-center text-sm text-zinc-500">
             No projects found matching your query.
           </div>
         )}

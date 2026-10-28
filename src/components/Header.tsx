@@ -46,6 +46,17 @@ const Header = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsMenuOpen(false);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isMenuOpen]);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -72,28 +83,35 @@ const Header = () => {
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-[4.5rem]">
           
           {/* Logo / Brand */}
           <button
+            type="button"
             onClick={() => scrollToSection('home')}
             className="flex items-center space-x-2 text-left group cursor-pointer focus:outline-none"
             aria-label="Abdul Rahman - Return to top"
           >
-            <span className="font-heading font-bold text-base text-zinc-950 tracking-tight group-hover:text-zinc-700 transition-colors">
-              Abdul Rahman
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-950 text-xs font-bold tracking-tight text-white shadow-sm transition-colors group-hover:bg-indigo-600">
+              AR
             </span>
-            <span className="text-zinc-300 hidden sm:inline">·</span>
-            <span className="text-xs text-zinc-500 font-medium hidden sm:inline">
-              Software Engineer
+            <span className="flex flex-col leading-none">
+              <span className="font-heading font-bold text-sm text-zinc-950 tracking-tight group-hover:text-indigo-600 transition-colors">
+                Abdul Rahman
+              </span>
+              <span className="mt-1 text-[10px] text-zinc-500 font-medium tracking-wide">
+                SOFTWARE ENGINEER
+              </span>
             </span>
           </button>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav aria-label="Main navigation" className="hidden md:flex items-center space-x-7">
             {navItems.map((item) => (
               <button
+                type="button"
                 key={item.id}
+                aria-current={activeSection === item.id ? 'location' : undefined}
                 onClick={() => scrollToSection(item.id)}
                 className={`text-sm tracking-tight transition-colors focus:outline-none py-1 relative ${
                   activeSection === item.id
@@ -111,8 +129,9 @@ const Header = () => {
 
           {/* Right Actions: Availability & CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-200/70">
-              Available for hire
+            <span className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-xs font-medium bg-white text-zinc-600 border border-zinc-200/80">
+              <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
+              Available for opportunities
             </span>
 
             <button
@@ -133,9 +152,12 @@ const Header = () => {
               Contact
             </button>
             <button
+              type="button"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-1.5 rounded-md text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 transition-colors focus:outline-none"
-              aria-label="Toggle menu"
+              className="p-2 rounded-lg text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 transition-colors focus:outline-none"
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-navigation"
             >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
@@ -145,10 +167,12 @@ const Header = () => {
 
         {/* Mobile Dropdown */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-zinc-200/80 bg-[#FAFAFA] py-4 space-y-1 animate-fade-in">
+          <nav id="mobile-navigation" aria-label="Mobile navigation" className="md:hidden border-t border-zinc-200/80 bg-[#FAFAFA] py-4 space-y-1 animate-fade-in">
             {navItems.map((item) => (
               <button
+                type="button"
                 key={item.id}
+                aria-current={activeSection === item.id ? 'location' : undefined}
                 onClick={() => scrollToSection(item.id)}
                 className={`w-full flex items-center justify-between px-3 py-2.5 text-left text-sm rounded-md transition-colors ${
                   activeSection === item.id
@@ -161,9 +185,12 @@ const Header = () => {
             ))}
             <div className="pt-3 px-3 border-t border-zinc-200/60 flex items-center justify-between text-xs text-zinc-600">
               <span>Status</span>
-              <span className="text-zinc-600 font-medium">Available for hire</span>
+              <span className="inline-flex items-center gap-2 text-zinc-600 font-medium">
+                <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
+                Available for opportunities
+              </span>
             </div>
-          </div>
+          </nav>
         )}
       </div>
     </header>

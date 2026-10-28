@@ -44,7 +44,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-white border-t border-zinc-200 text-zinc-900 py-12">
+    <footer className="border-t border-zinc-200 bg-white py-10 text-zinc-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Footer Row */}
@@ -93,7 +93,7 @@ const Footer = () => {
 
         {/* Bottom Sub-Footer */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500">
-          <p>© {new Date().getFullYear()} Abdul Rahman. Designed with simplicity &amp; restraint.</p>
+          <p>© {new Date().getFullYear()} Abdul Rahman. Designed with care in Lahore.</p>
           
           <button
             onClick={scrollToTop}

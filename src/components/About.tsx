@@ -22,19 +22,19 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-16 md:py-24 border-b border-zinc-200/80 bg-white">
+    <section id="about" className="border-b border-zinc-200/80 bg-[#FAFAFA] py-20 md:py-28">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-left mb-12">
-          <span className="text-xs font-semibold text-indigo-600 uppercase tracking-wider block mb-2">
-            About Me
+          <span className="mb-3 block text-[11px] font-semibold uppercase tracking-[0.2em] text-indigo-600">
+            01 / A little about me
           </span>
-          <h2 className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950">
-            Background &amp; Experience
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-zinc-950 sm:text-4xl">
+            Curiosity, craft &amp; a clear purpose.
           </h2>
-          <p className="text-base text-zinc-600 mt-2 max-w-2xl">
-            Passionate about building scalable mobile systems, robust full-stack software, and intelligent workflows.
+          <p className="mt-3 max-w-2xl text-base leading-7 text-zinc-600">
+            Building useful technology means understanding the people, systems, and small details behind it.
           </p>
         </div>
 
@@ -42,7 +42,7 @@ const About = () => {
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start text-left">
           
           {/* Left Column: Personal Narrative & Education */}
-          <div className="lg:col-span-6 space-y-6">
+          <div className="lg:col-span-6 space-y-6 lg:pr-5">
             <div className="space-y-4 text-zinc-600 text-sm sm:text-base leading-relaxed">
               <p>
                 My journey began with core web systems and deepened into native mobile mechanics. For over three years, I have concentrated on the <strong className="text-zinc-900 font-medium">Flutter engine and Dart ecosystem</strong>, building native-feel apps across iOS and Android with strict frame budget discipline.
@@ -87,7 +87,7 @@ const About = () => {
               {workHistory.map((job, idx) => (
                 <div
                   key={idx}
-                  className="p-5 rounded-2xl border border-zinc-200/80 bg-white hover:border-indigo-200 transition-colors shadow-2xs"
+                  className="relative rounded-2xl border border-zinc-200/80 bg-white p-5 shadow-[0_8px_30px_-26px_rgba(24,24,27,0.35)] transition-colors hover:border-indigo-200 sm:p-6"
                 >
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                     <div>
