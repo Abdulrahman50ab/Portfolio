@@ -21,14 +21,6 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative overflow-hidden border-b border-zinc-200/80 bg-white">
-      {/* Ambient background: faint blueprint grid + soft color glows */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-x-0 top-0 h-full bg-grid" />
-        <div className="absolute -top-32 left-1/2 h-[26rem] w-[46rem] -translate-x-1/2 rounded-full bg-indigo-500/10 blur-3xl" />
-        <div className="absolute -right-24 top-24 h-80 w-80 rounded-full bg-violet-400/10 blur-3xl" />
-        <div className="absolute -left-32 bottom-[-6rem] h-72 w-72 rounded-full bg-sky-400/10 blur-3xl" />
-      </div>
-
       <div className="relative mx-auto max-w-6xl px-4 pb-16 pt-14 sm:px-6 md:pb-20 md:pt-20 lg:px-8 lg:pb-24 lg:pt-24">
         <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
 
@@ -56,7 +48,7 @@ const Hero = () => {
               style={fadeUp(70)}
             >
               Thoughtful software,
-              <span className="mt-1 block bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-500 bg-clip-text text-transparent">
+              <span className="mt-1 block text-indigo-600">
                 built to move people forward.
               </span>
             </h1>
@@ -115,10 +107,10 @@ const Hero = () => {
             className="animate-fade-in-up relative mx-auto w-full max-w-[27rem] lg:mr-0"
             style={fadeUp(160)}
           >
-            {/* Soft colored halo behind the card */}
+            {/* Soft neutral halo behind the card */}
             <div
               aria-hidden="true"
-              className="absolute inset-6 -z-10 translate-y-6 scale-95 rounded-[2.5rem] bg-gradient-to-br from-indigo-300/50 via-violet-300/40 to-sky-300/30 blur-2xl"
+              className="absolute inset-6 -z-10 translate-y-6 scale-95 rounded-[2.5rem] bg-zinc-200/60 blur-2xl"
             />
             <div className="absolute -right-5 -top-5 h-32 w-32 rounded-full border border-indigo-100 sm:-right-7 sm:-top-7 sm:h-40 sm:w-40" />
             <div className="absolute -bottom-5 -left-5 h-28 w-28 rounded-full border border-zinc-200 sm:-bottom-7 sm:-left-7 sm:h-36 sm:w-36" />
@@ -129,7 +121,7 @@ const Hero = () => {
                 alt="Abdul Rahman, software engineer"
                 className="aspect-[4/4.45] w-full rounded-[1.3rem] object-cover object-top"
               />
-              <div className="absolute inset-x-2 bottom-2 flex items-center justify-between rounded-b-[1.3rem] bg-gradient-to-t from-zinc-950/90 via-zinc-950/55 to-transparent px-5 pb-4 pt-10 text-white">
+              <div className="absolute inset-x-2 bottom-2 flex items-center justify-between rounded-b-[1.3rem] bg-zinc-950/75 px-5 py-4 text-white backdrop-blur-md">
                 <div>
                   <p className="text-sm font-semibold">Building what’s next</p>
                   <p className="mt-0.5 text-xs text-white/70">Mobile · Web · Intelligent systems</p>

@@ -204,7 +204,7 @@ const Header = () => {
       {/* Scroll progress indicator */}
       <div
         aria-hidden="true"
-        className={`absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-indigo-600 via-violet-500 to-indigo-500 transition-opacity duration-300 ${
+        className={`absolute bottom-0 left-0 h-[2px] bg-indigo-600 transition-opacity duration-300 ${
           scrolled ? 'opacity-100' : 'opacity-0'
         }`}
         style={{ width: `${progress}%` }}
