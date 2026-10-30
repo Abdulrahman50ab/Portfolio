@@ -4,16 +4,24 @@ import { Menu, X, ArrowUpRight } from 'lucide-react';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-      if (window.scrollY < 200) {
+      const y = window.scrollY;
+      setScrolled(y > 20);
+
+      // Reading progress through the whole page
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(scrollable > 0 ? Math.min(100, Math.max(0, (y / scrollable) * 100)) : 0);
+
+      if (y < 200) {
         setActiveSection('home');
       }
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -78,13 +86,13 @@ const Header = () => {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? 'bg-[#FAFAFA]/95 backdrop-blur-md border-b border-zinc-200/80 shadow-[0_1px_2px_rgba(0,0,0,0.03)]'
-          : 'bg-[#FAFAFA]/70 backdrop-blur-sm border-b border-transparent'
+          ? 'bg-[#FAFAFA]/90 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-20px_rgba(24,24,27,0.35)] backdrop-blur-md border-b border-zinc-200/70'
+          : 'bg-[#FAFAFA]/70 border-b border-transparent backdrop-blur-sm'
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-[4.5rem]">
-          
+        <div className="flex justify-between items-center h-[4.5rem] gap-4">
+
           {/* Logo / Brand */}
           <button
             type="button"
@@ -105,24 +113,24 @@ const Header = () => {
             </span>
           </button>
 
-          {/* Desktop Navigation */}
-          <nav aria-label="Main navigation" className="hidden md:flex items-center space-x-7">
+          {/* Desktop Navigation: floating glassy pill */}
+          <nav
+            aria-label="Main navigation"
+            className="hidden md:flex items-center gap-1 rounded-full border border-zinc-200/80 bg-white/80 p-1.5 shadow-[0_10px_30px_-24px_rgba(24,24,27,0.45)] backdrop-blur-md"
+          >
             {navItems.map((item) => (
               <button
                 type="button"
                 key={item.id}
                 aria-current={activeSection === item.id ? 'location' : undefined}
                 onClick={() => scrollToSection(item.id)}
-                className={`text-sm tracking-tight transition-colors focus:outline-none py-1 relative ${
+                className={`relative rounded-full px-4 py-1.5 text-sm tracking-tight transition-all duration-200 ${
                   activeSection === item.id
-                    ? 'text-zinc-950 font-semibold'
-                    : 'text-zinc-500 hover:text-indigo-600 font-normal'
+                    ? 'bg-zinc-950 font-semibold text-white shadow-sm'
+                    : 'text-zinc-500 font-normal hover:bg-zinc-100 hover:text-zinc-950'
                 }`}
               >
                 <span>{item.name}</span>
-                {activeSection === item.id && (
-                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-indigo-600 rounded-full" />
-                )}
               </button>
             ))}
           </nav>
@@ -136,10 +144,10 @@ const Header = () => {
 
             <button
               onClick={() => scrollToSection('contact')}
-              className="inline-flex items-center space-x-1.5 bg-zinc-950 hover:bg-indigo-600 text-white text-xs font-medium px-3.5 py-2 rounded-lg transition-all active:scale-[0.98]"
+              className="group inline-flex items-center space-x-1.5 bg-zinc-950 hover:bg-indigo-600 text-white text-xs font-medium px-3.5 py-2 rounded-lg transition-all active:scale-[0.98] shadow-sm"
             >
               <span>Get in touch</span>
-              <ArrowUpRight className="h-3.5 w-3.5 text-zinc-400" />
+              <ArrowUpRight className="h-3.5 w-3.5 text-zinc-400 transition-all group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </button>
           </div>
 
@@ -162,7 +170,6 @@ const Header = () => {
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
-
         </div>
 
         {/* Mobile Dropdown */}
@@ -193,6 +200,15 @@ const Header = () => {
           </nav>
         )}
       </div>
+
+      {/* Scroll progress indicator */}
+      <div
+        aria-hidden="true"
+        className={`absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-indigo-600 via-violet-500 to-indigo-500 transition-opacity duration-300 ${
+          scrolled ? 'opacity-100' : 'opacity-0'
+        }`}
+        style={{ width: `${progress}%` }}
+      />
     </header>
   );
 };
