@@ -1,22 +1,24 @@
-import React, { Component, Suspense, useEffect, useRef, useState, type ReactNode } from 'react';
+import React, { Component, Suspense, useRef, type ReactNode } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Float } from '@react-three/drei';
 import { useInView } from 'framer-motion';
 import * as THREE from 'three';
 
-// Shared pointer state, tracked on the window so the parallax keeps working
-// while the canvas sits behind content with pointer-events disabled.
-const pointer = { x: 0, y: 0 };
-
+// Everything renders once and stays mounted for the hero's lifetime.
+// Pointer input comes from R3F's own tracking (state.pointer) — no custom
+// listeners anywhere; the only dynamic bit is the frameloop prop, which
+// stops the render loop while the hero is scrolled out of view.
 const SceneCluster = () => {
   const group = useRef<THREE.Group>(null);
 
-  useFrame((_, delta) => {
+  useFrame((state, delta) => {
     const g = group.current;
     if (!g) return;
-    g.rotation.y += delta * 0.045;
-    g.rotation.x += (pointer.y * 0.14 - g.rotation.x) * 0.04;
-    g.rotation.z += (pointer.x * 0.08 - g.rotation.z) * 0.04;
+    // Clamp delta so a long tab hide or frame stall can't fling the scene.
+    const d = Math.min(delta, 0.05);
+    g.rotation.y += d * 0.045;
+    g.rotation.x += (state.pointer.y * 0.14 - g.rotation.x) * 0.04;
+    g.rotation.z += (state.pointer.x * 0.08 - g.rotation.z) * 0.04;
   });
 
   return (
@@ -70,43 +72,25 @@ const SceneCluster = () => {
   );
 };
 
-// Pauses the render loop whenever the hero scrolls out of the viewport.
-const VisibleCanvas = () => {
+const HeroCanvas = () => {
   const wrapRef = useRef<HTMLDivElement>(null);
   const inView = useInView(wrapRef);
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    // Defer mounting the WebGL context until after first paint.
-    const id = window.setTimeout(() => setReady(true), 50);
-    const onMove = (e: PointerEvent) => {
-      pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
-      pointer.y = -((e.clientY / window.innerHeight) * 2 - 1);
-    };
-    window.addEventListener('pointermove', onMove, { passive: true });
-    return () => {
-      window.clearTimeout(id);
-      window.removeEventListener('pointermove', onMove);
-    };
-  }, []);
 
   return (
     <div ref={wrapRef} className="h-full w-full">
-      {ready && (
-        <Canvas
-          frameloop={inView ? 'always' : 'never'}
-          dpr={[1, 1.75]}
-          camera={{ position: [0, 0, 9], fov: 45 }}
-          gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
-        >
-          <ambientLight intensity={1.15} />
-          <directionalLight position={[4, 6, 6]} intensity={1.1} />
-          <directionalLight position={[-5, -2, 4]} intensity={0.35} />
-          <Suspense fallback={null}>
-            <SceneCluster />
-          </Suspense>
-        </Canvas>
-      )}
+      <Canvas
+        frameloop={inView ? 'always' : 'never'}
+        dpr={[1, 1.75]}
+        camera={{ position: [0, 0, 9], fov: 45 }}
+        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+      >
+        <ambientLight intensity={1.15} />
+        <directionalLight position={[4, 6, 6]} intensity={1.1} />
+        <directionalLight position={[-5, -2, 4]} intensity={0.35} />
+        <Suspense fallback={null}>
+          <SceneCluster />
+        </Suspense>
+      </Canvas>
     </div>
   );
 };
@@ -127,7 +111,7 @@ class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean
 
 const HeroScene = () => (
   <SceneBoundary>
-    <VisibleCanvas />
+    <HeroCanvas />
   </SceneBoundary>
 );
 

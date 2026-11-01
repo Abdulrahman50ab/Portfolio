@@ -37,7 +37,7 @@ const Hero = () => {
   return (
     <section id="home" className="relative overflow-hidden border-b border-zinc-200/80 bg-white">
       {!reduceMotion && (
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
+        <div aria-hidden="true" className="absolute inset-0 z-0">
           <Suspense fallback={null}>
             <HeroScene />
           </Suspense>
