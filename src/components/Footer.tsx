@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowUp, Github, Linkedin, Mail, MessageSquare } from 'lucide-react';
+import Reveal from './motion/Reveal';
 
 const Footer = () => {
   const scrollToSection = (id: string) => {
@@ -46,6 +47,7 @@ const Footer = () => {
   return (
     <footer className="border-t border-zinc-200 bg-white py-10 text-zinc-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Reveal y={16}>
         
         {/* Main Footer Row */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-zinc-100 text-left">
@@ -103,6 +105,7 @@ const Footer = () => {
             <ArrowUp className="h-3.5 w-3.5" />
           </button>
         </div>
+        </Reveal>
 
       </div>
     </footer>

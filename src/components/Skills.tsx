@@ -1,5 +1,6 @@
 import React from 'react';
 import { Smartphone, Cpu, Globe, Database } from 'lucide-react';
+import Reveal from './motion/Reveal';
 
 interface SkillGroup {
   title: string;
@@ -74,7 +75,7 @@ const Skills = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-left mb-12">
+        <Reveal className="text-left mb-12">
           <span className="mb-3 block text-[11px] font-semibold uppercase tracking-[0.2em] text-indigo-600">
             03 / What I work with
           </span>
@@ -84,14 +85,14 @@ const Skills = () => {
           <p className="mt-3 max-w-2xl text-base leading-7 text-zinc-600">
             A considered mix of mobile, AI, web, and backend technologies — chosen to solve the problem, not add noise.
           </p>
-        </div>
+        </Reveal>
 
         {/* 4 Clean Domain Cards */}
         <div className="grid md:grid-cols-2 gap-6 text-left">
           {skillGroups.map((group, idx) => (
+            <Reveal key={idx} className="h-full" delay={idx * 0.07}>
             <div
-              key={idx}
-              className="flex flex-col justify-between rounded-2xl border border-zinc-200/90 bg-[#FAFAFA] p-6 shadow-[0_8px_30px_-28px_rgba(24,24,27,0.4)] transition-colors hover:border-indigo-200/80 hover:bg-white sm:p-7"
+              className="flex h-full flex-col justify-between rounded-2xl border border-zinc-200/90 bg-[#FAFAFA] p-6 shadow-[0_8px_30px_-28px_rgba(24,24,27,0.4)] transition-colors hover:border-indigo-200/80 hover:bg-white sm:p-7"
             >
               <div>
                 {/* Header */}
@@ -121,6 +122,7 @@ const Skills = () => {
                 ))}
               </div>
             </div>
+            </Reveal>
           ))}
         </div>
 

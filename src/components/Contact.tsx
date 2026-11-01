@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Send, Check, Copy, ArrowUpRight, MapPin, Github, Linkedin } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import Reveal from './motion/Reveal';
 
 const Contact = () => {
   const form = useRef<HTMLFormElement>(null);
@@ -62,7 +63,7 @@ const Contact = () => {
   return (
     <section id="contact" className="border-b border-zinc-200/80 bg-[#FAFAFA] py-20 md:py-28">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 text-left">
+        <Reveal className="mb-12 text-left">
           <span className="mb-3 block text-[11px] font-semibold uppercase tracking-[0.2em] text-indigo-600">
             04 / Get in touch
           </span>
@@ -72,10 +73,11 @@ const Contact = () => {
           <p className="mt-3 max-w-2xl text-base leading-7 text-zinc-600">
             I’m always glad to hear about thoughtful products, interesting challenges, and meaningful collaborations.
           </p>
-        </div>
+        </Reveal>
 
         <div className="grid items-start gap-8 text-left lg:grid-cols-12 lg:gap-12">
           <div className="space-y-4 lg:col-span-5">
+            <Reveal>
             <div className="rounded-2xl border border-zinc-200/90 bg-white p-5 shadow-[0_8px_30px_-28px_rgba(24,24,27,0.4)] transition-colors hover:border-indigo-200/80">
               <div className="mb-2 flex items-center justify-between">
                 <span className="text-xs font-medium text-zinc-500">Write me an email</span>
@@ -94,7 +96,9 @@ const Contact = () => {
                 abdulrahman50ab@gmail.com
               </a>
             </div>
+            </Reveal>
 
+            <Reveal delay={0.08}>
             <div className="rounded-2xl border border-zinc-200/90 bg-white p-5 shadow-[0_8px_30px_-28px_rgba(24,24,27,0.4)] transition-colors hover:border-indigo-200/80">
               <div className="mb-2 flex items-center justify-between">
                 <span className="text-xs font-medium text-zinc-500">WhatsApp / Phone</span>
@@ -105,7 +109,9 @@ const Contact = () => {
               <p className="font-heading text-base font-semibold text-zinc-950">+92 301 0401544</p>
               <p className="mt-0.5 text-xs text-zinc-500">Available on WhatsApp and direct call</p>
             </div>
+            </Reveal>
 
+            <Reveal delay={0.16}>
             <div className="flex items-center justify-between rounded-2xl border border-zinc-200/90 bg-white p-5 shadow-[0_8px_30px_-28px_rgba(24,24,27,0.4)]">
               <div>
                 <span className="block text-xs font-medium text-zinc-500">Based in</span>
@@ -124,9 +130,10 @@ const Contact = () => {
                 </a>
               </div>
             </div>
+            </Reveal>
           </div>
 
-          <div className="lg:col-span-7">
+          <Reveal delay={0.1} className="lg:col-span-7">
             <div className="rounded-2xl border border-zinc-200/90 bg-white p-6 shadow-[0_12px_40px_-32px_rgba(24,24,27,0.45)] sm:p-8">
               {status === 'success' ? (
                 <div role="status" className="space-y-3 py-10 text-center">
@@ -174,7 +181,7 @@ const Contact = () => {
                 </form>
               )}
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

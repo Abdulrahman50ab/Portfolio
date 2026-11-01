@@ -1,5 +1,6 @@
 import React from 'react';
 import { Award, Briefcase, GraduationCap } from 'lucide-react';
+import Reveal from './motion/Reveal';
 
 const About = () => {
   const workHistory = [
@@ -26,7 +27,7 @@ const About = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-left mb-12">
+        <Reveal className="text-left mb-12">
           <span className="mb-3 block text-[11px] font-semibold uppercase tracking-[0.2em] text-indigo-600">
             01 / A little about me
           </span>
@@ -36,24 +37,25 @@ const About = () => {
           <p className="mt-3 max-w-2xl text-base leading-7 text-zinc-600">
             Building useful technology means understanding the people, systems, and small details behind it.
           </p>
-        </div>
+        </Reveal>
 
         {/* 2-Column Scannable Layout */}
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start text-left">
           
           {/* Left Column: Personal Narrative & Education */}
           <div className="lg:col-span-6 space-y-6 lg:pr-5">
-            <div className="space-y-4 text-zinc-600 text-sm sm:text-base leading-relaxed">
+            <Reveal className="space-y-4 text-zinc-600 text-sm sm:text-base leading-relaxed">
               <p>
                 My journey began with core web systems and deepened into native mobile mechanics. For over three years, I have concentrated on the <strong className="text-zinc-900 font-medium">Flutter engine and Dart ecosystem</strong>, building native-feel apps across iOS and Android with strict frame budget discipline.
               </p>
               <p>
                 At <strong className="text-zinc-900 font-medium">IntelliG</strong>, I architect scalable generative workflows and document processing pipelines using modern LLM frameworks. I prioritize predictable state machines, clean architecture, and restraint over unnecessary complexity.
               </p>
-            </div>
+            </Reveal>
 
             {/* Academic Credentials Card */}
-            <div className="p-5 rounded-2xl border border-zinc-200/90 bg-zinc-50/70 hover:border-indigo-200/80 transition-colors">
+            <Reveal delay={0.1}>
+              <div className="p-5 rounded-2xl border border-zinc-200/90 bg-zinc-50/70 hover:border-indigo-200/80 transition-colors">
               <div className="flex items-center space-x-2 text-zinc-900 font-semibold text-sm mb-2">
                 <GraduationCap className="h-4 w-4 text-indigo-600" />
                 <span>Education &amp; Distinction</span>
@@ -72,21 +74,24 @@ const About = () => {
                   <span>CGPA 3.93 / 4.00</span>
                 </span>
               </div>
-            </div>
+              </div>
+            </Reveal>
 
           </div>
 
           {/* Right Column: Work Experience Timeline */}
           <div className="lg:col-span-6">
+            <Reveal>
             <div className="flex items-center space-x-2 text-zinc-900 font-semibold text-sm mb-6">
               <Briefcase className="h-4 w-4 text-indigo-600" />
               <span>Professional Trajectory</span>
             </div>
+            </Reveal>
 
             <div className="space-y-6">
               {workHistory.map((job, idx) => (
+                <Reveal key={idx} delay={idx * 0.08}>
                 <div
-                  key={idx}
                   className="relative rounded-2xl border border-zinc-200/80 bg-white p-5 shadow-[0_8px_30px_-26px_rgba(24,24,27,0.35)] transition-colors hover:border-indigo-200 sm:p-6"
                 >
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
@@ -122,6 +127,7 @@ const About = () => {
                     ))}
                   </div>
                 </div>
+                </Reveal>
               ))}
             </div>
 

@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Github, Smartphone, Globe, Bot, Terminal, ArrowUpRight, Search } from 'lucide-react';
+import Reveal from './motion/Reveal';
 
 interface Project {
   id: string;
@@ -154,7 +155,7 @@ const Projects = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-left mb-10">
+        <Reveal className="text-left mb-10">
           <span className="mb-3 block text-[11px] font-semibold uppercase tracking-[0.2em] text-indigo-600">
             02 / Selected work
           </span>
@@ -164,10 +165,10 @@ const Projects = () => {
           <p className="mt-3 max-w-2xl text-base leading-7 text-zinc-600">
             A selection of mobile products, intelligent workflows, web platforms, and systems work.
           </p>
-        </div>
+        </Reveal>
 
         {/* Filter Tabs & Search Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-zinc-200/70">
+        <Reveal delay={0.05} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-zinc-200/70">
           
           {/* Category Filter Pills */}
           <div aria-label="Filter projects by category" className="flex flex-wrap items-center gap-1.5">
@@ -201,14 +202,14 @@ const Projects = () => {
             />
           </div>
 
-        </div>
+        </Reveal>
 
         {/* Projects Grid */}
         <div className="grid items-stretch gap-6 text-left md:grid-cols-2">
-          {filteredProjects.map((project) => (
+          {filteredProjects.map((project, idx) => (
+            <Reveal key={project.id} className="h-full" delay={Math.min(idx * 0.05, 0.25)}>
             <article
-              key={project.id}
-              className="overflow-hidden rounded-2xl border border-zinc-200/90 bg-white transition-all hover:border-indigo-200/90 hover:shadow-[0_18px_45px_-34px_rgba(24,24,27,0.4)] flex flex-col justify-between shadow-2xs group"
+              className="h-full overflow-hidden rounded-2xl border border-zinc-200/90 bg-white transition-all hover:border-indigo-200/90 hover:shadow-[0_18px_45px_-34px_rgba(24,24,27,0.4)] flex flex-col justify-between shadow-2xs group"
             >
               {project.image && (
                 <div className="relative overflow-hidden border-b border-zinc-100 bg-zinc-100">
@@ -295,6 +296,7 @@ const Projects = () => {
 
               </div>
             </article>
+            </Reveal>
           ))}
         </div>
 
