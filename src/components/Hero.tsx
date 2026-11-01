@@ -3,6 +3,7 @@ import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { ArrowDown, ArrowUpRight, FileText, MapPin } from 'lucide-react';
 import img from './cv2.jpg';
 import Counter from './motion/Counter';
+import Magnetic from './motion/Magnetic';
 import { EASE } from './motion/presets';
 
 const HeroScene = lazy(() => import('./HeroScene'));
@@ -87,27 +88,33 @@ const Hero = () => {
             </motion.p>
 
             <motion.div variants={heroItem} className="mt-8 flex flex-wrap items-center gap-3">
-              <button
-                onClick={() => scrollToSection('projects')}
-                className="group inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/25 transition-all hover:bg-indigo-700 hover:shadow-indigo-600/30 active:scale-[0.98]"
-              >
-                Explore my work
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </button>
-              <button
-                onClick={() => window.print()}
-                className="inline-flex items-center gap-2 rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm font-semibold text-zinc-700 transition-colors hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-950 active:scale-[0.98]"
-              >
-                <FileText className="h-4 w-4 text-zinc-500" />
-                Download résumé
-              </button>
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="group inline-flex items-center gap-1.5 rounded-xl px-3 py-3 text-sm font-semibold text-zinc-600 transition-colors hover:text-indigo-600"
-              >
-                Let’s talk
-                <ArrowDown className="h-3.5 w-3.5 -rotate-45 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
-              </button>
+              <Magnetic>
+                <button
+                  onClick={() => scrollToSection('projects')}
+                  className="group inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/25 transition-all hover:bg-indigo-700 hover:shadow-indigo-600/30 active:scale-[0.98]"
+                >
+                  Explore my work
+                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </button>
+              </Magnetic>
+              <Magnetic>
+                <button
+                  onClick={() => window.print()}
+                  className="inline-flex items-center gap-2 rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm font-semibold text-zinc-700 transition-colors hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-950 active:scale-[0.98]"
+                >
+                  <FileText className="h-4 w-4 text-zinc-500" />
+                  Download résumé
+                </button>
+              </Magnetic>
+              <Magnetic>
+                <button
+                  onClick={() => scrollToSection('contact')}
+                  className="group inline-flex items-center gap-1.5 rounded-xl px-3 py-3 text-sm font-semibold text-zinc-600 transition-colors hover:text-indigo-600"
+                >
+                  Let’s talk
+                  <ArrowDown className="h-3.5 w-3.5 -rotate-45 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+                </button>
+              </Magnetic>
             </motion.div>
 
             <motion.div

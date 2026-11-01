@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Github, Smartphone, Globe, Bot, Terminal, ArrowUpRight, Search } from 'lucide-react';
 import Reveal from './motion/Reveal';
+import TiltCard from './motion/TiltCard';
 
 interface Project {
   id: string;
@@ -208,8 +209,9 @@ const Projects = () => {
         <div className="grid items-stretch gap-6 text-left md:grid-cols-2">
           {filteredProjects.map((project, idx) => (
             <Reveal key={project.id} className="h-full" delay={Math.min(idx * 0.05, 0.25)}>
-            <article
-              className="h-full overflow-hidden rounded-2xl border border-zinc-200/90 bg-white transition-all hover:border-indigo-200/90 hover:shadow-[0_18px_45px_-34px_rgba(24,24,27,0.4)] flex flex-col justify-between shadow-2xs group"
+            <TiltCard
+              as="article"
+              className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-zinc-200/90 bg-white shadow-2xs transition-[border-color,box-shadow] hover:border-indigo-200/90 hover:shadow-[0_18px_45px_-34px_rgba(24,24,27,0.4)]"
             >
               {project.image && (
                 <div className="relative overflow-hidden border-b border-zinc-100 bg-zinc-100">
@@ -295,7 +297,7 @@ const Projects = () => {
               </div>
 
               </div>
-            </article>
+            </TiltCard>
             </Reveal>
           ))}
         </div>

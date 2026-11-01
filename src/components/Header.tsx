@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 
 const Header = () => {
@@ -124,13 +125,20 @@ const Header = () => {
                 key={item.id}
                 aria-current={activeSection === item.id ? 'location' : undefined}
                 onClick={() => scrollToSection(item.id)}
-                className={`relative rounded-full px-4 py-1.5 text-sm tracking-tight transition-all duration-200 ${
+                className={`relative rounded-full px-4 py-1.5 text-sm tracking-tight transition-colors duration-200 ${
                   activeSection === item.id
-                    ? 'bg-zinc-950 font-semibold text-white shadow-sm'
+                    ? 'font-semibold text-white'
                     : 'text-zinc-500 font-normal hover:bg-zinc-100 hover:text-zinc-950'
                 }`}
               >
-                <span>{item.name}</span>
+                {activeSection === item.id && (
+                  <motion.span
+                    layoutId="nav-active-pill"
+                    className="absolute inset-0 rounded-full bg-zinc-950 shadow-sm"
+                    transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                  />
+                )}
+                <span className="relative z-10">{item.name}</span>
               </button>
             ))}
           </nav>

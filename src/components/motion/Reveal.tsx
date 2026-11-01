@@ -1,5 +1,5 @@
-import { motion, useReducedMotion } from 'framer-motion';
-import React from 'react';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
 import { EASE } from './presets';
 
 interface RevealProps {
@@ -12,16 +12,37 @@ interface RevealProps {
 }
 
 // Fades content up into view the first time it enters the viewport.
-// Renders statically (no transform) when the user prefers reduced motion.
+// Elements scrolled past without ever intersecting (instant jumps like
+// scroll restoration or the End key) are shown immediately, so nothing
+// can get stuck invisible. Renders statically for reduced motion.
 const Reveal = ({ children, delay = 0, y = 24, className }: RevealProps) => {
   const reduceMotion = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-64px 0px' });
+  const [passed, setPassed] = useState(false);
+  const visible = inView || passed;
+
+  useEffect(() => {
+    if (reduceMotion || passed) return;
+    const check = () => {
+      const el = ref.current;
+      if (el && el.getBoundingClientRect().bottom < 0) setPassed(true);
+    };
+    check();
+    window.addEventListener('scroll', check, { passive: true });
+    return () => window.removeEventListener('scroll', check);
+  }, [reduceMotion, passed]);
+
+  if (reduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <motion.div
+      ref={ref}
       className={className}
-      initial={reduceMotion ? false : { opacity: 0, y }}
-      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-64px 0px' }}
+      initial={{ opacity: 0, y }}
+      animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y }}
       transition={{ duration: 0.55, delay, ease: EASE }}
     >
       {children}

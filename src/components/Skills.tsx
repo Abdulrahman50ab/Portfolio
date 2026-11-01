@@ -1,6 +1,7 @@
 import React from 'react';
 import { Smartphone, Cpu, Globe, Database } from 'lucide-react';
 import Reveal from './motion/Reveal';
+import TiltCard from './motion/TiltCard';
 
 interface SkillGroup {
   title: string;
@@ -69,6 +70,8 @@ const skillGroups: SkillGroup[] = [
   }
 ];
 
+const marqueeSkills = skillGroups.flatMap((group) => group.skills);
+
 const Skills = () => {
   return (
     <section id="skills" className="border-b border-zinc-200/80 bg-white py-20 md:py-28">
@@ -91,8 +94,8 @@ const Skills = () => {
         <div className="grid md:grid-cols-2 gap-6 text-left">
           {skillGroups.map((group, idx) => (
             <Reveal key={idx} className="h-full" delay={idx * 0.07}>
-            <div
-              className="flex h-full flex-col justify-between rounded-2xl border border-zinc-200/90 bg-[#FAFAFA] p-6 shadow-[0_8px_30px_-28px_rgba(24,24,27,0.4)] transition-colors hover:border-indigo-200/80 hover:bg-white sm:p-7"
+            <TiltCard
+              className="group relative flex h-full flex-col justify-between rounded-2xl border border-zinc-200/90 bg-[#FAFAFA] p-6 shadow-[0_8px_30px_-28px_rgba(24,24,27,0.4)] transition-colors hover:border-indigo-200/80 hover:bg-white sm:p-7"
             >
               <div>
                 {/* Header */}
@@ -121,9 +124,30 @@ const Skills = () => {
                   </span>
                 ))}
               </div>
-            </div>
+            </TiltCard>
             </Reveal>
           ))}
+        </div>
+
+        {/* Scrolling tech strip */}
+        <div
+          aria-hidden="true"
+          className="group mt-12 overflow-hidden rounded-xl border border-zinc-200/80 bg-white py-3.5 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
+        >
+          <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
+            {[0, 1].map((half) => (
+              <div key={half} className="flex gap-2.5 pr-2.5">
+                {marqueeSkills.map((skill, i) => (
+                  <span
+                    key={i}
+                    className="whitespace-nowrap rounded-lg border border-zinc-200/70 bg-[#FAFAFA] px-3 py-1 text-xs font-medium text-zinc-600"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
 
       </div>
