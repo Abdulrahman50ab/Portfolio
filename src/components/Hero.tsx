@@ -1,12 +1,9 @@
-import { Suspense, lazy } from 'react';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { ArrowDown, ArrowUpRight, FileText, MapPin } from 'lucide-react';
 import img from './cv2.jpg';
 import Counter from './motion/Counter';
 import Magnetic from './motion/Magnetic';
 import { EASE } from './motion/presets';
-
-const HeroScene = lazy(() => import('./HeroScene'));
 
 const heroContainer: Variants = {
   hidden: {},
@@ -36,13 +33,6 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative overflow-hidden border-b border-zinc-200/80 bg-white">
-      {!reduceMotion && (
-        <div aria-hidden="true" className="absolute inset-0 z-0">
-          <Suspense fallback={null}>
-            <HeroScene />
-          </Suspense>
-        </div>
-      )}
       <div className="relative z-10 mx-auto max-w-6xl px-4 pb-16 pt-14 sm:px-6 md:pb-20 md:pt-20 lg:px-8 lg:pb-24 lg:pt-24">
         <motion.div
           className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20"
