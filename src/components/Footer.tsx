@@ -28,7 +28,7 @@ const Footer = () => {
     },
     {
       name: 'LinkedIn',
-      url: 'https://www.linkedin.com/in/abdulrahman50?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+      url: 'https://www.linkedin.com/in/abdulrahman50',
       icon: <Linkedin className="h-4 w-4" />
     },
     {

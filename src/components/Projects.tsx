@@ -24,7 +24,7 @@ const projects: Project[] = [
     technologies: ['Gemini 1.5 Flash', 'LangGraph', 'pgvector', 'React'],
     category: 'Generative AI',
     icon: <Bot className="h-4 w-4" />,
-    githubLink: 'https://github.com/Abdulrahman50ab',
+    githubLink: 'https://github.com/Abdulrahman50ab/Docflow',
     featured: true,
   },
   {
@@ -47,7 +47,7 @@ const projects: Project[] = [
     category: 'Mobile',
     icon: <Smartphone className="h-4 w-4" />,
     image: '/projects/weather_app.png',
-    githubLink: 'https://github.com/Abdulrahman50ab',
+    githubLink: 'https://github.com/Abdulrahman50ab/Weather-App-Mobile',
   },
   {
     id: 'ai-keyboard',

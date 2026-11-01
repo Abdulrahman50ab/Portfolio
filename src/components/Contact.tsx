@@ -119,7 +119,7 @@ const Contact = () => {
                 <a href="https://github.com/Abdulrahman50ab" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-transparent bg-zinc-100 p-2 text-zinc-700 transition-colors hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-600" aria-label="GitHub">
                   <Github className="h-4 w-4" />
                 </a>
-                <a href="https://www.linkedin.com/in/abdulrahman50?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-transparent bg-zinc-100 p-2 text-zinc-700 transition-colors hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-600" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/abdulrahman50" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-transparent bg-zinc-100 p-2 text-zinc-700 transition-colors hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-600" aria-label="LinkedIn">
                   <Linkedin className="h-4 w-4" />
                 </a>
               </div>

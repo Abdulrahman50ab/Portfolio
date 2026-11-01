@@ -17,7 +17,7 @@ const PrintableCV = () => {
           <span>|</span>
           <a href="mailto:abdulrahman50ab@gmail.com" className="text-slate-800 underline">abdulrahman50ab@gmail.com</a>
           <span>|</span>
-          <a href="https://linkedin.com" className="text-slate-800 underline">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/abdulrahman50" className="text-slate-800 underline">LinkedIn</a>
           <span>|</span>
           <a href="https://github.com/Abdulrahman50ab" className="text-slate-800 underline">GitHub</a>
         </div>
