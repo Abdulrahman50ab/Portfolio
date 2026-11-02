@@ -100,13 +100,6 @@
   background-size: 72px 72px;
 }
 
-/* Hand-drawn accent underline for display type */
-.ink-underline {
-  background-image: linear-gradient(to top, rgba(79, 70, 229, 0.28) 0.16em, transparent 0.16em);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
 /* Micro interaction transitions */
 button, a, input, textarea, select {
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);

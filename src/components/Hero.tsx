@@ -68,7 +68,7 @@ const Hero = () => {
               <span className="block">Thoughtful software,</span>
               <span className="block">
                 built to{' '}
-                <span className="ink-underline font-display font-normal italic tracking-[-0.02em] text-accent">
+                <span className="font-display font-normal italic tracking-[-0.02em] text-accent">
                   move people
                 </span>
               </span>
