@@ -38,9 +38,11 @@ const BARCODE = [
 
 const STRIP_LABELS = Array.from({ length: 10 }, () => 'ABDULRAHMAN');
 
-// Lanyard anchor sits at the horizontal center of the hero stage, so the
-// card rests centered and the strip hangs perfectly straight at rest.
-const getAnchorX = (stageWidth: number) => Math.max(48, stageWidth / 2);
+// Desktop: lanyard hangs on the right side of the hero (below the nav's
+// "Let's talk"), with the card resting fully inside the stage. Small
+// screens keep the anchor centered above the card.
+const getAnchorX = (stageWidth: number) =>
+  stageWidth >= 1024 ? Math.max(48, stageWidth - 180) : Math.max(48, stageWidth / 2);
 
 interface EmployeeCardProps {
   /** Use the complete hero as the card's drag area instead of the card column. */
