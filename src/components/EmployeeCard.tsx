@@ -1,5 +1,6 @@
 import {
   useCallback,
+  useEffect,
   useLayoutEffect,
   useRef,
   useState,
@@ -59,6 +60,20 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
   const [ready, setReady] = useState(false);
   const reduceMotion = Boolean(useReducedMotion());
 
+  const boxRef = useRef(box);
+  useEffect(() => {
+    boxRef.current = box;
+  }, [box]);
+
+  const physicsRef = useRef<{
+    theta: number;
+    omega: number;
+    L: number;
+    running: boolean;
+    rafId: number | null;
+    lastTime: number;
+  }>({ theta: 0, omega: 0, L: 280, running: false, rafId: null, lastTime: 0 });
+
   const updateBox = useCallback((next: Box) => {
     setBox(next);
   }, []);
@@ -67,14 +82,19 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
     const w = Math.min(DEFAULT_W, Math.max(MIN_W, stageWidth - 32));
     const h = Math.min(DEFAULT_H, Math.max(MIN_H, stageHeight - 56));
     const desktop = fullHero && isDesktopHero();
+    const anchorX = Math.max(48, stageWidth - 64);
+    const anchorY = fullHero ? 0 : -48;
+    const L = 280;
     return {
       w,
       h,
-      x: desktop ? Math.max(16, stageWidth - w - 16) : Math.max(8, (stageWidth - w) / 2),
+      x: fullHero
+        ? clamp(anchorX - w / 2, -100, stageWidth - w + 100)
+        : desktop
+          ? Math.max(16, stageWidth - w - 16)
+          : Math.max(8, (stageWidth - w) / 2),
       y: fullHero
-        ? desktop
-          ? clamp(getHeroTopPadding() + 48, 0, stageHeight - h)
-          : clamp(stageHeight - h - 48, 0, stageHeight - h)
+        ? clamp(anchorY + L - h / 2, 0, stageHeight - h)
         : clamp(70, 0, stageHeight - h),
     };
   }, [fullHero]);
@@ -120,18 +140,34 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
     };
   }, [defaultBox, fullHero, updateBox]);
 
+  const movedRef = useRef(false);
+
   const endInteraction = (pointerId?: number) => {
+    const wasDrag = modeRef.current === 'drag' && movedRef.current;
     if (pointerId !== undefined && cardRef.current?.hasPointerCapture(pointerId)) {
       cardRef.current.releasePointerCapture(pointerId);
     }
     modeRef.current = 'idle';
     setMode('idle');
+
+    if (wasDrag && fullHero && !reduceMotion) {
+      const current = boxRef.current;
+      const anchorXVal = Math.max(48, (stageRef.current?.clientWidth ?? stage.w) - 64);
+      const anchorY = stage.anchorY ?? 0;
+      const cx = current.x + current.w / 2;
+      const cy = current.y + current.h / 2;
+      const L = Math.max(120, Math.min(360, Math.hypot(cx - anchorXVal, cy - anchorY)));
+      const theta = Math.atan2(cx - anchorXVal, cy - anchorY);
+      startPhysics(L, theta, 0);
+    }
   };
 
   const handlePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (event.pointerType === 'mouse' && event.button !== 0) return;
     if ((event.target as HTMLElement).closest('[data-resize-handle]')) return;
 
+    cancelPhysics();
+    movedRef.current = false;
     event.preventDefault();
     cardRef.current?.setPointerCapture(event.pointerId);
     start.current = { px: event.clientX, py: event.clientY, box };
@@ -142,6 +178,7 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
   const handleResizeStart = (event: ReactPointerEvent<HTMLButtonElement>) => {
     event.preventDefault();
     event.stopPropagation();
+    cancelPhysics();
     cardRef.current?.setPointerCapture(event.pointerId);
     start.current = { px: event.clientX, py: event.clientY, box };
     modeRef.current = 'resize';
@@ -156,12 +193,13 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
     const origin = start.current.box;
 
     if (modeRef.current === 'drag') {
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) movedRef.current = true;
       const stageEl = stageRef.current;
       const sw = stageEl?.clientWidth ?? stage.w;
       const sh = stageEl?.clientHeight ?? stage.h;
       updateBox({
         ...origin,
-        x: clamp(origin.x + dx, 0, sw - origin.w),
+        x: clamp(origin.x + dx, -100, sw - origin.w + 100),
         y: clamp(origin.y + dy, 0, sh - origin.h),
       });
       return;
@@ -188,14 +226,77 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
     const step = event.shiftKey ? 24 : 8;
     const next = { ...box };
 
-    if (event.key === 'ArrowLeft') next.x = clamp(next.x - step, 0, sw - next.w);
-    if (event.key === 'ArrowRight') next.x = clamp(next.x + step, 0, sw - next.w);
+    if (event.key === 'ArrowLeft') next.x = clamp(next.x - step, -100, sw - next.w + 100);
+    if (event.key === 'ArrowRight') next.x = clamp(next.x + step, -100, sw - next.w + 100);
     if (event.key === 'ArrowUp') next.y = clamp(next.y - step, 0, sh - next.h);
     if (event.key === 'ArrowDown') next.y = clamp(next.y + step, 0, sh - next.h);
     updateBox(next);
   };
 
+  const cancelPhysics = () => {
+    const p = physicsRef.current;
+    p.running = false;
+    if (p.rafId) {
+      cancelAnimationFrame(p.rafId);
+      p.rafId = null;
+    }
+  };
+
+  const startPhysics = (L: number, theta0: number, omega0: number) => {
+    const p = physicsRef.current;
+    cancelPhysics();
+    p.theta = theta0;
+    p.omega = omega0;
+    p.L = Math.max(120, Math.min(360, L));
+    p.running = true;
+    p.lastTime = performance.now();
+
+    const g = 3200;
+    const damping = 1.1;
+
+    const loop = (now: number) => {
+      if (!physicsRef.current.running) return;
+      const pp = physicsRef.current;
+      const dt = Math.min((now - pp.lastTime) / 1000, 0.05);
+      pp.lastTime = now;
+
+      const alpha = -(g / pp.L) * Math.sin(pp.theta) - damping * pp.omega;
+      const newOmega = pp.omega + alpha * dt;
+      const newTheta = pp.theta + newOmega * dt;
+      pp.theta = newTheta;
+      pp.omega = newOmega;
+
+      const anchorY = stage.anchorY ?? 0;
+      const anchorXVal = Math.max(48, (stageRef.current?.clientWidth ?? stage.w) - 64);
+      const cx = anchorXVal + pp.L * Math.sin(newTheta);
+      const cy = anchorY + pp.L * Math.cos(newTheta);
+
+      const currentBox = boxRef.current;
+      const sw = stageRef.current?.clientWidth ?? stage.w;
+      const sh = stageRef.current?.clientHeight ?? stage.h;
+      const newX = clamp(cx - currentBox.w / 2, -100, sw - currentBox.w + 100);
+      const newY = clamp(cy - currentBox.h / 2, 0, sh - currentBox.h);
+
+      setBox({ x: newX, y: newY, w: currentBox.w, h: currentBox.h });
+
+      if (Math.abs(newTheta) < 0.003 && Math.abs(newOmega) < 0.003) {
+        pp.running = false;
+        const sw = stageRef.current?.clientWidth ?? stage.w;
+        const sh = stageRef.current?.clientHeight ?? stage.h;
+        const eqX = clamp(anchorXVal - currentBox.w / 2, -100, sw - currentBox.w + 100);
+        const eqY = clamp(anchorY + pp.L - currentBox.h / 2, 0, sh - currentBox.h);
+        setBox({ x: eqX, y: eqY, w: currentBox.w, h: currentBox.h });
+        return;
+      }
+
+      pp.rafId = requestAnimationFrame(loop);
+    };
+
+    p.rafId = requestAnimationFrame(loop);
+  };
+
   const reset = () => {
+    cancelPhysics();
     const el = stageRef.current;
     if (!el) return;
     updateBox(defaultBox(el.clientWidth, el.clientHeight));
@@ -209,24 +310,12 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
   const anchorX = Math.max(48, stage.w - 64);
   const cardCenterX = box.x + box.w / 2;
   const tetherDx = cardCenterX - anchorX;
-  const tetherDy = Math.max(box.y - stage.anchorY, 0);
+  const tetherDy = Math.max(box.y + box.h / 2 - stage.anchorY, 0);
   const tetherLength = Math.sqrt(tetherDx ** 2 + tetherDy ** 2);
   const tetherAngle = Math.atan2(tetherDy, tetherDx) * (180 / Math.PI);
   const hangingAngle = clamp(tetherAngle * 0.16, -5, 5);
   const stripWidth = 18;
-
-  const floatingAnimation = reduceMotion || active
-    ? { y: 0, rotate: active ? 0 : hangingAngle }
-    : {
-        y: [0, -3, 0, 2, 0],
-        rotate: [hangingAngle, hangingAngle - 0.7, hangingAngle + 0.35, hangingAngle - 0.25, hangingAngle],
-      };
-
-  const floatingTransition = reduceMotion
-    ? { duration: 0 }
-    : active
-      ? { type: 'spring' as const, stiffness: 190, damping: 18, mass: 0.7 }
-      : { duration: 7.5, ease: 'easeInOut' as const, repeat: Infinity, repeatType: 'loop' as const, delay: 0.7 };
+  void hangingAngle;
 
   return (
     <div
@@ -296,7 +385,7 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
           style={{
             width: box.w,
             height: box.h,
-            transform: `translate3d(${box.x}px, ${box.y}px, 0)`,
+            transform: `translate3d(${box.x}px, ${box.y}px, 0) rotate(${clamp(tetherAngle - 90, -18, 18)}deg)`,
             willChange: active ? 'transform' : 'auto',
           }}
         >
@@ -305,13 +394,8 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
           animate={{ opacity: 1, y: 0, rotate: 0 }}
           transition={{ type: 'spring', stiffness: 145, damping: 12, mass: 0.8, delay: 0.12 }}
           className="relative h-full w-full"
+          style={{ transformOrigin: 'top center' }}
         >
-          <motion.div
-            animate={floatingAnimation}
-            transition={floatingTransition}
-            style={{ transformOrigin: 'top center' }}
-            className="relative h-full w-full"
-          >
           {/* Metal badge clip */}
           <div
             aria-hidden="true"
@@ -455,7 +539,6 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
               <span className="absolute right-0 top-0 h-1.5 w-1.5 rounded-tr-[2px] border-r-2 border-t-2 border-current opacity-40" />
             </span>
           </button>
-          </motion.div>
         </motion.div>
         </div>
       </div>
