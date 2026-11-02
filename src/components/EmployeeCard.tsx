@@ -204,7 +204,9 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
   };
 
   const active = mode !== 'idle';
-  const anchorX = stage.w / 2;
+  // Anchor the lanyard to the right side of the hero, just below the
+  // "Let's talk" button in the navigation bar.
+  const anchorX = Math.max(48, stage.w - 64);
   const cardCenterX = box.x + box.w / 2;
   const tetherDx = cardCenterX - anchorX;
   const tetherDy = Math.max(box.y - stage.anchorY, 0);
@@ -238,8 +240,8 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
         {/* The lanyard begins just below the sticky navigation. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 z-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border border-zinc-400/80 bg-gradient-to-b from-white via-zinc-200 to-zinc-400 shadow-[0_2px_7px_rgba(24,24,27,0.2)]"
-          style={{ top: stage.anchorY }}
+          className="pointer-events-none absolute z-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border border-zinc-400/80 bg-gradient-to-b from-white via-zinc-200 to-zinc-400 shadow-[0_2px_7px_rgba(24,24,27,0.2)]"
+          style={{ left: anchorX, top: stage.anchorY }}
         />
 
         {/* Centered lanyard strip: its lower end meets the badge clip exactly. */}
