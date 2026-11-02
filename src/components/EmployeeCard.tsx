@@ -38,11 +38,15 @@ const BARCODE = [
 
 const STRIP_LABELS = Array.from({ length: 10 }, () => 'ABDULRAHMAN');
 
-// Desktop: lanyard hangs on the right side of the hero (below the nav's
-// "Let's talk"), with the card resting fully inside the stage. Small
-// screens keep the anchor centered above the card.
+// Lanyard anchor sits at the horizontal center of the hero stage, so the
+// card rests centered and the strip hangs perfectly straight at rest.
 const getAnchorX = (stageWidth: number) =>
   stageWidth >= 1024 ? Math.max(48, stageWidth - 180) : Math.max(48, stageWidth / 2);
+
+// Resting hang length: keep the card inside the VISIBLE portion of the
+// hero (viewport bottom, not stage bottom) with a small bottom margin.
+const restY = (anchorY: number, visibleHeight: number, cardHeight: number) =>
+  Math.max(0, Math.min(anchorY + 280, visibleHeight - cardHeight - 40));
 
 interface EmployeeCardProps {
   /** Use the complete hero as the card's drag area instead of the card column. */
@@ -62,7 +66,12 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
 
   const [box, setBox] = useState<Box>({ x: 0, y: 0, w: DEFAULT_W, h: DEFAULT_H });
   const [mode, setMode] = useState<InteractionMode>('idle');
-  const [stage, setStage] = useState({ w: 0, h: 0, anchorY: fullHero ? 0 : -48 });
+  const [stage, setStage] = useState({
+    w: 0,
+    h: 0,
+    anchorY: fullHero ? 0 : -48,
+    visibleH: typeof window !== 'undefined' ? window.innerHeight : 800,
+  });
   const [ready, setReady] = useState(false);
   const reduceMotion = Boolean(useReducedMotion());
 
@@ -84,13 +93,12 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
     setBox(next);
   }, []);
 
-  const defaultBox = useCallback((stageWidth: number, stageHeight: number): Box => {
+  const defaultBox = useCallback((stageWidth: number, stageHeight: number, visibleHeight: number): Box => {
     const w = Math.min(DEFAULT_W, Math.max(MIN_W, stageWidth - 32));
     const h = Math.min(DEFAULT_H, Math.max(MIN_H, stageHeight - 56));
     const desktop = fullHero && isDesktopHero();
     const anchorX = getAnchorX(stageWidth);
     const anchorY = fullHero ? 0 : -48;
-    const L = 280;
     return {
       w,
       h,
@@ -100,7 +108,7 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
           ? Math.max(16, stageWidth - w - 16)
           : Math.max(8, (stageWidth - w) / 2),
       y: fullHero
-        ? clamp(anchorY + L, 0, stageHeight - h)
+        ? clamp(restY(anchorY, visibleHeight, h), 0, stageHeight - h)
         : clamp(70, 0, stageHeight - h),
     };
   }, [fullHero]);
@@ -115,11 +123,15 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
       const w = el.clientWidth;
       const h = el.clientHeight;
       if (w === 0 || h === 0) return;
-      setStage({ w, h, anchorY: fullHero ? 0 : -getHeroTopPadding() });
+      // How much of the stage is visible before the viewport bottom cuts
+      // it off — the card must rest inside this, not the full stage.
+      const stageTopAbs = el.getBoundingClientRect().top + window.scrollY;
+      const visibleH = Math.max(320, Math.min(h, window.innerHeight - stageTopAbs));
+      setStage({ w, h, anchorY: fullHero ? 0 : -getHeroTopPadding(), visibleH });
 
       if (!initialized.current) {
         initialized.current = true;
-        updateBox(defaultBox(w, h));
+        updateBox(defaultBox(w, h, visibleH));
         setReady(true);
         return;
       }
@@ -293,7 +305,7 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
         const sw = stageRef.current?.clientWidth ?? stage.w;
         const sh = stageRef.current?.clientHeight ?? stage.h;
         const eqX = clamp(anchorXVal - currentBox.w / 2, -100, sw - currentBox.w + 100);
-        const eqY = clamp(anchorY + pp.L, 0, sh - currentBox.h);
+        const eqY = clamp(restY(anchorY, stage.visibleH || sh, currentBox.h), 0, sh - currentBox.h);
         setBox({ x: eqX, y: eqY, w: currentBox.w, h: currentBox.h });
         return;
       }
@@ -308,7 +320,7 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
     cancelPhysics();
     const el = stageRef.current;
     if (!el) return;
-    updateBox(defaultBox(el.clientWidth, el.clientHeight));
+    updateBox(defaultBox(el.clientWidth, el.clientHeight, stage.visibleH));
     modeRef.current = 'idle';
     setMode('idle');
   };
