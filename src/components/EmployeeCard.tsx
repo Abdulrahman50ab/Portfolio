@@ -38,6 +38,10 @@ const BARCODE = [
 
 const STRIP_LABELS = Array.from({ length: 10 }, () => 'ABDULRAHMAN');
 
+// Lanyard anchor sits at the horizontal center of the hero stage, so the
+// card rests centered and the strip hangs perfectly straight at rest.
+const getAnchorX = (stageWidth: number) => Math.max(48, stageWidth / 2);
+
 interface EmployeeCardProps {
   /** Use the complete hero as the card's drag area instead of the card column. */
   fullHero?: boolean;
@@ -82,7 +86,7 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
     const w = Math.min(DEFAULT_W, Math.max(MIN_W, stageWidth - 32));
     const h = Math.min(DEFAULT_H, Math.max(MIN_H, stageHeight - 56));
     const desktop = fullHero && isDesktopHero();
-    const anchorX = Math.max(48, stageWidth - 64);
+    const anchorX = getAnchorX(stageWidth);
     const anchorY = fullHero ? 0 : -48;
     const L = 280;
     return {
@@ -152,7 +156,7 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
 
     if (wasDrag && fullHero && !reduceMotion) {
       const current = boxRef.current;
-      const anchorXVal = Math.max(48, (stageRef.current?.clientWidth ?? stage.w) - 64);
+      const anchorXVal = getAnchorX(stageRef.current?.clientWidth ?? stage.w);
       const anchorY = stage.anchorY ?? 0;
       const cx = current.x + current.w / 2;
       const cy = current.y + current.h / 2;
@@ -267,7 +271,7 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
       pp.omega = newOmega;
 
       const anchorY = stage.anchorY ?? 0;
-      const anchorXVal = Math.max(48, (stageRef.current?.clientWidth ?? stage.w) - 64);
+      const anchorXVal = getAnchorX(stageRef.current?.clientWidth ?? stage.w);
       const cx = anchorXVal + pp.L * Math.sin(newTheta);
       const cy = anchorY + pp.L * Math.cos(newTheta);
 
@@ -305,9 +309,9 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
   };
 
   const active = mode !== 'idle';
-  // Anchor the lanyard to the right side of the hero, just below the
-  // "Let's talk" button in the navigation bar.
-  const anchorX = Math.max(48, stage.w - 64);
+  // Anchor the lanyard at the horizontal center of the hero, emerging from
+  // just below the navigation bar; the strip meets the card's center clip.
+  const anchorX = getAnchorX(stage.w);
   const cardCenterX = box.x + box.w / 2;
   const tetherDx = cardCenterX - anchorX;
   const tetherDy = Math.max(box.y + box.h / 2 - stage.anchorY, 0);
@@ -326,20 +330,13 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
         className={fullHero ? 'relative h-full w-full overflow-visible' : 'relative h-[520px] overflow-visible sm:h-[560px]'}
       >
 
-        {/* The lanyard begins just below the sticky navigation. */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute z-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border border-zinc-400/80 bg-gradient-to-b from-white via-zinc-200 to-zinc-400 shadow-[0_2px_7px_rgba(24,24,27,0.2)]"
-          style={{ left: anchorX, top: stage.anchorY }}
-        />
-
-        {/* Centered lanyard strip: its lower end meets the badge clip exactly. */}
+        {/* The lanyard strip emerges directly from under the navigation bar. */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute z-0 overflow-hidden rounded-[999px] border border-white/70 bg-gradient-to-r from-indigo-200 via-white to-indigo-200 shadow-[0_2px_12px_rgba(79,70,229,0.2)] transition-opacity duration-700"
           style={{
-            left: anchorX,
-            top: stage.anchorY - stripWidth / 2,
+            left: anchorX - stripWidth / 2,
+            top: stage.anchorY,
             height: tetherLength,
             width: stripWidth,
             transform: `rotate(${tetherAngle - 90}deg)`,
