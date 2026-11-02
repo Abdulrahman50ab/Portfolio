@@ -53,7 +53,7 @@ const EmployeeCard = () => {
       w,
       h,
       x: Math.max(8, (stageWidth - w) / 2),
-      y: clamp(24, 0, stageHeight - h),
+      y: clamp(70, 0, stageHeight - h),
     };
   }, []);
 
@@ -183,9 +183,7 @@ const EmployeeCard = () => {
     <div className="relative">
       <div
         ref={stageRef}
-        className={`relative h-[520px] overflow-hidden rounded-[2rem] border bg-white/25 transition-colors duration-300 sm:h-[560px] ${
-          active ? 'border-accent/40' : 'border-dashed border-line/80'
-        }`}
+        className="relative h-[520px] overflow-visible sm:h-[560px]"
       >
         <div
           aria-hidden="true"
@@ -205,6 +203,11 @@ const EmployeeCard = () => {
           }}
         />
 
+        {/* Lanyard anchor at the top of the stage */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-0 z-0 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-zinc-400/70 bg-gradient-to-b from-zinc-100 to-zinc-300 shadow-[0_2px_6px_rgba(24,24,27,0.18)]"
+        />
         {/* Lanyard strip that hangs from the top of the stage to the badge clip */}
         <div
           aria-hidden="true"
