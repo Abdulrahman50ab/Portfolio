@@ -98,7 +98,7 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
           ? Math.max(16, stageWidth - w - 16)
           : Math.max(8, (stageWidth - w) / 2),
       y: fullHero
-        ? clamp(anchorY + L - h / 2, 0, stageHeight - h)
+        ? clamp(anchorY + L, 0, stageHeight - h)
         : clamp(70, 0, stageHeight - h),
     };
   }, [fullHero]);
@@ -158,10 +158,12 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
       const current = boxRef.current;
       const anchorXVal = getAnchorX(stageRef.current?.clientWidth ?? stage.w);
       const anchorY = stage.anchorY ?? 0;
-      const cx = current.x + current.w / 2;
-      const cy = current.y + current.h / 2;
-      const L = Math.max(120, Math.min(360, Math.hypot(cx - anchorXVal, cy - anchorY)));
-      const theta = Math.atan2(cx - anchorXVal, cy - anchorY);
+      // The pendulum pivots at the card's clip (top-center), so the strip
+      // and the card always move as one rigid piece.
+      const clipX = current.x + current.w / 2;
+      const clipY = current.y;
+      const L = Math.max(120, Math.min(360, Math.hypot(clipX - anchorXVal, clipY - anchorY)));
+      const theta = Math.atan2(clipX - anchorXVal, Math.max(clipY - anchorY, 1));
       startPhysics(L, theta, 0);
     }
   };
@@ -272,6 +274,7 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
 
       const anchorY = stage.anchorY ?? 0;
       const anchorXVal = getAnchorX(stageRef.current?.clientWidth ?? stage.w);
+      // cx/cy track the clip (card top-center), not the card center.
       const cx = anchorXVal + pp.L * Math.sin(newTheta);
       const cy = anchorY + pp.L * Math.cos(newTheta);
 
@@ -279,7 +282,7 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
       const sw = stageRef.current?.clientWidth ?? stage.w;
       const sh = stageRef.current?.clientHeight ?? stage.h;
       const newX = clamp(cx - currentBox.w / 2, -100, sw - currentBox.w + 100);
-      const newY = clamp(cy - currentBox.h / 2, 0, sh - currentBox.h);
+      const newY = clamp(cy, 0, sh - currentBox.h);
 
       setBox({ x: newX, y: newY, w: currentBox.w, h: currentBox.h });
 
@@ -288,7 +291,7 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
         const sw = stageRef.current?.clientWidth ?? stage.w;
         const sh = stageRef.current?.clientHeight ?? stage.h;
         const eqX = clamp(anchorXVal - currentBox.w / 2, -100, sw - currentBox.w + 100);
-        const eqY = clamp(anchorY + pp.L - currentBox.h / 2, 0, sh - currentBox.h);
+        const eqY = clamp(anchorY + pp.L, 0, sh - currentBox.h);
         setBox({ x: eqX, y: eqY, w: currentBox.w, h: currentBox.h });
         return;
       }
@@ -312,14 +315,15 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
   // Anchor the lanyard at the horizontal center of the hero, emerging from
   // just below the navigation bar; the strip meets the card's center clip.
   const anchorX = getAnchorX(stage.w);
-  const cardCenterX = box.x + box.w / 2;
-  const tetherDx = cardCenterX - anchorX;
-  const tetherDy = Math.max(box.y + box.h / 2 - stage.anchorY, 0);
+  // The tether connects the anchor to the card's clip (top-center), which
+  // is also the card's rotation pivot — strip and card tilt together.
+  const clipX = box.x + box.w / 2;
+  const clipY = box.y;
+  const tetherDx = clipX - anchorX;
+  const tetherDy = Math.max(clipY - stage.anchorY, 1);
   const tetherLength = Math.sqrt(tetherDx ** 2 + tetherDy ** 2);
   const tetherAngle = Math.atan2(tetherDy, tetherDx) * (180 / Math.PI);
-  const hangingAngle = clamp(tetherAngle * 0.16, -5, 5);
   const stripWidth = 18;
-  void hangingAngle;
 
   return (
     <div
@@ -382,7 +386,8 @@ const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
           style={{
             width: box.w,
             height: box.h,
-            transform: `translate3d(${box.x}px, ${box.y}px, 0) rotate(${clamp(tetherAngle - 90, -18, 18)}deg)`,
+            transform: `translate3d(${box.x}px, ${box.y}px, 0) rotate(${tetherAngle - 90}deg)`,
+            transformOrigin: 'top center',
             willChange: active ? 'transform' : 'auto',
           }}
         >
