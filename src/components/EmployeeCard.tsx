@@ -6,6 +6,7 @@ import {
   type KeyboardEvent,
   type PointerEvent as ReactPointerEvent,
 } from 'react';
+import { motion } from 'framer-motion';
 import { Move, RotateCcw } from 'lucide-react';
 import img from './cv2.jpg';
 
@@ -204,6 +205,17 @@ const EmployeeCard = () => {
           }}
         />
 
+        {/* Lanyard strip that hangs from the top of the stage to the badge clip */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute top-0 z-0 w-[3px] rounded-full bg-gradient-to-b from-zinc-400/70 via-zinc-500/60 to-zinc-600/80 shadow-[0_0_8px_rgba(24,24,27,0.18)] transition-opacity duration-700"
+          style={{
+            left: box.x + box.w / 2 - 1.5,
+            height: Math.max(0, box.y + 12),
+            opacity: ready ? 1 : 0,
+          }}
+        />
+
         {/* Draggable badge */}
         <div
           ref={cardRef}
@@ -229,6 +241,13 @@ const EmployeeCard = () => {
             transform: `translate3d(${box.x}px, ${box.y}px, 0)`,
             willChange: active ? 'transform' : 'auto',
           }}
+        >
+        <motion.div
+          initial={{ opacity: 0, y: -34, rotate: -9 }}
+          animate={{ opacity: 1, y: 0, rotate: 0 }}
+          transition={{ type: 'spring', stiffness: 170, damping: 13, mass: 0.7, delay: 0.12 }}
+          style={{ transformOrigin: 'top center' }}
+          className="relative h-full w-full"
         >
           {/* Metal badge clip */}
           <div
@@ -373,6 +392,7 @@ const EmployeeCard = () => {
               <span className="absolute right-0 top-0 h-1.5 w-1.5 rounded-tr-[2px] border-r-2 border-t-2 border-current opacity-40" />
             </span>
           </button>
+        </motion.div>
         </div>
       </div>
 
