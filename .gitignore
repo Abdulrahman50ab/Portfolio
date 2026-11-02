@@ -27,6 +27,7 @@ dist-ssr
 # Chat tool artifacts
 .cloud-attachments/
 .zcode/
+.opencode/
 
 # TypeScript incremental build info
 *.tsbuildinfo

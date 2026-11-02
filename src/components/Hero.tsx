@@ -37,7 +37,7 @@ const Hero = () => {
       />
       <div aria-hidden="true" className="hero-wash absolute inset-0 -z-10" />
 
-      <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
         <motion.div
           className="grid items-center gap-14 pb-14 pt-12 sm:pt-16 lg:grid-cols-12 lg:gap-8 lg:pb-20 lg:pt-20"
           variants={heroContainer}
@@ -115,14 +115,14 @@ const Hero = () => {
             </motion.div>
           </div>
 
-          {/* Employee ID card */}
-          <motion.div
-            variants={heroItem}
-            className="relative mx-auto w-full max-w-[26rem] lg:col-span-5 lg:ml-auto lg:mr-0"
-          >
-            <EmployeeCard />
-          </motion.div>
         </motion.div>
+
+        {/* Freely hanging employee ID card */}
+        <div className="pointer-events-none absolute inset-0 z-20">
+          <div className="pointer-events-auto">
+            <EmployeeCard fullHero />
+          </div>
+        </div>
 
         {/* Stat strip */}
         <motion.div

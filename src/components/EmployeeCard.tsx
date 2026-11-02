@@ -6,7 +6,7 @@ import {
   type KeyboardEvent,
   type PointerEvent as ReactPointerEvent,
 } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Move, RotateCcw } from 'lucide-react';
 import img from './cv2.jpg';
 
@@ -21,12 +21,28 @@ const DEFAULT_H = 420;
 const clamp = (value: number, min: number, max: number) =>
   Math.min(Math.max(value, min), Math.max(min, max));
 
+const getHeroTopPadding = () => {
+  if (typeof window === 'undefined') return 48;
+  if (window.innerWidth >= 1024) return 80;
+  if (window.innerWidth >= 640) return 64;
+  return 48;
+};
+
+const isDesktopHero = () => typeof window !== 'undefined' && window.innerWidth >= 1024;
+
 const BARCODE = [
   2, 1, 3, 1, 1, 2, 4, 1, 2, 2, 1, 3, 1, 2, 4, 1, 1, 3, 2, 1, 2, 4, 1, 2, 1, 3,
   1, 4, 2, 1, 3, 1, 2, 2, 1, 4, 1, 2, 3, 1, 2, 1, 4, 1, 2, 3, 1, 2,
 ];
 
-const EmployeeCard = () => {
+const STRIP_LABELS = Array.from({ length: 10 }, () => 'ABDULRAHMAN');
+
+interface EmployeeCardProps {
+  /** Use the complete hero as the card's drag area instead of the card column. */
+  fullHero?: boolean;
+}
+
+const EmployeeCard = ({ fullHero = false }: EmployeeCardProps) => {
   const stageRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const initialized = useRef(false);
@@ -39,8 +55,9 @@ const EmployeeCard = () => {
 
   const [box, setBox] = useState<Box>({ x: 0, y: 0, w: DEFAULT_W, h: DEFAULT_H });
   const [mode, setMode] = useState<InteractionMode>('idle');
-  const [stage, setStage] = useState({ w: 0, h: 0 });
+  const [stage, setStage] = useState({ w: 0, h: 0, anchorY: fullHero ? 0 : -48 });
   const [ready, setReady] = useState(false);
+  const reduceMotion = Boolean(useReducedMotion());
 
   const updateBox = useCallback((next: Box) => {
     setBox(next);
@@ -49,13 +66,18 @@ const EmployeeCard = () => {
   const defaultBox = useCallback((stageWidth: number, stageHeight: number): Box => {
     const w = Math.min(DEFAULT_W, Math.max(MIN_W, stageWidth - 32));
     const h = Math.min(DEFAULT_H, Math.max(MIN_H, stageHeight - 56));
+    const desktop = fullHero && isDesktopHero();
     return {
       w,
       h,
-      x: Math.max(8, (stageWidth - w) / 2),
-      y: clamp(70, 0, stageHeight - h),
+      x: desktop ? Math.max(16, stageWidth - w - 16) : Math.max(8, (stageWidth - w) / 2),
+      y: fullHero
+        ? desktop
+          ? clamp(getHeroTopPadding() + 48, 0, stageHeight - h)
+          : clamp(stageHeight - h - 48, 0, stageHeight - h)
+        : clamp(70, 0, stageHeight - h),
     };
-  }, []);
+  }, [fullHero]);
 
   // Measure the stage, place the card the first time, and keep it inside
   // the stage whenever the browser is resized.
@@ -67,7 +89,7 @@ const EmployeeCard = () => {
       const w = el.clientWidth;
       const h = el.clientHeight;
       if (w === 0 || h === 0) return;
-      setStage({ w, h });
+      setStage({ w, h, anchorY: fullHero ? 0 : -getHeroTopPadding() });
 
       if (!initialized.current) {
         initialized.current = true;
@@ -91,8 +113,12 @@ const EmployeeCard = () => {
     measure();
     const observer = new ResizeObserver(measure);
     observer.observe(el);
-    return () => observer.disconnect();
-  }, [defaultBox, updateBox]);
+    window.addEventListener('resize', measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, [defaultBox, fullHero, updateBox]);
 
   const endInteraction = (pointerId?: number) => {
     if (pointerId !== undefined && cardRef.current?.hasPointerCapture(pointerId)) {
@@ -178,46 +204,71 @@ const EmployeeCard = () => {
   };
 
   const active = mode !== 'idle';
+  const anchorX = stage.w / 2;
+  const cardCenterX = box.x + box.w / 2;
+  const tetherDx = cardCenterX - anchorX;
+  const tetherDy = Math.max(box.y - stage.anchorY, 0);
+  const tetherLength = Math.sqrt(tetherDx ** 2 + tetherDy ** 2);
+  const tetherAngle = Math.atan2(tetherDy, tetherDx) * (180 / Math.PI);
+  const hangingAngle = clamp(tetherAngle * 0.16, -5, 5);
+  const stripWidth = 18;
+
+  const floatingAnimation = reduceMotion || active
+    ? { y: 0, rotate: active ? 0 : hangingAngle }
+    : {
+        y: [0, -3, 0, 2, 0],
+        rotate: [hangingAngle, hangingAngle - 0.7, hangingAngle + 0.35, hangingAngle - 0.25, hangingAngle],
+      };
+
+  const floatingTransition = reduceMotion
+    ? { duration: 0 }
+    : active
+      ? { type: 'spring' as const, stiffness: 190, damping: 18, mass: 0.7 }
+      : { duration: 7.5, ease: 'easeInOut' as const, repeat: Infinity, repeatType: 'loop' as const, delay: 0.7 };
 
   return (
-    <div className="relative">
+    <div
+      className={fullHero ? 'pointer-events-none absolute inset-0 z-20' : 'relative'}
+    >
       <div
         ref={stageRef}
-        className="relative h-[520px] overflow-visible sm:h-[560px]"
+        className={fullHero ? 'relative h-full w-full overflow-visible' : 'relative h-[520px] overflow-visible sm:h-[560px]'}
       >
+
+        {/* The lanyard begins just below the sticky navigation. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full border border-line/70"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-accent/[0.05] blur-3xl"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-40"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle at 1px 1px, rgba(107,101,92,0.18) 1px, transparent 0)',
-            backgroundSize: '18px 18px',
-          }}
+          className="pointer-events-none absolute left-1/2 z-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border border-zinc-400/80 bg-gradient-to-b from-white via-zinc-200 to-zinc-400 shadow-[0_2px_7px_rgba(24,24,27,0.2)]"
+          style={{ top: stage.anchorY }}
         />
 
-        {/* Lanyard anchor at the top of the stage */}
+        {/* Centered lanyard strip: its lower end meets the badge clip exactly. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 top-0 z-0 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-zinc-400/70 bg-gradient-to-b from-zinc-100 to-zinc-300 shadow-[0_2px_6px_rgba(24,24,27,0.18)]"
-        />
-        {/* Lanyard strip that hangs from the top of the stage to the badge clip */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute top-0 z-0 w-[3px] rounded-full bg-gradient-to-b from-zinc-400/70 via-zinc-500/60 to-zinc-600/80 shadow-[0_0_8px_rgba(24,24,27,0.18)] transition-opacity duration-700"
+          className="pointer-events-none absolute z-0 overflow-hidden rounded-[999px] border border-white/70 bg-gradient-to-r from-indigo-200 via-white to-indigo-200 shadow-[0_2px_12px_rgba(79,70,229,0.2)] transition-opacity duration-700"
           style={{
-            left: box.x + box.w / 2 - 1.5,
-            height: Math.max(0, box.y + 12),
+            left: anchorX,
+            top: stage.anchorY - stripWidth / 2,
+            height: tetherLength,
+            width: stripWidth,
+            transform: `rotate(${tetherAngle - 90}deg)`,
+            transformOrigin: 'top center',
             opacity: ready ? 1 : 0,
           }}
-        />
+        >
+          <span className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-indigo-400/30" />
+          <span className="absolute inset-0 flex flex-col items-center gap-1 overflow-hidden py-1">
+            {STRIP_LABELS.map((label, index) => (
+              <span
+                key={`${label}-${index}`}
+                className="shrink-0 text-[5px] font-bold leading-none tracking-[0.08em] text-indigo-900/50"
+                style={{ writingMode: 'vertical-rl' }}
+              >
+                {label}
+              </span>
+            ))}
+          </span>
+        </div>
 
         {/* Draggable badge */}
         <div
@@ -235,7 +286,9 @@ const EmployeeCard = () => {
           }}
           onKeyDown={handleKeyDown}
           onDragStart={(event) => event.preventDefault()}
-          className={`absolute left-0 top-0 z-10 touch-none select-none rounded-[1.4rem] outline-none transition-opacity duration-500 focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas ${
+          className={`pointer-events-auto absolute left-0 top-0 touch-none select-none rounded-[1.4rem] outline-none transition-opacity duration-500 focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas ${
+            active ? 'z-20' : 'z-10'
+          } ${
             ready ? 'opacity-100' : 'opacity-0'
           } ${active ? 'cursor-grabbing' : 'cursor-grab'}`}
           style={{
@@ -246,12 +299,17 @@ const EmployeeCard = () => {
           }}
         >
         <motion.div
-          initial={{ opacity: 0, y: -34, rotate: -9 }}
+          initial={{ opacity: 0, y: -68, rotate: -11 }}
           animate={{ opacity: 1, y: 0, rotate: 0 }}
-          transition={{ type: 'spring', stiffness: 170, damping: 13, mass: 0.7, delay: 0.12 }}
-          style={{ transformOrigin: 'top center' }}
+          transition={{ type: 'spring', stiffness: 145, damping: 12, mass: 0.8, delay: 0.12 }}
           className="relative h-full w-full"
         >
+          <motion.div
+            animate={floatingAnimation}
+            transition={floatingTransition}
+            style={{ transformOrigin: 'top center' }}
+            className="relative h-full w-full"
+          >
           {/* Metal badge clip */}
           <div
             aria-hidden="true"
@@ -395,6 +453,7 @@ const EmployeeCard = () => {
               <span className="absolute right-0 top-0 h-1.5 w-1.5 rounded-tr-[2px] border-r-2 border-t-2 border-current opacity-40" />
             </span>
           </button>
+          </motion.div>
         </motion.div>
         </div>
       </div>
