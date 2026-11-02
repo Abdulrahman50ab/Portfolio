@@ -100,7 +100,7 @@ const Hero = () => {
                   className="inline-flex items-center gap-2 rounded-full border border-line bg-white/70 px-4 py-3 text-sm font-semibold text-ink transition-colors hover:border-ink/25 hover:bg-white active:scale-[0.98]"
                 >
                   <FileText className="h-4 w-4 text-muted" />
-                  Download résumé
+                  Download resume
                 </button>
               </Magnetic>
               <Magnetic>
