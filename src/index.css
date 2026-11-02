@@ -5,17 +5,22 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
-    background-color: #FAFAFA;
-    color: #09090B;
+    scroll-padding-top: 5.5rem;
+    background-color: #F5F3EE;
+    color: #0E0E10;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Lenis drives the scroll; disable native smooth scrolling while it is active. */
+  html.lenis {
+    scroll-behavior: auto;
+  }
+
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: #FAFAFA;
-    color: #09090B;
+    background-color: #F5F3EE;
+    color: #0E0E10;
   }
 
   button:focus-visible,
@@ -50,16 +55,16 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #FAFAFA;
+  background: #F5F3EE;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D4D4D8;
+  background: #CFC9BD;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #A1A1AA;
+  background: #A8A195;
 }
 
 /* Tabular figures for aligned numerical metrics */
@@ -69,20 +74,49 @@
 
 /* Editorial hairline rules */
 .hairline-b {
-  border-bottom: 1px solid rgba(228, 228, 231, 0.85);
+  border-bottom: 1px solid rgba(227, 223, 214, 0.9);
 }
 
 .hairline-t {
-  border-top: 1px solid rgba(228, 228, 231, 0.85);
+  border-top: 1px solid rgba(227, 223, 214, 0.9);
 }
 
 .hairline-border {
-  border: 1px solid rgba(228, 228, 231, 0.85);
+  border: 1px solid rgba(227, 223, 214, 0.9);
+}
+
+/* Faint architectural grid used behind the hero and dark sections */
+.paper-grid {
+  background-image:
+    linear-gradient(to right, rgba(14, 14, 16, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(14, 14, 16, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+.dark-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+/* Hand-drawn accent underline for display type */
+.ink-underline {
+  background-image: linear-gradient(to top, rgba(79, 70, 229, 0.28) 0.16em, transparent 0.16em);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 /* Micro interaction transitions */
 button, a, input, textarea, select {
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Soft grain-free paper gradient used at the top of the page */
+.hero-wash {
+  background:
+    radial-gradient(ellipse 60% 55% at 82% 8%, rgba(79, 70, 229, 0.1), transparent 60%),
+    radial-gradient(ellipse 45% 40% at 10% 90%, rgba(14, 14, 16, 0.045), transparent 65%);
 }
 
 /* Hide scrollbar utility */

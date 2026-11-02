@@ -1,5 +1,3 @@
-import React from 'react';
-
 const PrintableCV = () => {
   return (
     <div id="printable-cv" className="hidden print:block bg-white text-black p-8 font-sans text-sm max-w-4xl mx-auto leading-relaxed">
@@ -10,7 +8,7 @@ const PrintableCV = () => {
         <p className="text-sm font-bold text-indigo-700 tracking-wider mt-1">
           Software Engineer &bull; Mobile App Specialist &bull; AI-Powered Applications
         </p>
-        <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs text-slate-650 mt-3 font-medium">
+        <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs text-slate-600 mt-3 font-medium">
           <span>Lahore, Pakistan</span>
           <span>|</span>
           <span>+92 301-0401544</span>
@@ -61,7 +59,7 @@ const PrintableCV = () => {
           <div>
             <div className="flex justify-between items-baseline">
               <h3 className="text-xs font-bold text-slate-900">Software Engineer — IntelliG</h3>
-              <span className="text-xs font-semibold text-slate-650">Jan 2026 – Present</span>
+              <span className="text-xs font-semibold text-slate-600">Jan 2026 – Present</span>
             </div>
             <ul className="list-disc pl-4 text-xs text-slate-800 mt-1 space-y-1">
               <li>Working as a Software Engineer building AI-powered and full-stack applications, contributing across backend, frontend, and Generative AI workflows.</li>
@@ -74,7 +72,7 @@ const PrintableCV = () => {
           <div>
             <div className="flex justify-between items-baseline">
               <h3 className="text-xs font-bold text-slate-900">Flutter & Web Developer — IzzaTech</h3>
-              <span className="text-xs font-semibold text-slate-650">Nov 2024 – Apr 2025 (6 Months)</span>
+              <span className="text-xs font-semibold text-slate-600">Nov 2024 – Apr 2025 (6 Months)</span>
             </div>
             <p className="text-[10px] text-slate-500 font-semibold italic -mt-0.5">Lahore, Pakistan</p>
             <ul className="list-disc pl-4 text-xs text-slate-800 mt-1 space-y-1">
@@ -89,7 +87,7 @@ const PrintableCV = () => {
       </div>
 
       {/* Featured Projects */}
-      <div className="mb-6 text-left page-break-before">
+      <div className="mb-6 break-before-page text-left">
         <h2 className="text-xs font-bold tracking-widest text-slate-900 uppercase border-b border-slate-300 pb-1 mb-3">
           Selected Projects
         </h2>
@@ -145,7 +143,7 @@ const PrintableCV = () => {
             <h3 className="text-xs font-bold text-slate-900">BS in Computer Science</h3>
             <p className="text-xs text-slate-700">Riphah International University, Lahore &bull; CGPA: 3.93 / 4.00</p>
           </div>
-          <span className="text-xs font-semibold text-slate-650">2023 – 2027</span>
+          <span className="text-xs font-semibold text-slate-600">2023 – 2027</span>
         </div>
       </div>
 

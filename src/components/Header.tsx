@@ -1,25 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { useSmoothScroll } from '../hooks/useSmoothScroll';
+
+const navItems = [
+  { name: 'About', id: 'about' },
+  { name: 'Work', id: 'projects' },
+  { name: 'Skills', id: 'skills' },
+  { name: 'Contact', id: 'contact' },
+];
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [progress, setProgress] = useState(0);
   const [activeSection, setActiveSection] = useState('home');
+  const [pendingSection, setPendingSection] = useState<string | null>(null);
+  const { scrollToSection: scrollTo } = useSmoothScroll();
 
   useEffect(() => {
     const handleScroll = () => {
       const y = window.scrollY;
-      setScrolled(y > 20);
+      setScrolled(y > 16);
 
-      // Reading progress through the whole page
       const scrollable = document.documentElement.scrollHeight - window.innerHeight;
       setProgress(scrollable > 0 ? Math.min(100, Math.max(0, (y / scrollable) * 100)) : 0);
 
-      if (y < 200) {
-        setActiveSection('home');
-      }
+      if (y < 180) setActiveSection('home');
     };
 
     handleScroll();
@@ -28,22 +35,18 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    const sections = ['about', 'projects', 'skills', 'contact'];
-    const observers = sections.map((sectionId) => {
+    const sectionIds = ['about', 'projects', 'skills', 'contact'];
+    const observers = sectionIds.map((sectionId) => {
       const el = document.getElementById(sectionId);
       if (!el) return null;
 
       const observer = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveSection(sectionId);
-          }
+          if (entry.isIntersecting) setActiveSection(sectionId);
         },
-        {
-          rootMargin: '-20% 0px -60% 0px',
-          threshold: 0.1,
-        }
+        { rootMargin: '-15% 0px -65% 0px', threshold: 0.05 }
       );
+
       observer.observe(el);
       return { observer, el };
     });
@@ -61,158 +64,188 @@ const Header = () => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') setIsMenuOpen(false);
     };
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
 
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, [isMenuOpen]);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    } else if (sectionId === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    setIsMenuOpen(false);
-  };
+  useEffect(() => {
+    if (isMenuOpen || !pendingSection) return;
 
-  const navItems = [
-    { name: 'About', id: 'about' },
-    { name: 'Projects', id: 'projects' },
-    { name: 'Skills', id: 'skills' },
-    { name: 'Contact', id: 'contact' },
-  ];
+    const frame = requestAnimationFrame(() => {
+      const sectionId = pendingSection;
+      setPendingSection(null);
+      scrollTo(sectionId);
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [isMenuOpen, pendingSection, scrollTo]);
+
+  const scrollToSection = (sectionId: string) => {
+    if (isMenuOpen) {
+      setPendingSection(sectionId);
+      setIsMenuOpen(false);
+      return;
+    }
+    scrollTo(sectionId);
+  };
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        scrolled
-          ? 'bg-[#FAFAFA]/90 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-20px_rgba(24,24,27,0.35)] backdrop-blur-md border-b border-zinc-200/70'
-          : 'bg-[#FAFAFA]/70 border-b border-transparent backdrop-blur-sm'
+      className={`sticky top-0 z-50 w-full transition-colors duration-300 ${
+        scrolled || isMenuOpen
+          ? 'border-b border-line/90 bg-canvas/95 backdrop-blur-xl'
+          : 'border-b border-transparent bg-canvas/80 backdrop-blur-sm'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-[4.5rem] gap-4">
-
-          {/* Logo / Brand */}
+      <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
+        <div className="flex h-[4.75rem] items-center justify-between gap-6">
+          {/* Brand */}
           <button
             type="button"
             onClick={() => scrollToSection('home')}
-            className="flex items-center space-x-2 text-left group cursor-pointer focus:outline-none"
-            aria-label="Abdul Rahman - Return to top"
+            className="group flex shrink-0 items-center gap-3 text-left focus-visible:outline-none"
+            aria-label="Abdul Rahman — return to top"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-950 text-xs font-bold tracking-tight text-white shadow-sm transition-colors group-hover:bg-indigo-600">
+            <span className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-ink text-[11px] font-bold tracking-tight text-white transition-colors duration-300 group-hover:bg-accent">
               AR
+              <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full border-2 border-canvas bg-emerald-500" />
             </span>
-            <span className="flex flex-col leading-none">
-              <span className="font-heading font-bold text-sm text-zinc-950 tracking-tight group-hover:text-indigo-600 transition-colors">
+            <span className="hidden flex-col leading-none sm:flex">
+              <span className="font-heading text-[13px] font-bold tracking-tight text-ink transition-colors group-hover:text-accent">
                 Abdul Rahman
               </span>
-              <span className="mt-1 text-[10px] text-zinc-500 font-medium tracking-wide">
-                SOFTWARE ENGINEER
+              <span className="mt-1.5 text-[9px] font-medium uppercase tracking-[0.18em] text-muted">
+                Software engineer
               </span>
             </span>
           </button>
 
-          {/* Desktop Navigation: floating glassy pill */}
-          <nav
-            aria-label="Main navigation"
-            className="hidden md:flex items-center gap-1 rounded-full border border-zinc-200/80 bg-white/80 p-1.5 shadow-[0_10px_30px_-24px_rgba(24,24,27,0.45)] backdrop-blur-md"
-          >
-            {navItems.map((item) => (
-              <button
-                type="button"
-                key={item.id}
-                aria-current={activeSection === item.id ? 'location' : undefined}
-                onClick={() => scrollToSection(item.id)}
-                className={`relative rounded-full px-4 py-1.5 text-sm tracking-tight transition-colors duration-200 ${
-                  activeSection === item.id
-                    ? 'font-semibold text-white'
-                    : 'text-zinc-500 font-normal hover:bg-zinc-100 hover:text-zinc-950'
-                }`}
-              >
-                {activeSection === item.id && (
-                  <motion.span
-                    layoutId="nav-active-pill"
-                    className="absolute inset-0 rounded-full bg-zinc-950 shadow-sm"
-                    transition={{ type: 'spring', stiffness: 420, damping: 34 }}
-                  />
-                )}
-                <span className="relative z-10">{item.name}</span>
-              </button>
-            ))}
+          {/* Desktop nav */}
+          <nav aria-label="Main navigation" className="hidden items-center gap-1 md:flex">
+            {navItems.map((item) => {
+              const active = activeSection === item.id;
+              return (
+                <button
+                  type="button"
+                  key={item.id}
+                  aria-current={active ? 'location' : undefined}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`relative rounded-full px-3.5 py-2 text-[13px] tracking-tight transition-colors duration-200 lg:px-4 ${
+                    active
+                      ? 'font-semibold text-ink'
+                      : 'font-medium text-muted hover:bg-white/70 hover:text-ink'
+                  }`}
+                >
+                  <span className="relative z-10">{item.name}</span>
+                  {active && (
+                    <motion.span
+                      layoutId="nav-active-dot"
+                      className="absolute bottom-0.5 left-1/2 h-[3px] w-[3px] -translate-x-1/2 rounded-full bg-accent"
+                      transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                    />
+                  )}
+                </button>
+              );
+            })}
           </nav>
 
-          {/* Right Actions: Availability & CTA */}
-          <div className="hidden md:flex items-center space-x-4">
-            <span className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full text-xs font-medium bg-white text-zinc-600 border border-zinc-200/80">
-              <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
-              Available for opportunities
+          {/* Desktop actions */}
+          <div className="hidden items-center gap-3 md:flex">
+            <span className="hidden items-center gap-2 text-[11px] font-medium text-muted lg:inline-flex">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-50" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-600" />
+              </span>
+              Open to work
             </span>
 
             <button
               onClick={() => scrollToSection('contact')}
-              className="group inline-flex items-center space-x-1.5 bg-zinc-950 hover:bg-indigo-600 text-white text-xs font-medium px-3.5 py-2 rounded-lg transition-all active:scale-[0.98] shadow-sm"
+              className="group inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-xs font-semibold text-white transition-colors duration-200 hover:bg-accent"
             >
-              <span>Get in touch</span>
-              <ArrowUpRight className="h-3.5 w-3.5 text-zinc-400 transition-all group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              Let&apos;s talk
+              <ArrowUpRight className="h-3.5 w-3.5 text-white/60 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />
             </button>
           </div>
 
-          {/* Mobile Menu Trigger */}
-          <div className="flex md:hidden items-center space-x-3">
+          {/* Mobile controls */}
+          <div className="flex items-center gap-2 md:hidden">
             <button
+              type="button"
               onClick={() => scrollToSection('contact')}
-              className="bg-zinc-950 text-white text-xs font-medium px-3 py-1.5 rounded-md"
+              className="rounded-full bg-ink px-3 py-2 text-[11px] font-semibold text-white transition-colors hover:bg-accent"
             >
-              Contact
+              Let&apos;s talk
             </button>
             <button
               type="button"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-lg text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 transition-colors focus:outline-none"
+              className="rounded-full border border-line bg-white/60 p-2.5 text-ink transition-colors hover:border-ink/30"
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-navigation"
             >
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </button>
           </div>
         </div>
+      </div>
 
-        {/* Mobile Dropdown */}
-        {isMenuOpen && (
-          <nav id="mobile-navigation" aria-label="Mobile navigation" className="md:hidden border-t border-zinc-200/80 bg-[#FAFAFA] py-4 space-y-1 animate-fade-in">
-            {navItems.map((item) => (
+      {/* Mobile sheet */}
+      {isMenuOpen && (
+        <div
+          id="mobile-navigation"
+          className="animate-fade-in border-y border-line bg-canvas md:hidden"
+        >
+          <nav aria-label="Mobile navigation" className="mx-auto max-w-[1180px] px-4 py-4 sm:px-6">
+            {navItems.map((item, index) => (
               <button
                 type="button"
                 key={item.id}
                 aria-current={activeSection === item.id ? 'location' : undefined}
                 onClick={() => scrollToSection(item.id)}
-                className={`w-full flex items-center justify-between px-3 py-2.5 text-left text-sm rounded-md transition-colors ${
-                  activeSection === item.id
-                    ? 'bg-zinc-100 text-zinc-950 font-semibold'
-                    : 'text-zinc-600 hover:text-zinc-950 hover:bg-zinc-50'
+                className={`group flex w-full items-baseline justify-between border-b border-line/70 py-4 text-left ${
+                  activeSection === item.id ? 'text-ink' : 'text-muted'
                 }`}
               >
-                <span>{item.name}</span>
+                <span className="flex items-baseline gap-4">
+                  <span className="text-[10px] font-semibold tabular-nums text-accent">
+                    0{index + 1}
+                  </span>
+                  <span className="font-heading text-2xl font-semibold tracking-tight">
+                    {item.name}
+                  </span>
+                </span>
+                <ArrowUpRight className="h-4 w-4 text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </button>
             ))}
-            <div className="pt-3 px-3 border-t border-zinc-200/60 flex items-center justify-between text-xs text-zinc-600">
-              <span>Status</span>
-              <span className="inline-flex items-center gap-2 text-zinc-600 font-medium">
-                <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
+
+            <div className="flex items-center justify-between pt-5 text-xs text-muted">
+              <span className="inline-flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-600" />
                 Available for opportunities
               </span>
+              <a
+                href="mailto:abdulrahman50ab@gmail.com"
+                className="font-medium text-ink hover:text-accent"
+              >
+                Email me
+              </a>
             </div>
           </nav>
-        )}
-      </div>
+        </div>
+      )}
 
-      {/* Scroll progress indicator */}
+      {/* Reading progress */}
       <div
         aria-hidden="true"
-        className={`absolute bottom-0 left-0 h-[2px] bg-indigo-600 transition-opacity duration-300 ${
+        className={`absolute bottom-0 left-0 h-[2px] bg-accent transition-opacity duration-300 ${
           scrolled ? 'opacity-100' : 'opacity-0'
         }`}
         style={{ width: `${progress}%` }}

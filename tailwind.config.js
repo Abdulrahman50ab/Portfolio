@@ -6,10 +6,17 @@ export default {
       fontFamily: {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         heading: ['"Plus Jakarta Sans"', 'Inter', '-apple-system', 'sans-serif'],
+        display: ['"Instrument Serif"', 'Georgia', 'Cambria', 'serif'],
       },
       colors: {
-        canvas: '#FAFAFA',
-        obsidian: '#09090B',
+        canvas: '#F5F3EE',
+        ink: '#0E0E10',
+        line: '#E3DFD6',
+        muted: '#6B655C',
+        accent: {
+          DEFAULT: '#4F46E5',
+          soft: '#ECEBFF',
+        },
       },
       animation: {
         'fade-in': 'fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards',

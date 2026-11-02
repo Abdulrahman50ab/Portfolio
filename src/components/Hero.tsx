@@ -1,17 +1,18 @@
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { ArrowDown, ArrowUpRight, FileText, MapPin } from 'lucide-react';
-import img from './cv2.jpg';
+import EmployeeCard from './EmployeeCard';
 import Counter from './motion/Counter';
 import Magnetic from './motion/Magnetic';
 import { EASE } from './motion/presets';
+import { useSmoothScroll } from '../hooks/useSmoothScroll';
 
 const heroContainer: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.08 } },
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.06 } },
 };
 
 const heroItem: Variants = {
-  hidden: { opacity: 0, y: 26 },
+  hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: EASE } },
 };
 
@@ -19,147 +20,140 @@ type Stat = { numeric?: number; text?: string; suffix?: string; decimals?: numbe
 
 const stats: Stat[] = [
   { numeric: 3, suffix: '+', label: 'Years building' },
-  { numeric: 15, suffix: '+', label: 'Shipped works' },
+  { numeric: 15, suffix: '+', label: 'Shipped projects' },
   { numeric: 3.93, decimals: 2, label: 'BS CS · CGPA' },
   { text: 'AI', label: 'Current focus' },
 ];
 
 const Hero = () => {
   const reduceMotion = useReducedMotion();
-
-  const scrollToSection = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const { scrollToSection } = useSmoothScroll();
 
   return (
-    <section id="home" className="relative overflow-hidden border-b border-zinc-200/80 bg-white">
-      <div className="relative z-10 mx-auto max-w-6xl px-4 pb-16 pt-14 sm:px-6 md:pb-20 md:pt-20 lg:px-8 lg:pb-24 lg:pt-24">
+    <section id="home" className="relative isolate overflow-hidden bg-canvas">
+      <div
+        aria-hidden="true"
+        className="paper-grid absolute inset-0 -z-10 opacity-60 [mask-image:radial-gradient(ellipse_78%_70%_at_50%_0%,black,transparent_80%)]"
+      />
+      <div aria-hidden="true" className="hero-wash absolute inset-0 -z-10" />
+
+      <div className="mx-auto max-w-[1180px] px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20"
+          className="grid items-center gap-14 pb-14 pt-12 sm:pt-16 lg:grid-cols-12 lg:gap-8 lg:pb-20 lg:pt-20"
           variants={heroContainer}
           initial={reduceMotion ? false : 'hidden'}
           animate={reduceMotion ? undefined : 'visible'}
         >
-
-          {/* Left column */}
-          <div className="relative z-10 text-left">
+          {/* Intro */}
+          <div className="relative z-10 lg:col-span-7">
             <motion.div
               variants={heroItem}
-              className="mb-7 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-medium text-zinc-500"
+              className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted sm:text-[11px]"
             >
-              <span className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-[#FAFAFA] px-3 py-1.5 text-zinc-700">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-500 opacity-60" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-indigo-600" />
-                </span>
-                Software Engineer
+              <span className="inline-flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                Portfolio / 2026
               </span>
-              <span className="inline-flex items-center gap-1.5">
-                <MapPin className="h-3.5 w-3.5 text-indigo-600" />
+              <span className="h-3 w-px bg-line" aria-hidden="true" />
+              <span className="inline-flex items-center gap-1.5 normal-case tracking-normal">
+                <MapPin className="h-3.5 w-3.5 text-accent" />
                 Lahore, Pakistan
               </span>
             </motion.div>
 
             <motion.h1
               variants={heroItem}
-              className="max-w-2xl font-heading text-5xl font-bold leading-[1.04] tracking-[-0.055em] text-zinc-950 sm:text-6xl lg:text-[4.5rem]"
+              className="mt-7 max-w-[14ch] font-heading text-[2.9rem] font-semibold leading-[0.98] tracking-[-0.06em] text-ink sm:text-[4.2rem] lg:text-[4rem] xl:text-[4.55rem]"
             >
-              Thoughtful software,
-              <span className="mt-1 block text-indigo-600">
-                built to move people forward.
+              <span className="block">Thoughtful software,</span>
+              <span className="block">
+                built to{' '}
+                <span className="ink-underline font-display font-normal italic tracking-[-0.02em] text-accent">
+                  move people
+                </span>
               </span>
+              <span className="block">forward.</span>
             </motion.h1>
 
             <motion.p
               variants={heroItem}
-              className="mt-7 max-w-xl text-base leading-7 text-zinc-600 sm:text-lg sm:leading-8"
+              className="mt-7 max-w-[34rem] text-pretty text-[15px] leading-7 text-muted sm:text-base sm:leading-8"
             >
-              I’m <span className="font-semibold text-zinc-900">Abdul Rahman</span> — a software engineer building polished Flutter apps, dependable React products, and practical Generative AI workflows. I care about the details that make technology feel clear, useful, and human.
+              I&apos;m <span className="font-semibold text-ink">Abdul Rahman</span> — a software engineer
+              crafting polished Flutter apps, dependable React products, and practical Generative AI
+              workflows. I care about the details that make technology feel clear, useful, and human.
             </motion.p>
 
             <motion.div variants={heroItem} className="mt-8 flex flex-wrap items-center gap-3">
               <Magnetic>
                 <button
                   onClick={() => scrollToSection('projects')}
-                  className="group inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/25 transition-all hover:bg-indigo-700 hover:shadow-indigo-600/30 active:scale-[0.98]"
+                  className="group inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_30px_-14px_rgba(79,70,229,0.55)] transition-all hover:bg-indigo-700 hover:shadow-[0_18px_36px_-14px_rgba(79,70,229,0.65)] active:scale-[0.98]"
                 >
-                  Explore my work
-                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  Explore selected work
+                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </button>
               </Magnetic>
               <Magnetic>
                 <button
                   onClick={() => window.print()}
-                  className="inline-flex items-center gap-2 rounded-xl border border-zinc-200 bg-white px-4 py-3 text-sm font-semibold text-zinc-700 transition-colors hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-950 active:scale-[0.98]"
+                  className="inline-flex items-center gap-2 rounded-full border border-line bg-white/70 px-4 py-3 text-sm font-semibold text-ink transition-colors hover:border-ink/25 hover:bg-white active:scale-[0.98]"
                 >
-                  <FileText className="h-4 w-4 text-zinc-500" />
+                  <FileText className="h-4 w-4 text-muted" />
                   Download résumé
                 </button>
               </Magnetic>
               <Magnetic>
                 <button
                   onClick={() => scrollToSection('contact')}
-                  className="group inline-flex items-center gap-1.5 rounded-xl px-3 py-3 text-sm font-semibold text-zinc-600 transition-colors hover:text-indigo-600"
+                  className="group inline-flex items-center gap-1.5 px-2 py-3 text-sm font-semibold text-muted transition-colors hover:text-accent"
                 >
-                  Let’s talk
+                  Let&apos;s talk
                   <ArrowDown className="h-3.5 w-3.5 -rotate-45 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
                 </button>
               </Magnetic>
             </motion.div>
-
-            <motion.div
-              variants={heroItem}
-              className="mt-11 grid max-w-xl grid-cols-2 gap-y-5 border-t border-zinc-200 pt-6 sm:grid-cols-4 sm:divide-x sm:divide-zinc-200/70"
-            >
-              {stats.map((stat) => (
-                <div key={stat.label} className="sm:pl-5 sm:first:pl-0">
-                  <p className="font-heading text-2xl font-bold tracking-tight text-zinc-950 tabular-nums">
-                    {stat.text !== undefined ? (
-                      stat.text
-                    ) : (
-                      <Counter
-                        value={stat.numeric ?? 0}
-                        decimals={stat.decimals ?? 0}
-                        suffix={stat.suffix ?? ''}
-                      />
-                    )}
-                  </p>
-                  <span className="mt-1 block text-xs text-zinc-500">{stat.label}</span>
-                </div>
-              ))}
-            </motion.div>
           </div>
 
-          {/* Right column: portrait */}
-          <motion.div variants={heroItem} className="relative mx-auto w-full max-w-[27rem] lg:mr-0">
-            {/* Soft neutral halo behind the card */}
-            <div
-              aria-hidden="true"
-              className="absolute inset-6 -z-10 translate-y-6 scale-95 rounded-[2.5rem] bg-zinc-200/60 blur-2xl"
-            />
-            <div className="absolute -right-5 -top-5 h-32 w-32 rounded-full border border-indigo-100 sm:-right-7 sm:-top-7 sm:h-40 sm:w-40" />
-            <div className="absolute -bottom-5 -left-5 h-28 w-28 rounded-full border border-zinc-200 sm:-bottom-7 sm:-left-7 sm:h-36 sm:w-36" />
-
-            <div className="relative overflow-hidden rounded-[1.75rem] border border-zinc-200 bg-zinc-100 p-2 shadow-[0_24px_70px_-36px_rgba(24,24,27,0.35)]">
-              <img
-                src={img}
-                alt="Abdul Rahman, software engineer"
-                className="aspect-[4/4.45] w-full rounded-[1.3rem] object-cover object-top"
-              />
-              <div className="absolute inset-x-2 bottom-2 flex items-center justify-between rounded-b-[1.3rem] bg-zinc-950/75 px-5 py-4 text-white backdrop-blur-md">
-                <div>
-                  <p className="text-sm font-semibold">Building what’s next</p>
-                  <p className="mt-0.5 text-xs text-white/70">Mobile · Web · Intelligent systems</p>
-                </div>
-                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10 text-xs font-semibold backdrop-blur-sm">AR</span>
-              </div>
-            </div>
-
-            <div className="animate-float absolute -left-5 top-10 hidden rounded-xl border border-zinc-200 bg-white px-4 py-3 shadow-lg shadow-zinc-900/5 sm:block">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-400">Currently</p>
-              <p className="mt-1 text-sm font-semibold text-zinc-900">Software Engineer <span className="text-indigo-600">@ IntelliG</span></p>
-            </div>
+          {/* Employee ID card */}
+          <motion.div
+            variants={heroItem}
+            className="relative mx-auto w-full max-w-[26rem] lg:col-span-5 lg:ml-auto lg:mr-0"
+          >
+            <EmployeeCard />
           </motion.div>
+        </motion.div>
+
+        {/* Stat strip */}
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+          animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.42, ease: EASE }}
+          className="grid grid-cols-2 border-y border-line sm:grid-cols-4"
+        >
+          {stats.map((stat, index) => (
+            <div
+              key={stat.label}
+              className={`px-5 py-6 sm:px-7 sm:py-7 ${index > 0 ? 'border-l border-line' : ''} ${
+                index === 2 ? 'border-l-0 sm:border-l' : ''
+              } ${index > 1 ? 'border-t border-line sm:border-t-0' : ''}`}
+            >
+              <p className="font-heading text-[1.6rem] font-semibold tracking-tight text-ink tabular-nums sm:text-[1.85rem]">
+                {stat.text !== undefined ? (
+                  stat.text
+                ) : (
+                  <Counter
+                    value={stat.numeric ?? 0}
+                    decimals={stat.decimals ?? 0}
+                    suffix={stat.suffix ?? ''}
+                  />
+                )}
+              </p>
+              <span className="mt-1.5 block text-[10px] font-medium uppercase tracking-[0.14em] text-muted">
+                {stat.label}
+              </span>
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>
